@@ -1,0 +1,4 @@
+CC_FIPS	CC_ISO	TLD	COUNTRY_NAME
+AA	AW	.aw	Aruba
+AC	AG	.ag	Antigua and Barbuda
+AE	AE	.ae	United Arab Emirates
