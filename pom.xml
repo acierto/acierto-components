@@ -98,6 +98,11 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.aciertoteam</groupId>
+                <artifactId>aciertoteam-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
                 <version>4.1.2</version>
@@ -377,6 +382,12 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-expression</artifactId>
+                <version>${spring-version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
                 <version>${spring-version}</version>
                 <scope>provided</scope>
             </dependency>
@@ -800,8 +811,10 @@
     </reporting>
 
     <modules>
+        <module>aciertoteam-common</module>
         <module>aciertoteam-generator</module>
         <module>aciertoteam-io</module>
+		<module>aciertoteam-mail</module>
     </modules>
 
     <properties>

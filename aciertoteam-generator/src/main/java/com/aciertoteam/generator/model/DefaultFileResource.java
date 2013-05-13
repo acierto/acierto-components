@@ -1,8 +1,8 @@
 package com.aciertoteam.generator.model;
 
 import com.aciertoteam.generator.model.enums.FileFormat;
-import com.aciertoteam.io.AciertoTeamFileUtils;
 import org.apache.commons.io.FilenameUtils;
+import com.aciertoteam.io.AciertoTeamFileUtils;
 
 import java.io.File;
 

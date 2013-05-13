@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring-2.10.3.xsd">
+
+    <camel:camelContext id="camelContext" trace="true">
+        <camel:contextScan/>
+        <camel:jmxAgent id="jmxAgent" usePlatformMBeanServer="true" registryPort="2097" createConnector="true"/>
+    </camel:camelContext>
+
+    <bean id="emailRouteBuilder" class="com.aciertoteam.mail.routers.EmailRouteBuilder"/>
+
+    <bean id="freemarkerConfiguration" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
+        <property name="templateLoaderPath" value="classpath:/com/aciertoteam/ftl/"/>
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
+
+    <bean id="emailMessageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>classpath:subject_messages</value>
+            </list>
+        </property>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+</beans>
