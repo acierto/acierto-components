@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * @author Bogdan Nechyporenko
  */
-public interface IAbstractEntity extends Identifiable {
+public interface IAbstractEntity extends Identifiable, IdentifiableEntity {
 
     /**
      * The time when entity starts to be valid.
@@ -34,4 +34,9 @@ public interface IAbstractEntity extends Identifiable {
      * @return
      */
     boolean isDeleted();
+
+    /**
+     * Set expiration time with the current time
+     */
+    void closeEndPeriod();
 }

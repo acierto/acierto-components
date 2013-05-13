@@ -62,4 +62,8 @@ public class EmailVerification extends AbstractEntity {
     public void setNotification(Notification notification) {
         this.notification = notification;
     }
+
+    public boolean isVerified() {
+        return requestStatus.isSuccess();
+    }
 }
