@@ -1,6 +1,7 @@
 package com.aciertoteam.mail;
 
 /**
+ *
  * @author Bogdan Nechyporenko
  */
 public class DeliveryResult {

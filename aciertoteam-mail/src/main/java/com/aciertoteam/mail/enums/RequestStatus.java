@@ -4,6 +4,7 @@ package com.aciertoteam.mail.enums;
  * @author Bogdan Nechyporenko
  */
 public enum RequestStatus {
+
     NOT_FOUND, REQUESTED, PENDING, SUCCESS, FAILED, REJECTED, EXPIRED;
 
     public boolean isFailed() {

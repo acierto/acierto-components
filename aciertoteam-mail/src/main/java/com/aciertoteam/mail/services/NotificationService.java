@@ -1,6 +1,7 @@
 package com.aciertoteam.mail.services;
 
 import com.aciertoteam.mail.dto.NotificationDTO;
+import com.aciertoteam.mail.entity.DecisionRequest;
 import com.aciertoteam.mail.entity.EmailVerification;
 import com.aciertoteam.mail.entity.Notification;
 import com.aciertoteam.mail.enums.NotificationStatus;
@@ -12,6 +13,12 @@ import java.util.Map;
  * @author Bogdan Nechyporenko
  */
 public interface NotificationService {
+
+    /**
+     * After changing the state of request to final the status the user can be notified by this method
+     * to know what the result has been taken.
+     */
+    void notifyUserAboutTakenDecisionByRequest(DecisionRequest decisionRequest, String description);
 
     /**
      * Creates a token which will be provided to the end user for email verification

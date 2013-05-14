@@ -1,6 +1,8 @@
 package com.aciertoteam.mail.services.impl;
 
+import com.aciertoteam.common.service.EntityService;
 import com.aciertoteam.mail.dto.NotificationDTO;
+import com.aciertoteam.mail.entity.DecisionRequest;
 import com.aciertoteam.mail.entity.EmailVerification;
 import com.aciertoteam.mail.entity.Notification;
 import com.aciertoteam.mail.enums.NotificationStatus;
@@ -34,6 +36,15 @@ public class DefaultNotificationService implements NotificationService {
 
     @Autowired
     private MailConfigurationService configurationService;
+
+    @Autowired
+    private EntityService entityService;
+
+    @Override
+    public void notifyUserAboutTakenDecisionByRequest(DecisionRequest decisionRequest, String description) {
+        DecisionRequest request = entityService.findById(decisionRequest.getClass(), decisionRequest.getId());
+        //TODO: notify
+    }
 
     @Override
     public EmailVerification createVerificationToken(String email, String token) {
