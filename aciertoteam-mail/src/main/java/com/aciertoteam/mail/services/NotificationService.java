@@ -15,6 +15,12 @@ import java.util.Map;
 public interface NotificationService {
 
     /**
+     * Should be called after saving of notification request which to be pended till user
+     * will take an decision about reject/approval status of it.
+     */
+    void notifyUserAboutRegisteredDecisionRequest(DecisionRequest decisionRequest);
+
+    /**
      * After changing the state of request to final the status the user can be notified by this method
      * to know what the result has been taken.
      */

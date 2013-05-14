@@ -1,6 +1,5 @@
 package com.aciertoteam.mail.entity;
 
-import com.aciertoteam.common.interfaces.IAbstractEntity;
 import com.aciertoteam.common.interfaces.Identifiable;
 import com.aciertoteam.mail.enums.RequestStatus;
 
@@ -9,7 +8,7 @@ import com.aciertoteam.mail.enums.RequestStatus;
  *
  * @author Bogdan Nechyporenko
  */
-public interface DecisionRequest extends IAbstractEntity {
+public interface DecisionRequest extends Identifiable {
 
     /**
      * Returns the current status of the request.
@@ -27,4 +26,11 @@ public interface DecisionRequest extends IAbstractEntity {
      * Changes the status of request to SUCCESS status
      */
     void approve();
+
+    /**
+     * The email of recipient where this notification to be sent
+     *
+     * @return
+     */
+    String getRecipient();
 }

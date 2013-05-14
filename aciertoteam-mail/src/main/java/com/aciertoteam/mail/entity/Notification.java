@@ -36,12 +36,11 @@ public class Notification extends AbstractEntity {
     @Column(name = "recipients")
     private String to;
 
+    private String comment;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn
     private MailTemplate mailTemplate;
-
-    @Column
-    private String comment;
 
     @Column(name = "notification_status")
     @Enumerated(value = EnumType.STRING)
@@ -59,6 +58,10 @@ public class Notification extends AbstractEntity {
 
     public Notification() {
         status = NotificationStatus.CREATED;
+    }
+
+    public Notification(NotificationStatus status) {
+        this.status = status;
     }
 
     public String getFrom() {
@@ -125,6 +128,10 @@ public class Notification extends AbstractEntity {
         return result;
     }
 
+    public Long getSid() {
+        return 12000 + getId();
+    }
+
     public NotificationDTO createDTO() {
         NotificationDTO dto = new NotificationDTO();
 
@@ -162,6 +169,14 @@ public class Notification extends AbstractEntity {
                 dto.addAttachment(entry.getKey(), (Serializable) entry.getValue());
             }
         }
+    }
+
+    public void setAttachments(HashMap<String, Object> attachmentMap) {
+        this.attachments = SerializeUtil.write(attachmentMap);
+    }
+
+    public void setProperties(HashMap<String, Object> parameterMap) {
+        this.properties = SerializeUtil.write(parameterMap);
     }
 
 }

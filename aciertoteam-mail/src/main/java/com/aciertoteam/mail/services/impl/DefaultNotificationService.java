@@ -1,6 +1,5 @@
 package com.aciertoteam.mail.services.impl;
 
-import com.aciertoteam.common.service.EntityService;
 import com.aciertoteam.mail.dto.NotificationDTO;
 import com.aciertoteam.mail.entity.DecisionRequest;
 import com.aciertoteam.mail.entity.EmailVerification;
@@ -8,6 +7,7 @@ import com.aciertoteam.mail.entity.Notification;
 import com.aciertoteam.mail.enums.NotificationStatus;
 import com.aciertoteam.mail.enums.RequestStatus;
 import com.aciertoteam.mail.repositories.EmailVerificationRepository;
+import com.aciertoteam.mail.repositories.MailTemplateRepository;
 import com.aciertoteam.mail.repositories.NotificationRepository;
 import com.aciertoteam.mail.services.MailConfigurationService;
 import com.aciertoteam.mail.services.NotificationService;
@@ -35,15 +35,21 @@ public class DefaultNotificationService implements NotificationService {
     private EmailVerificationRepository emailVerificationRepository;
 
     @Autowired
-    private MailConfigurationService configurationService;
+    private MailTemplateRepository mailTemplateRepository;
 
     @Autowired
-    private EntityService entityService;
+    private MailConfigurationService configurationService;
+
+    @Override
+    public void notifyUserAboutRegisteredDecisionRequest(DecisionRequest decisionRequest) {
+        Notification notification = createRegistrationRequestNotification(decisionRequest);
+        notificationRepository.saveOrUpdate(notification);
+    }
 
     @Override
     public void notifyUserAboutTakenDecisionByRequest(DecisionRequest decisionRequest, String description) {
-        DecisionRequest request = entityService.findById(decisionRequest.getClass(), decisionRequest.getId());
-        //TODO: notify
+        Notification notification = createResultOfRequestNotification(decisionRequest, description);
+        notificationRepository.saveOrUpdate(notification);
     }
 
     @Override
@@ -59,6 +65,40 @@ public class DefaultNotificationService implements NotificationService {
     public Map<String, Long> loadNotifications(Collection<Notification> notifications) {
         notificationRepository.saveAll(notifications);
         return createNotificationMap(notifications);
+    }
+
+    private Notification createRegistrationRequestNotification(DecisionRequest decisionRequest) {
+        Notification notification = new Notification(NotificationStatus.PENDING);
+        notification.setTo(decisionRequest.getRecipient());
+        notification.setMailTemplate(mailTemplateRepository.findByTemplateName("registered_decision_request"));
+        addNotificationImages(notification);
+        addProperties(notification);
+        return notification;
+    }
+
+    private Notification createResultOfRequestNotification(DecisionRequest decisionRequest, String description) {
+        boolean isAccepted = decisionRequest.getRequestStatus().isSuccess();
+
+        Notification notification = new Notification(NotificationStatus.PENDING);
+        notification.setTo(decisionRequest.getRecipient());
+        notification.setMailTemplate(mailTemplateRepository.findByTemplateName(
+                String.format("%s_decision_request", isAccepted ? "success" : "rejected")));
+        addNotificationImages(notification);
+        addProperties(notification);
+        notification.setComment(description);
+
+        return notification;
+    }
+
+    private void addProperties(Notification notification) {
+        HashMap<String, Object> properties = new HashMap<String, Object>();
+        notification.setProperties(properties);
+    }
+
+    private void addNotificationImages(Notification notification) {
+        HashMap<String, Object> attachments = new HashMap<String, Object>();
+        attachments.put("cid:email_logo", "/com/aciertoteam/images/email_logo.jpg");
+        notification.setAttachments(attachments);
     }
 
     private Map<String, Long> createNotificationMap(Collection<Notification> notifications) {
