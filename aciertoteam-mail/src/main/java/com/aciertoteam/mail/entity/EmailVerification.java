@@ -1,5 +1,6 @@
 package com.aciertoteam.mail.entity;
 
+import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.mail.enums.RequestStatus;
 
 import javax.persistence.CascadeType;

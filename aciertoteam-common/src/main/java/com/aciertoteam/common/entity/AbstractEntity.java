@@ -1,4 +1,4 @@
-package com.aciertoteam.mail.entity;
+package com.aciertoteam.common.entity;
 
 import com.aciertoteam.common.dto.AbstractDTO;
 import com.aciertoteam.common.interfaces.IAbstractEntity;

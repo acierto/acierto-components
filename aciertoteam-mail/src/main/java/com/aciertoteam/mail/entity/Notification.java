@@ -1,5 +1,6 @@
 package com.aciertoteam.mail.entity;
 
+import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.utils.SerializeUtil;
 import com.aciertoteam.mail.dto.NotificationDTO;
 import com.aciertoteam.mail.enums.NotificationStatus;
