@@ -72,7 +72,7 @@ public class DefaultNotificationService implements NotificationService {
         notification.setTo(decisionRequest.getRecipient());
         notification.setMailTemplate(mailTemplateRepository.findByTemplateName("registered_decision_request"));
         addNotificationImages(notification);
-        addProperties(notification);
+        addRegistrationProperties(notification, decisionRequest);
         return notification;
     }
 
@@ -84,14 +84,22 @@ public class DefaultNotificationService implements NotificationService {
         notification.setMailTemplate(mailTemplateRepository.findByTemplateName(
                 String.format("%s_decision_request", isAccepted ? "success" : "rejected")));
         addNotificationImages(notification);
-        addProperties(notification);
+        addProperties(notification, decisionRequest);
         notification.setComment(description);
 
         return notification;
     }
 
-    private void addProperties(Notification notification) {
+    private void addRegistrationProperties(Notification notification, DecisionRequest decisionRequest) {
         HashMap<String, Object> properties = new HashMap<String, Object>();
+        properties.put("requestSid", decisionRequest.getSid());
+        notification.setProperties(properties);
+    }
+
+    private void addProperties(Notification notification, DecisionRequest decisionRequest) {
+        HashMap<String, Object> properties = new HashMap<String, Object>();
+        properties.put("requestSid", decisionRequest.getSid());
+        properties.put("cause", decisionRequest.getRejectCause());
         notification.setProperties(properties);
     }
 

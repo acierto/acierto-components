@@ -11,6 +11,13 @@ import com.aciertoteam.mail.enums.RequestStatus;
 public interface DecisionRequest extends Identifiable {
 
     /**
+     * Returns the displayable request id for the end user
+     *
+     * @return
+     */
+    Long getSid();
+
+    /**
      * Returns the current status of the request.
      *
      * @return
@@ -33,4 +40,12 @@ public interface DecisionRequest extends Identifiable {
      * @return
      */
     String getRecipient();
+
+    /**
+     * Returns the cause if the request has been rejected.
+     *
+     * @return
+     */
+    String getRejectCause();
+
 }
