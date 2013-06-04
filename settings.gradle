@@ -1,0 +1,14 @@
+def String[] modules = [
+    'aciertoteam-common',
+    'aciertoteam-generator',
+    'aciertoteam-io',
+    'aciertoteam-mail'
+]
+
+include modules
+
+modules.each {name ->
+    def p = findProject(":${name}")
+    p.name = "${name}"
+    p.buildFileName = "${name}.gradle"
+}

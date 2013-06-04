@@ -140,7 +140,7 @@
     </dependencies>
 
     <build>
-        <finalName>aciertoteam-mail-${project.version}</finalName>
+        <finalName>aciertoteam-common-${project.version}</finalName>
     </build>
 
 </project>
