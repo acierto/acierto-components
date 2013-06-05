@@ -13,6 +13,10 @@
 
     <repositories>
         <repository>
+            <id>AciertoNexus</id>
+            <url>http://80.83.120.164:8081/nexus/content/repositories/thirdparty/</url>
+        </repository>
+        <repository>
             <id>repoNet</id>
             <url>http://download.java.net/maven/2/</url>
         </repository>
@@ -139,12 +143,6 @@
                 <artifactId>json-lib</artifactId>
                 <version>2.2.1</version>
                 <classifier>jdk15</classifier>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.springfaces</groupId>
-                <artifactId>springfaces-mvc</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>com.sun.el</groupId>

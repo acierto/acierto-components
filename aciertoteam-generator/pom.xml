@@ -63,10 +63,6 @@
             <classifier>jdk15</classifier>
         </dependency>
         <dependency>
-            <groupId>org.springframework.springfaces</groupId>
-            <artifactId>springfaces-mvc</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.sun.el</groupId>
             <artifactId>el-ri</artifactId>
         </dependency>
