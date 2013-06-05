@@ -260,17 +260,3 @@ subprojects {
         }
     }
 }
-
-project(':aciertoteam-generator') {
-    apply plugin: 'java'
-    dependencies {
-        compile project(':aciertoteam-io')
-    }
-}
-
-project(':aciertoteam-mail') {
-    apply plugin: 'java'
-    dependencies {
-        compile project(':aciertoteam-common')
-    }
-}
