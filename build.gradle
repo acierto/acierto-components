@@ -29,6 +29,9 @@ buildscript {
         mavenLocal()
         mavenCentral()
         mavenRepo url: localMavenRepo
+        maven {
+            url "http://80.83.120.164:8081/nexus/content/repositories/thirdparty"
+        }
     }
 
     dependencies {
@@ -44,6 +47,9 @@ allprojects {
     repositories {
         mavenCentral()
         mavenRepo url: localMavenRepo
+        maven {
+            url "http://80.83.120.164:8081/nexus/content/repositories/thirdparty"
+        }
     }
 }
 
