@@ -1,0 +1,71 @@
+apply plugin: 'maven'
+
+// Create a source jar for uploading
+task sourceJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.java.srcDirs
+    include '**/*.java'
+}
+
+artifacts {
+    archives sourceJar
+}
+
+// Configuration for SpringSource s3 maven deployer
+configurations {
+    deployerJars
+}
+dependencies {
+    deployerJars "org.springframework.build.aws:org.springframework.build.aws.maven:3.0.0.RELEASE"
+}
+
+// Remove the archive configuration from the runtime configuration, so that anything added to archives
+// (such as the source jar) is no longer included in the runtime classpath
+configurations.default.extendsFrom = [configurations.runtime] as Set
+// Add the main jar into the default configuration
+artifacts { 'default' jar }
+
+install {
+    customizePom(repositories.mavenInstaller.pom, project)
+}
+
+def customizePom(pom, gradleProject) {
+    def optionalDeps = ['ehcache', 'log4j', 'apacheds-core', 'jsp-api', 'jsr250-api', 'ldapsdk', 'aspectjrt', 'aspectjweaver']
+
+    pom.whenConfigured { p ->
+        // Remove test scope dependencies from published poms
+        p.dependencies = p.dependencies.findAll {it.scope != 'test'}
+
+        // Flag optional deps
+        p.dependencies.findAll { dep ->
+            optionalDeps.contains(dep.artifactId) ||
+            dep.groupId.startsWith('org.apache.directory') ||
+            dep.groupId.startsWith('org.slf4j')
+        }*.optional = true
+
+    }
+
+    pom.project {
+        name = gradleProject.name
+        description = gradleProject.name
+        url = 'http://www.fastappoint.com'
+
+    }
+}
+
+task generatePom {
+    group = 'Build'
+    description = 'Generates the Maven pom.xml'
+
+    ext.generatedPomFileName = 'pom.xml'
+
+    inputs.files('**/*.gradle')
+    outputs.files(generatedPomFileName)
+
+    doLast() {
+        def p = pom {}
+        customizePom(p, project)
+        p.writeTo(generatedPomFileName)
+    }
+
+}
