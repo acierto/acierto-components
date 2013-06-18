@@ -212,7 +212,7 @@ subprojects {
 
         testCompile "org.seleniumhq.selenium:selenium-java:$seleniumVersion",
                 "org.dbunit:dbunit:2.4.8",
-                "junit:junit:4.7",
+                "junit:junit:4.11",
                 "org.mockito:mockito-all:1.8.4",
                 "org.jmock:jmock-junit4:2.5.1",
                 "org.jmock:jmock-junit4:2.5.1",
