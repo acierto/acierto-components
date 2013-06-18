@@ -13,11 +13,6 @@
 
     <bean id="emailRouteBuilder" class="com.aciertoteam.mail.routers.EmailRouteBuilder"/>
 
-    <bean id="freemarkerConfiguration" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
-        <property name="templateLoaderPath" value="classpath:/com/aciertoteam/ftl/"/>
-        <property name="defaultEncoding" value="utf-8"/>
-    </bean>
-
     <bean id="emailMessageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames">

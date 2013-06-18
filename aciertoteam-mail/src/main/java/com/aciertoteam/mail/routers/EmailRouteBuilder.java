@@ -7,7 +7,7 @@ import com.aciertoteam.mail.entity.MailConfiguration;
 import com.aciertoteam.mail.entity.MailTemplate;
 import com.aciertoteam.mail.exceptions.EmptyMessageBodyException;
 import com.aciertoteam.mail.services.MailConfigurationService;
-import com.aciertoteam.mail.utils.FtlReader;
+import com.aciertoteam.common.utils.FtlReader;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
@@ -41,8 +41,7 @@ public class EmailRouteBuilder extends RouteBuilder {
     private int port;
     private String host;
 
-    @Autowired
-    private FtlReader ftlReader;
+    private FtlReader ftlReader = new FtlReader("classpath:/com/aciertoteam/ftl/");
 
     @Autowired
     @Qualifier(value = "emailMessageSource")

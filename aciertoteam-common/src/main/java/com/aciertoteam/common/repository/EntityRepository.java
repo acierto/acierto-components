@@ -38,6 +38,16 @@ public interface EntityRepository extends AbstractRepository<AbstractEntity> {
     <T> T findById(Class clazz, Long id);
 
     /**
+     * Returns the entities of specified class by IDs.
+     *
+     * @param clazz
+     * @param ids
+     * @param <T>
+     * @return
+     */
+    <T> List<T> findByIds(Class clazz, List<Long> ids);
+
+    /**
      * Returns all entities from the specified database
      *
      * @param clazz

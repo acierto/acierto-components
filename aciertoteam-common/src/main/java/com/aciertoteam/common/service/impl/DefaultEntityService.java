@@ -35,6 +35,11 @@ public class DefaultEntityService implements EntityService {
     }
 
     @Override
+    public <T extends IAbstractEntity> List<T> findByIds(Class<T> clazz, List<Long> ids) {
+        return entityRepository.findByIds(clazz, ids);
+    }
+
+    @Override
     public <T extends IAbstractEntity> List<T> findAll(Class<T> clazz) {
         return entityRepository.findAll(clazz);
     }

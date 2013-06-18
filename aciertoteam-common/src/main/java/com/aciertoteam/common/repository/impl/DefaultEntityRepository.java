@@ -40,6 +40,13 @@ public class DefaultEntityRepository extends DefaultAbstractRepository<AbstractE
     }
 
     @Override
+    public <T> List<T> findByIds(Class clazz, List<Long> ids) {
+        return getSession().createCriteria(clazz).add(Restrictions.in("id", ids)).
+                add(Restrictions.or(Restrictions.isNull("validThru"), Restrictions.gt("validThru", new Date()))).
+                list();
+    }
+
+    @Override
     public <T extends IAbstractEntity> List<T> findAll(Class<T> clazz) {
         return getSession().createQuery("from " + clazz.getSimpleName() + " where validThru is null or validThru > :now").
                 setParameter("now", new Date()).list();

@@ -1,14 +1,15 @@
-package com.aciertoteam.mail.utils;
+package com.aciertoteam.common.utils;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.CharEncoding;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Locale;
@@ -17,22 +18,24 @@ import java.util.Map;
 /**
  * @author Bogdan Nechyporenko
  */
-@Component
 public class FtlReader {
 
     private static final Logger LOG = Logger.getLogger(FtlReader.class);
 
     private static final int BYTE_ARRAY_SIZE = 1024 * 1024;
 
-    @Autowired
-    private Configuration configuration;
+    private String templateLoaderPath;
+
+    public FtlReader(String templateLoaderPath) {
+        this.templateLoaderPath = templateLoaderPath;
+    }
 
     public String read(String ftlFileName, Map<String, Object> root, Locale locale) {
         String localizedFtlFileName = String.format(ftlFileName + "_%s_%s.ftl", locale.getLanguage(), locale.getCountry());
 
         Writer out = null;
         try {
-            Template template = configuration.getTemplate(localizedFtlFileName);
+            Template template = getConfiguration().getTemplate(localizedFtlFileName);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream(BYTE_ARRAY_SIZE);
             out = new OutputStreamWriter(baos, CharEncoding.UTF_8);
@@ -45,5 +48,13 @@ public class FtlReader {
             IOUtils.closeQuietly(out);
         }
         return null;
+    }
+
+    private Configuration getConfiguration() throws IOException, TemplateException {
+        FreeMarkerConfigurationFactoryBean  factoryBean = new FreeMarkerConfigurationFactoryBean();
+        factoryBean.setDefaultEncoding(CharEncoding.UTF_8);
+        factoryBean.setTemplateLoaderPath(templateLoaderPath);
+        factoryBean.afterPropertiesSet();
+        return factoryBean.getObject();
     }
 }

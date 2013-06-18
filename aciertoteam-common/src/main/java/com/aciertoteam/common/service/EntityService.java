@@ -31,6 +31,16 @@ public interface EntityService {
     <T extends IAbstractEntity> T findById(Class<T> clazz, Long id);
 
     /**
+     * Returns the entities of specified class by the list of IDs.
+     *
+     * @param clazz
+     * @param ids
+     * @param <T>
+     * @return
+     */
+    <T extends IAbstractEntity> List<T> findByIds(Class<T> clazz, List<Long> ids);
+
+    /**
      * Returns all entities from the specified database
      *
      * @param clazz
