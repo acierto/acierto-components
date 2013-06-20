@@ -1,23 +1,24 @@
 package com.aciertoteam.common.service.impl;
 
-import com.aciertoteam.common.entity.AbstractEntity;
-import com.aciertoteam.common.interfaces.IAbstractEntity;
-import com.aciertoteam.common.repository.EntityRepository;
-import com.aciertoteam.common.service.EntityService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.aciertoteam.common.entity.AbstractEntity;
+import com.aciertoteam.common.interfaces.IAbstractEntity;
+import com.aciertoteam.common.repository.EntityRepository;
+import com.aciertoteam.common.service.EntityService;
+
 /**
  * @author Bogdan Nechyporenko
  */
-@Service
+@Service(value = "entityService")
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
 public class DefaultEntityService implements EntityService {
 
