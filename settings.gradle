@@ -2,7 +2,8 @@ def String[] modules = [
     'aciertoteam-common',
     'aciertoteam-generator',
     'aciertoteam-io',
-    'aciertoteam-mail'
+    'aciertoteam-mail',
+	'aciertoteam-test'
 ]
 
 include modules
