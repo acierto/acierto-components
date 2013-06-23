@@ -39,6 +39,10 @@ public class DefaultEntityRepository extends DefaultAbstractRepository<AbstractE
                 uniqueResult();
     }
 
+    public void deleteById(Class clazz, Long id) {
+        getSession().createQuery("delete from " + clazz.getName() + " where id = :id").setParameter("id", id).executeUpdate();
+    }
+
     @Override
     public <T> List<T> findByIds(Class clazz, List<Long> ids) {
         return getSession().createCriteria(clazz).add(Restrictions.in("id", ids)).

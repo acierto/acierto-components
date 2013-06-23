@@ -2,15 +2,9 @@ package com.aciertoteam.mail.entity;
 
 import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.mail.enums.RequestStatus;
+import org.hibernate.annotations.Cascade;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * @author Bogdan Nechyporenko
@@ -25,7 +19,8 @@ public class EmailVerification extends AbstractEntity {
     @Enumerated(value = EnumType.STRING)
     private RequestStatus requestStatus;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
     private Notification notification;
 
