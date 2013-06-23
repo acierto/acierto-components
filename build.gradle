@@ -126,8 +126,7 @@ subprojects {
                 "org.apache.httpcomponents:httpcore:$httpcomponentsVersion",
                 "org.kohsuke:geoip:1.2.8",
                 "org.apache.camel:camel-core:$camelVersion",
-                "org.apache.camel:camel-mail:$camelVersion",
-                "org.apache.camel:camel-spring:$camelVersion",
+                "org.apache.camel:camel-mail:$camelVersion",                
                 "com.lowagie:itext:2.1.7",
                 "net.sf.json-lib:json-lib:2.2.1:jdk15",
                 "org.springframework.springfaces:springfaces-mvc:$springFacesVersion",
@@ -138,7 +137,6 @@ subprojects {
                 "javax.inject:javax.inject:1",
                 "com.sun.faces:jsf-api:$jsfVersion",
                 "com.sun.faces:jsf-impl:$jsfVersion",
-                "javax.validation:validation-api:1.0.0.GA",
                 "joda-time:joda-time:1.6.2",
                 "org.glassfish.web:el-impl:2.2",
                 "javax.el:el-api:2.2",
@@ -209,6 +207,13 @@ subprojects {
         compile("com.octo.captcha:jcaptcha-all:1.0-RC4") {
             exclude(group: 'org.springframework', module: 'spring')
         }
+		
+		compile("org.apache.camel:camel-spring:$camelVersion") {
+			exclude(group: 'org.springframework', module: 'spring-tx')
+			exclude(group: 'org.springframework', module: 'spring-aop')
+			exclude(group: 'org.apache.geronimo.specs', module: 'geronimo-jta_1.0.1B_spec')
+			exclude(group: 'org.apache.geronimo.specs', module: 'geronimo-jta_1.1_spec')
+		}
 
         testCompile "org.seleniumhq.selenium:selenium-java:$seleniumVersion",
                 "org.dbunit:dbunit:2.4.8",
