@@ -1,10 +1,11 @@
 package com.aciertoteam.mail.entity;
 
-import com.aciertoteam.common.entity.AbstractEntity;
-import com.aciertoteam.common.utils.SerializeUtil;
-import com.aciertoteam.mail.dto.NotificationDTO;
-import com.aciertoteam.mail.enums.NotificationStatus;
-import org.springframework.util.StringUtils;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,12 +16,13 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+
+import org.springframework.util.StringUtils;
+
+import com.aciertoteam.common.entity.AbstractEntity;
+import com.aciertoteam.common.utils.SerializeUtil;
+import com.aciertoteam.mail.dto.NotificationDTO;
+import com.aciertoteam.mail.enums.NotificationStatus;
 
 /**
  * @author Bogdan Nechyporenko
@@ -30,19 +32,19 @@ public class Notification extends AbstractEntity {
 
     private static final long serialVersionUID = -8622575437668981919L;
 
-    @Column(name = "sender")
+    @Column(name = "SENDER")
     private String from;
 
-    @Column(name = "recipients")
+    @Column(name = "RECIPIENTS")
     private String to;
 
     private String comment;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn
+    @JoinColumn(name = "MAIL_TEMPLATE_ID")
     private MailTemplate mailTemplate;
 
-    @Column(name = "notification_status")
+    @Column(name = "NOTIFICATION_STATUS")
     @Enumerated(value = EnumType.STRING)
     private NotificationStatus status;
 

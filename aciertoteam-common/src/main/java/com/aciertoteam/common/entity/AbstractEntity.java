@@ -1,15 +1,18 @@
 package com.aciertoteam.common.entity;
 
-import com.aciertoteam.common.dto.AbstractDTO;
-import com.aciertoteam.common.interfaces.IAbstractEntity;
-import org.codehaus.jackson.annotate.JsonIgnore;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import java.util.Date;
+import javax.persistence.Version;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+import com.aciertoteam.common.dto.AbstractDTO;
+import com.aciertoteam.common.interfaces.IAbstractEntity;
 
 /**
  * @author Bogdan Nechyporenko
@@ -22,6 +25,9 @@ public abstract class AbstractEntity implements IAbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Version
+    private Integer version;
 
     @Column
     private Date validFrom;
@@ -55,10 +61,6 @@ public abstract class AbstractEntity implements IAbstractEntity {
 
     public Date getValidThru() {
         return validThru;
-    }
-
-    public void setValidThru(Date validThru) {
-        this.validThru = validThru;
     }
 
     public Date getTimestamp() {
@@ -95,7 +97,7 @@ public abstract class AbstractEntity implements IAbstractEntity {
 
     /**
      * Additional options that will be added to the json object
-     *
+     * 
      * @return String[]
      */
     public String[] getSelectItemOptions() {

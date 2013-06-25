@@ -1,5 +1,7 @@
 package com.aciertoteam.repository;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.Before;
@@ -15,6 +17,8 @@ import com.aciertoteam.dbunit.HsqlJdbcDatabaseTester;
  * @author Bogdan Nechyporenko
  */
 public abstract class AbstractDbUnitRepositoryTest {
+
+    private static final Log LOG = LogFactory.getLog(AbstractDbUnitRepositoryTest.class);
 
     @Autowired
     private SessionFactory sessionFactory;
