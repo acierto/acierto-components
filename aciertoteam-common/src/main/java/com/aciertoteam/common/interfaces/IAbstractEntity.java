@@ -39,4 +39,10 @@ public interface IAbstractEntity extends Identifiable, IdentifiableEntity {
      * Set expiration time with the current time
      */
     void closeEndPeriod();
+
+    /**
+     * Executes checking of the entity before performing any actions with it, i.e. saving if some conditions
+     * are not matching with expected values range.
+     */
+    void check();
 }
