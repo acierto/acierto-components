@@ -17,11 +17,6 @@ import java.util.Date;
 public class DefaultMailTemplateRepository extends DefaultAbstractRepository<MailTemplate> implements MailTemplateRepository {
 
     @Override
-    public Class getClazz() {
-        return MailTemplate.class;
-    }
-
-    @Override
     public MailTemplate findByTemplateName(String templateName) {
         return (MailTemplate) getSession().createQuery("from MailTemplate where templateName = :templateName" +
                 " and (validThru is null or validThru > :now)").

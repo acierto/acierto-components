@@ -62,9 +62,4 @@ public class DefaultEntityRepository extends DefaultAbstractRepository<AbstractE
                 " order by timestamp " + (asc ? "asc" : "desc")).
                 setParameter("now", new Date()).list();
     }
-
-    @Override
-    public Class getClazz() {
-        return AbstractEntity.class;
-    }
 }

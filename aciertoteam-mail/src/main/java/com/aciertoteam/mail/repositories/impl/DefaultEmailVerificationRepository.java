@@ -20,11 +20,6 @@ public class DefaultEmailVerificationRepository extends DefaultAbstractRepositor
     private static final Logger LOGGER = Logger.getLogger(DefaultEmailVerificationRepository.class);
 
     @Override
-    public Class getClazz() {
-        return EmailVerification.class;
-    }
-
-    @Override
     public EmailVerification createVerificationToken(String email, String token) {
         LOGGER.info("Creating of verification token with next data: email = " + email + ", token = " + token);
 

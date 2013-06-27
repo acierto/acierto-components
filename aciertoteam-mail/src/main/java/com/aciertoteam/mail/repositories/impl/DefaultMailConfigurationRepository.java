@@ -13,8 +13,4 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class DefaultMailConfigurationRepository extends DefaultAbstractRepository<MailConfiguration> implements MailConfigurationRepository {
 
-    @Override
-    public Class getClazz() {
-        return MailConfiguration.class;
-    }
 }

@@ -14,8 +14,4 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class DefaultNotificationRepository extends DefaultAbstractRepository<Notification> implements NotificationRepository {
 
-    @Override
-    public Class getClazz() {
-        return Notification.class;
-    }
 }

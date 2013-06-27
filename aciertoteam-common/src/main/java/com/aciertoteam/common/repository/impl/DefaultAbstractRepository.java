@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -113,7 +114,10 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
         return count() == 0;
     }
 
-    public abstract Class getClazz();
+    public Class getClazz() {
+        ParameterizedType superClass = (ParameterizedType) this.getClass().getGenericSuperclass();
+        return (Class) superClass.getActualTypeArguments()[0];
+    }
 
     protected final Session getSession() {
         return sessionFactory.getCurrentSession();
