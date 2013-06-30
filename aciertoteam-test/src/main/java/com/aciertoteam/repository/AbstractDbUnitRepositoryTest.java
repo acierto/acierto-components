@@ -18,8 +18,6 @@ import com.aciertoteam.dbunit.HsqlJdbcDatabaseTester;
  */
 public abstract class AbstractDbUnitRepositoryTest {
 
-    private static final Log LOG = LogFactory.getLog(AbstractDbUnitRepositoryTest.class);
-
     @Autowired
     private SessionFactory sessionFactory;
 
