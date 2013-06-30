@@ -90,4 +90,8 @@ public class DefaultEntityService implements EntityService {
         entityRepository.saveAll(entities);
     }
 
+    @Override
+    public long count(Class clazz) {
+        return entityRepository.count(clazz);
+    }
 }
