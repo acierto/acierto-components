@@ -227,6 +227,7 @@ subprojects {
                 "org.jodd:jodd:3.1.1",
                 "org.jvnet.mock-javamail:mock-javamail:1.9"
                 "org.kubek2k:springockito-annotations:1.0.8"
+                "org.kubek2k:springockito:1.0.5"
 
         testCompile("org.jencks:jencks:2.1") {
             exclude(group: 'org.springframework', module: 'spring-jms')
