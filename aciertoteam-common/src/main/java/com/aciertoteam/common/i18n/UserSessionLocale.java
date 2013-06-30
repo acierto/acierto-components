@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.aciertoteam.common.i18n;
 
 import java.io.Serializable;
