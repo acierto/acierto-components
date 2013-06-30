@@ -1,7 +1,7 @@
 package com.aciertoteam.repository;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.aciertoteam.common.repository.EntityRepository;
+import com.aciertoteam.dbunit.HsqlJdbcDatabaseTester;
 import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.Before;
@@ -9,9 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
-
-import com.aciertoteam.common.repository.EntityRepository;
-import com.aciertoteam.dbunit.HsqlJdbcDatabaseTester;
 
 /**
  * @author Bogdan Nechyporenko
