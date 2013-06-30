@@ -54,7 +54,7 @@ public interface EntityRepository extends AbstractRepository<AbstractEntity> {
      * @param <T>
      * @return
      */
-    <T> List<T> findByIds(Class clazz, List<Long> ids);
+    <T> List<T> findByIds(Class<T> clazz, List<Long> ids);
 
     /**
      * Returns all entities from the specified database
