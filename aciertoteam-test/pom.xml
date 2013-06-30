@@ -178,6 +178,16 @@
             <artifactId>spring-test</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.kubek2k</groupId>
+            <artifactId>springockito-annotations</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.kubek2k</groupId>
+            <artifactId>springockito</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>taglibs</groupId>
             <artifactId>standard</artifactId>
         </dependency>
