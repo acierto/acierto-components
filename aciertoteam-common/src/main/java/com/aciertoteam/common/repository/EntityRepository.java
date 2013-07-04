@@ -35,7 +35,7 @@ public interface EntityRepository extends AbstractRepository<AbstractEntity> {
      * @param <T>
      * @return
      */
-    <T> T findById(Class clazz, Long id);
+    <T> T findById(Class<T> clazz, Long id);
 
     /**
      * Deletes the entity of specified class by ID.

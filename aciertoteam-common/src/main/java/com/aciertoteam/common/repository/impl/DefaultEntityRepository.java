@@ -37,7 +37,7 @@ public class DefaultEntityRepository extends DefaultAbstractRepository<AbstractE
     }
 
     @Override
-    public <T> T findById(Class clazz, Long id) {
+    public <T> T findById(Class<T> clazz, Long id) {
         return (T) getSession().createCriteria(clazz).add(Restrictions.eq("id", id)).
                 add(Restrictions.or(Restrictions.isNull("validThru"), Restrictions.gt("validThru", clock.getCurrentDate()))).
                 uniqueResult();
