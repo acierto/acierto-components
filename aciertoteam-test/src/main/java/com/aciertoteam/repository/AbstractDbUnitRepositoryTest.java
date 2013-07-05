@@ -37,7 +37,12 @@ public abstract class AbstractDbUnitRepositoryTest {
     @Before
     public void setUp() throws Exception {
         databaseTester.onSetup();
+        preSetUp();
         onSetUp();
+    }
+
+    protected void preSetUp() {
+        // do nothing
     }
 
     protected void onSetUp() {
