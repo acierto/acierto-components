@@ -74,6 +74,27 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
     }
 
     @Override
+    public void markAsDeleted(Long id) {
+        T t = get(id);
+        t.closeEndPeriod();
+        saveOrUpdate(t);
+    }
+
+    @Override
+    public void markAsDeleted(List<T> entities) {
+        for (T t : entities) {
+            t.closeEndPeriod();
+            saveOrUpdate(t);
+        }
+    }
+
+    @Override
+    public void markAsDeleted(T entity) {
+        entity.closeEndPeriod();
+        saveOrUpdate(entity);
+    }
+
+    @Override
     public void delete(Long id) {
         getSession().delete(get(id));
     }

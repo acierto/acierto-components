@@ -80,6 +80,28 @@ public interface AbstractRepository<T> {
      */
     void saveOrUpdate(T t);
 
+
+    /**
+     * Close end period of entity by id.
+     *
+     * @param id
+     */
+    void markAsDeleted(Long id);
+
+    /**
+     * Close end period for all passed entities.
+     * @param entities
+     */
+    void markAsDeleted(List<T> entities);
+
+    /**
+     * Close end period of entity.
+     *
+     * @param entity
+     */
+    void markAsDeleted(T entity);
+
+
     /**
      * Deletes entity from the database by identifier
      *
