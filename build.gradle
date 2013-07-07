@@ -238,6 +238,6 @@ subprojects {
             exclude(group: 'org.springframework', module: 'spring-aop')
         }
 
-        testRuntime project(':log4j-test-config')
+        //testRuntime project(':log4j-test-config')
     }
 }
