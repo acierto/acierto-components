@@ -16,6 +16,9 @@ dependencies {
 
     // If using JUnit, need to depend on geb-junit (3 or 4)
     testCompile "org.gebish:geb-junit4:$gebVersion"
+
+    runtime spec.external.slf4jLog4j
+    runtime spec.external.log4j
 }
 
 //processResources.inputs.files compileSass
@@ -237,5 +240,7 @@ subprojects {
         testCompile("org.springframework:spring-test:$springVersion") {
             exclude(group: 'org.springframework', module: 'spring-aop')
         }
+
+        testRuntime project(':log4j-test-config')
     }
 }
