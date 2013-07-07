@@ -2,7 +2,6 @@ package com.aciertoteam.common.utils;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -11,19 +10,21 @@ import java.util.List;
 public class Filewalker {
 
     public static List<File> walk(String path) {
-
         List<File> files = new ArrayList<File>();
+        return walk(path, files);
+    }
 
+    private static List<File> walk(String path, List<File> files) {
         File root = new File(path);
         File[] list = root.listFiles();
 
         if (list == null) {
-            return Collections.emptyList();
+            return files;
         }
 
         for (File f : list) {
             if (f.isDirectory()) {
-                walk(f.getAbsolutePath());
+                walk(f.getAbsolutePath(), files);
             } else {
                 files.add(f);
             }
