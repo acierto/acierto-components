@@ -15,7 +15,8 @@ import java.util.List;
  */
 @Repository(value = "emailVerificationRepository")
 @Transactional
-public class DefaultEmailVerificationRepository extends DefaultAbstractRepository<EmailVerification> implements EmailVerificationRepository {
+public class DefaultEmailVerificationRepository extends DefaultAbstractRepository<EmailVerification> implements
+        EmailVerificationRepository {
 
     private static final Logger LOGGER = Logger.getLogger(DefaultEmailVerificationRepository.class);
 
