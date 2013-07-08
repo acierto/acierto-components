@@ -114,6 +114,10 @@ task compileSass(type: JavaExec) {
     }
 }
 
+test {
+    testLogging.showStandardStreams = true
+}
+
 subprojects {
     group = "com.aciertoteam"
 
@@ -237,7 +241,5 @@ subprojects {
         testCompile("org.springframework:spring-test:$springVersion") {
             exclude(group: 'org.springframework', module: 'spring-aop')
         }
-
-        //testRuntime project(':log4j-test-config')
     }
 }
