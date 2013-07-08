@@ -23,7 +23,7 @@ public class Filewalker {
         }
 
         for (File f : list) {
-            if (f.isDirectory()) {
+            if (f.isDirectory() && skipFolder(f)) {
                 walk(f.getAbsolutePath(), files);
             } else {
                 files.add(f);
@@ -31,6 +31,10 @@ public class Filewalker {
         }
 
         return files;
+    }
+
+    private static boolean skipFolder(File f) {
+        return f.getName().startsWith(".");
     }
 
 }
