@@ -1,5 +1,6 @@
 package com.aciertoteam.common.dto;
 
+import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.interfaces.Identifiable;
 import org.codehaus.jackson.annotate.JsonProperty;
 
@@ -52,5 +53,12 @@ public class AbstractDTO implements Identifiable {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public static void setBasicFields(AbstractDTO dto, AbstractEntity entity) {
+        dto.setId(entity.getId());
+        dto.setTimestamp(entity.getTimestamp());
+        dto.setValidFrom(entity.getValidFrom());
+        dto.setValidThru(entity.getValidThru());
     }
 }

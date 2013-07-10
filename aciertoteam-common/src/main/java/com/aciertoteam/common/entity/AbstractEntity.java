@@ -79,13 +79,6 @@ public abstract class AbstractEntity implements IAbstractEntity {
         validThru = new Date();
     }
 
-    public <DTO extends AbstractDTO> void inject(DTO dto) {
-        dto.setId(getId());
-        dto.setTimestamp(getTimestamp());
-        dto.setValidFrom(getValidFrom());
-        dto.setValidThru(getValidThru());
-    }
-
     @JsonIgnore
     public IAbstractEntity getEntity() {
         return this;
@@ -105,6 +98,6 @@ public abstract class AbstractEntity implements IAbstractEntity {
     }
 
     public void check() {
-        /*By default do not check the internal state of the current entity*/
+        /* By default do not check the internal state of the current entity */
     }
 }
