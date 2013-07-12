@@ -239,6 +239,12 @@
             <groupId>org.jodd</groupId>
             <artifactId>jodd</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.aciertoteam</groupId>
+            <artifactId>aciertoteam-test</artifactId>
+            <scope>test</scope>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

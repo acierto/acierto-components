@@ -1,5 +1,6 @@
 package com.aciertoteam.mail.entity;
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.aciertoteam.common.model.Clock;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -69,5 +71,25 @@ public class EmailVerification extends AbstractEntity {
 
     public boolean isVerified() {
         return requestStatus.isSuccess();
+    }
+
+    public RequestStatus updateVerificationStatus(String token) {
+        if (isExpired()) {
+            requestStatus = RequestStatus.EXPIRED;
+        } else if (isValidToken(token)) {
+            requestStatus = RequestStatus.SUCCESS;
+        } else {
+            requestStatus = RequestStatus.FAILED;
+        }
+        return requestStatus;
+    }
+
+    private boolean isValidToken(String token) {
+        return getToken().equals(token);
+    }
+
+    private boolean isExpired() {
+        Date validThru = getValidThru();
+        return validThru != null && validThru.before(new Date());
     }
 }
