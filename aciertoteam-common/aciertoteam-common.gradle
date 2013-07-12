@@ -1,0 +1,9 @@
+sonarRunner {
+    sonarProperties {
+        property "sonar.projectName", ':aciertoteam-common'
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.language", "java"
+    }
+}
+
+apply from: file('../gradle/jacoco.gradle')

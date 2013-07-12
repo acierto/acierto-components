@@ -1,0 +1,58 @@
+apply plugin: 'jacoco'
+
+configurations {
+    codeCoverage
+    codeCoverageAnt
+}
+
+dependencies {
+    codeCoverage 'org.jacoco:org.jacoco.agent:0.5.10.201208310627:runtime@jar'
+    codeCoverageAnt 'org.jacoco:org.jacoco.ant:0.5.10.201208310627'
+}
+
+jacoco {
+    toolVersion = "0.6.2.201302030002"
+    reportsDir = new File(buildDir, "customJacocoReportDir")
+}
+
+task generateCoverageReport << {
+
+test {
+    systemProperties = System.properties
+    jvmArgs "-javaagent:${configurations.codeCoverage.asPath}=destfile=${project.buildDir.path}/coverage-results/jacoco.exec,sessionid=HSServ,append=false",
+            '-Djacoco=true',
+            '-Xms128m',
+            '-Xmx512m',
+            '-XX:MaxPermSize=128m'
+}
+
+    ant {
+        taskdef(name:'jacocoreport', classname: 'org.jacoco.ant.ReportTask', classpath: configurations.codeCoverageAnt.asPath)
+
+        mkdir dir: "target/reports/coverage"
+        mkdir dir: "target/coverage-results"
+
+
+        jacocoreport {
+            executiondata {
+                fileset(dir: "target/coverage-results") {
+                    include name: 'jacoco.exec'
+                }
+            }
+            structure(name: project.name) {
+                classfiles {
+                    fileset(dir: "target/classes/main") {
+                        exclude name: 'org/ifxforum/**/*'
+                        exclude name: 'org/gca/euronet/generated**/*'
+                    }
+                }
+                sourcefiles(encoding: 'CP1252') {
+                    fileset dir: "src/main/java"
+                }
+            }
+
+            xml  destfile: "target/reports/coverage/jacoco.xml"
+            html destdir:  "target/reports/coverage"
+        }
+    }
+}

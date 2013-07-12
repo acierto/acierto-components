@@ -1,5 +1,6 @@
 apply plugin: 'groovy'
 apply plugin: 'java'
+apply plugin: 'sonar-runner'
 apply from: "./libraries.gradle"
 
 configurations {
@@ -35,7 +36,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.eriwen:gradle-css-plugin:1.2.1'
+        classpath 'com.eriwen:gradle-css-plugin:1.2.1',
+                classpath "org.codehaus.sonar:sonar-plugin-api:3.5.1"
     }
 
     apply from: file('gradle/buildscript.gradle'), to: buildscript
@@ -130,7 +132,7 @@ subprojects {
                 "org.apache.httpcomponents:httpcore:$httpcomponentsVersion",
                 "org.kohsuke:geoip:1.2.8",
                 "org.apache.camel:camel-core:$camelVersion",
-                "org.apache.camel:camel-mail:$camelVersion",                
+                "org.apache.camel:camel-mail:$camelVersion",
                 "com.lowagie:itext:2.1.7",
                 "net.sf.json-lib:json-lib:2.2.1:jdk15",
                 "org.springframework.springfaces:springfaces-mvc:$springFacesVersion",
@@ -211,13 +213,13 @@ subprojects {
         compile("com.octo.captcha:jcaptcha-all:1.0-RC4") {
             exclude(group: 'org.springframework', module: 'spring')
         }
-		
-		compile("org.apache.camel:camel-spring:$camelVersion") {
-			exclude(group: 'org.springframework', module: 'spring-tx')
-			exclude(group: 'org.springframework', module: 'spring-aop')
-			exclude(group: 'org.apache.geronimo.specs', module: 'geronimo-jta_1.0.1B_spec')
-			exclude(group: 'org.apache.geronimo.specs', module: 'geronimo-jta_1.1_spec')
-		}
+
+        compile("org.apache.camel:camel-spring:$camelVersion") {
+            exclude(group: 'org.springframework', module: 'spring-tx')
+            exclude(group: 'org.springframework', module: 'spring-aop')
+            exclude(group: 'org.apache.geronimo.specs', module: 'geronimo-jta_1.0.1B_spec')
+            exclude(group: 'org.apache.geronimo.specs', module: 'geronimo-jta_1.1_spec')
+        }
 
         testCompile "org.seleniumhq.selenium:selenium-java:$seleniumVersion",
                 "org.dbunit:dbunit:2.4.8",
@@ -230,8 +232,8 @@ subprojects {
                 "org.apache.camel:camel-http:$camelVersion",
                 "org.jodd:jodd:3.1.1",
                 "org.jvnet.mock-javamail:mock-javamail:1.9"
-                "org.kubek2k:springockito-annotations:1.0.8"
-                "org.kubek2k:springockito:1.0.5"
+        "org.kubek2k:springockito-annotations:1.0.8"
+        "org.kubek2k:springockito:1.0.5"
 
         testCompile("org.jencks:jencks:2.1") {
             exclude(group: 'org.springframework', module: 'spring-jms')
@@ -241,5 +243,26 @@ subprojects {
         testCompile("org.springframework:spring-test:$springVersion") {
             exclude(group: 'org.springframework', module: 'spring-aop')
         }
+    }
+}
+
+project(":aciertoteam-test") {
+    sonarRunner {
+        skipProject = true
+    }
+}
+
+sonarRunner {
+    sonarProperties {
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.jdbc.url", "jdbc:mysql://localhost:3306/sonar"
+        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+        property "sonar.jdbc.username", "sonar"
+        property "sonar.jdbc.password", "t0ps3cr3t"
+
+        property "sonar.core.codeCoveragePlugin", "jacoco"
+        property "sonar.jacoco.reportPath", "tests/jacoco-exec/jacoco.exec"
+        property "sonar.dynamicAnalysis", "reuseReports"
+        property "sonar.surefire.reportsPath", "tests/test-reports"
     }
 }

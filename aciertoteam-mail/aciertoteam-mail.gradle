@@ -4,3 +4,13 @@ dependencies {
     compile project(':aciertoteam-common')
     testCompile project(':aciertoteam-test')
 }
+
+sonarRunner {
+    sonarProperties {
+        property "sonar.projectName", ':aciertoteam-mail'
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.language", "java"
+    }
+}
+
+apply from: file('../gradle/jacoco.gradle')
