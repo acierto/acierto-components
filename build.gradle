@@ -254,6 +254,7 @@ project(":aciertoteam-test") {
 
 sonarRunner {
     sonarProperties {
+        property "sonar.projectKey", "Acierto_Components"
         property "sonar.projectName", "Acierto_Components"
         property "sonar.login", "admin"
         property "sonar.password", "FAst%aPpoiNtS0nar"
