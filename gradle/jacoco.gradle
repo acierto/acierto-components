@@ -41,7 +41,7 @@ test {
             }
             structure(name: project.name) {
                 classfiles {
-                    fileset(dir: "target/classes/main") {
+                    fileset(dir: "target/classes") {
                         exclude name: 'org/ifxforum/**/*'
                         exclude name: 'org/gca/euronet/generated**/*'
                     }
