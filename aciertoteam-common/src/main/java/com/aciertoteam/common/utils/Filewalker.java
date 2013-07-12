@@ -7,7 +7,11 @@ import java.util.List;
 /**
  * @author Bogdan Nechyporenko
  */
-public class Filewalker {
+public final class Filewalker {
+
+    private Filewalker() {
+        // restrict instantiation
+    }
 
     public static List<File> walk(String path) {
         List<File> files = new ArrayList<File>();

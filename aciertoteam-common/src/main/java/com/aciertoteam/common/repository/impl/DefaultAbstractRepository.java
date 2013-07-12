@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * @param <T> IAbstractEntity
  * @author Bogdan Nechyporenko
  */
 @SuppressWarnings("unchecked")

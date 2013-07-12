@@ -1,18 +1,14 @@
 package com.aciertoteam.common.entity;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
-
-import org.codehaus.jackson.annotate.JsonIgnore;
-
-import com.aciertoteam.common.dto.AbstractDTO;
 import com.aciertoteam.common.interfaces.IAbstractEntity;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * @author Bogdan Nechyporenko
@@ -69,6 +65,10 @@ public abstract class AbstractEntity implements IAbstractEntity {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Integer getVersion() {
+        return version;
     }
 
     public boolean isDeleted() {

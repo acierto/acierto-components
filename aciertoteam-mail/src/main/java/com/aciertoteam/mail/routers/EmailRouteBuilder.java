@@ -66,7 +66,8 @@ public class EmailRouteBuilder extends RouteBuilder {
                 sendMessage(producerTemplate, exchange, messageContainer);
             }
 
-            private void sendMessage(ProducerTemplate producerTemplate, Exchange exchange, MessageContainer messageContainer) {
+            private void sendMessage(ProducerTemplate producerTemplate, Exchange exchange,
+                    MessageContainer messageContainer) {
                 try {
                     populateMessageBeforeSending(exchange.getIn(), getEmailForm(messageContainer));
 
@@ -106,14 +107,15 @@ public class EmailRouteBuilder extends RouteBuilder {
     }
 
     private String createSmtpEndpoint() {
-        return "smtps://" + host + "?username=" + user + "@gmail.com&password=" + password +
-                (emailSslEnabled ? "&sslContextParameters=#sslContextParameters" : "");
+        return "smtps://" + host + "?username=" + user + "@gmail.com&password=" + password
+                + (emailSslEnabled ? "&sslContextParameters=#sslContextParameters" : "");
     }
 
     private EmailForm createEmailForm(NotificationDTO notification) {
         final MailTemplate mailTemplate = notification.getMailTemplateName();
         final EmailForm emailForm = new EmailForm();
-        final String body = ftlReader.read(mailTemplate.getTemplateName(), notification.getProperties(), Locale.getDefault());
+        final String body = ftlReader.read(mailTemplate.getTemplateName(), notification.getProperties(),
+                Locale.getDefault());
 
         emailForm.setTo(notification.getTo());
         emailForm.setSubject(getSubject(mailTemplate));
@@ -127,7 +129,7 @@ public class EmailRouteBuilder extends RouteBuilder {
     }
 
     private String getSubject(MailTemplate mailTemplate) {
-        return messageSource.getMessage(mailTemplate.getSubjectName(), new Object[]{}, Locale.getDefault());
+        return messageSource.getMessage(mailTemplate.getSubjectName(), new Object[] {}, Locale.getDefault());
     }
 
     private void checkEmailBody(Long notificationId, String body) {
@@ -174,7 +176,12 @@ public class EmailRouteBuilder extends RouteBuilder {
         return config == null ? null : config.getValue();
     }
 
+    /**
+     * @author bogdan
+     */
     public static class MessageContainer implements Serializable {
+
+        private static final long serialVersionUID = 1L;
 
         private final NotificationDTO notification;
 
@@ -194,4 +201,3 @@ public class EmailRouteBuilder extends RouteBuilder {
         }
     }
 }
-

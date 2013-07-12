@@ -5,6 +5,8 @@ import com.aciertoteam.generator.transformers.Transformer;
 import com.aciertoteam.generator.transformers.enums.PropertyType;
 
 /**
+ * @param <K> Transformer
+ * @param <V> Transformer
  * @author Bogdan Nechyporenko
  */
 public class SimplePropertyTransformer<K extends Transformer, V extends Transformer> implements PropertyTransformer {
@@ -20,12 +22,12 @@ public class SimplePropertyTransformer<K extends Transformer, V extends Transfor
     @Override
     public String transform(PropertyType propertyType, String inputText) {
         switch (propertyType) {
-            case KEY:
-                return keyTransformer.transform(inputText);
-            case VALUE:
-                return valueTransformer.transform(inputText);
-            default:
-                throw new IllegalArgumentException("Unsupportable enum type: " + propertyType);
+        case KEY:
+            return keyTransformer.transform(inputText);
+        case VALUE:
+            return valueTransformer.transform(inputText);
+        default:
+            throw new IllegalArgumentException("Unsupportable enum type: " + propertyType);
         }
     }
 }

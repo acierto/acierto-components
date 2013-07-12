@@ -15,9 +15,13 @@ import java.util.zip.ZipInputStream;
 /**
  * @author Bogdan Nechyporenko
  */
-public class AciertoTeamFileUtils {
+public final class AciertoTeamFileUtils {
 
     private static final Logger LOG = Logger.getLogger(AciertoTeamFileUtils.class);
+
+    private AciertoTeamFileUtils() {
+        // restrict instantiation
+    }
 
     public static File unzipFile(File zipFile, String outputFolderPath, String newFileName) {
         File outputFile = new File(outputFolderPath, newFileName);

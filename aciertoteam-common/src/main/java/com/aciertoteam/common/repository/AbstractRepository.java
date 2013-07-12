@@ -5,20 +5,21 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * @param <T> Entity
  * @author Bogdan Nechyporenko
  */
 public interface AbstractRepository<T> {
 
     /**
      * Returns all entries from the database
-     *
+     * 
      * @return
      */
     List<T> getAll();
 
     /**
      * Returns an entry by identifier
-     *
+     * 
      * @param id
      * @return
      */
@@ -26,7 +27,7 @@ public interface AbstractRepository<T> {
 
     /**
      * Returns the list of entries by the list of identifiers
-     *
+     * 
      * @param ids
      * @return
      */
@@ -34,7 +35,7 @@ public interface AbstractRepository<T> {
 
     /**
      * Returns the list of entries by the list of identifiers
-     *
+     * 
      * @param ids
      * @return
      */
@@ -42,14 +43,14 @@ public interface AbstractRepository<T> {
 
     /**
      * Saves the list of entities
-     *
+     * 
      * @param entities
      */
     void saveAll(Collection<T> entities);
 
     /**
      * Saves an entry
-     *
+     * 
      * @param entity
      * @return
      */
@@ -57,7 +58,7 @@ public interface AbstractRepository<T> {
 
     /**
      * Returns the entry from the specified table by specific field
-     *
+     * 
      * @param fieldName
      * @param value
      * @return
@@ -66,7 +67,7 @@ public interface AbstractRepository<T> {
 
     /**
      * Returns the entries from the specified table by specific field
-     *
+     * 
      * @param fieldName
      * @param value
      * @return
@@ -75,15 +76,14 @@ public interface AbstractRepository<T> {
 
     /**
      * Saves or update transferred entity
-     *
+     * 
      * @param t
      */
     void saveOrUpdate(T t);
 
-
     /**
      * Close end period of entity by id.
-     *
+     * 
      * @param id
      */
     void markAsDeleted(Long id);
@@ -96,29 +96,28 @@ public interface AbstractRepository<T> {
 
     /**
      * Close end period of entity.
-     *
+     * 
      * @param entity
      */
     void markAsDeleted(T entity);
 
-
     /**
      * Deletes entity from the database by identifier
-     *
-     * @param Id
+     * 
+     * @param id
      */
-    void delete(Long Id);
+    void delete(Long id);
 
     /**
      * Deletes the list of entities
-     *
+     * 
      * @param entities
      */
     void delete(List<T> entities);
 
     /**
      * Deletes the entity
-     *
+     * 
      * @param entity
      */
     void delete(T entity);

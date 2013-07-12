@@ -12,9 +12,13 @@ import java.io.Serializable;
 /**
  * @author Bogdan Nechyporenko
  */
-public class SerializeUtil {
+public final class SerializeUtil {
 
     private static final Logger LOG = Logger.getLogger(SerializeUtil.class);
+
+    private SerializeUtil() {
+        // restrict instantiation
+    }
 
     public static byte[] write(Serializable serializable) {
         ByteArrayOutputStream baos = null;
@@ -44,8 +48,7 @@ public class SerializeUtil {
 
         ObjectInputStream ois = null;
         try {
-            ois = new ObjectInputStream(
-                    new ByteArrayInputStream(bytes));
+            ois = new ObjectInputStream(new ByteArrayInputStream(bytes));
             return (Serializable) ois.readObject();
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);

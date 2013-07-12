@@ -8,13 +8,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.aciertoteam.common.model.Clock;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
 import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.mail.enums.RequestStatus;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  * @author Bogdan Nechyporenko

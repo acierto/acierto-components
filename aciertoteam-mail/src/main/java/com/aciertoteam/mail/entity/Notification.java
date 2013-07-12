@@ -153,10 +153,9 @@ public class Notification extends AbstractEntity {
 
     @SuppressWarnings("unchecked")
     private void addProperties(NotificationDTO dto) {
-        HashMap<String, Object> properties = (HashMap<String, Object>) SerializeUtil.read(getProperties());
-
-        if (properties != null) {
-            for (Map.Entry<String, Object> entry : properties.entrySet()) {
+        HashMap<String, Object> readProperties = (HashMap<String, Object>) SerializeUtil.read(getProperties());
+        if (readProperties != null) {
+            for (Map.Entry<String, Object> entry : readProperties.entrySet()) {
                 dto.addProperty(entry.getKey(), (Serializable) entry.getValue());
             }
         }
@@ -164,10 +163,9 @@ public class Notification extends AbstractEntity {
 
     @SuppressWarnings("unchecked")
     private void addAttachments(NotificationDTO dto) {
-        HashMap<String, Object> attachments = (HashMap<String, Object>) SerializeUtil.read(getAttachments());
-
-        if (attachments != null) {
-            for (Map.Entry<String, Object> entry : attachments.entrySet()) {
+        HashMap<String, Object> readAttachments = (HashMap<String, Object>) SerializeUtil.read(getAttachments());
+        if (readAttachments != null) {
+            for (Map.Entry<String, Object> entry : readAttachments.entrySet()) {
                 dto.addAttachment(entry.getKey(), (Serializable) entry.getValue());
             }
         }

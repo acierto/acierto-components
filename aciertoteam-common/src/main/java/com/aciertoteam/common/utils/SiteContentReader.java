@@ -11,13 +11,16 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 /**
  * @author Bogdan Nechyporenko
  */
-public class SiteContentReader {
+public final class SiteContentReader {
 
     private static final Logger LOG = Logger.getLogger(SiteContentReader.class);
+
+    private SiteContentReader() {
+        // restrict instantiation
+    }
 
     @SuppressWarnings("unchecked")
     public static InputStream readAsInputStream(String url) {
@@ -46,6 +49,5 @@ public class SiteContentReader {
             return null;
         }
     }
-
 
 }

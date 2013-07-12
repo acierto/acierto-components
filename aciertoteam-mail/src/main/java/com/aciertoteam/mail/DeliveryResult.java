@@ -1,10 +1,10 @@
 package com.aciertoteam.mail;
 
 /**
- *
+ * 
  * @author Bogdan Nechyporenko
  */
-public class DeliveryResult {
+public final class DeliveryResult {
 
     private final boolean success;
 

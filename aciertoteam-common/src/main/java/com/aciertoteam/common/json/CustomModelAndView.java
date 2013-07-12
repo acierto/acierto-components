@@ -13,7 +13,7 @@ public class CustomModelAndView extends ModelAndView {
 
     /**
      * Creates a generic JsonView with a default name
-     *
+     * 
      * @param modelObject
      * @see JsonView
      */
@@ -23,7 +23,7 @@ public class CustomModelAndView extends ModelAndView {
 
     /**
      * Creates a Model And View with the provided JsonView
-     *
+     * 
      * @param jsonView
      * @see JsonView
      */
@@ -33,7 +33,7 @@ public class CustomModelAndView extends ModelAndView {
 
     /**
      * Creates a generic JsonView with a specific name
-     *
+     * 
      * @param viewName
      * @param modelObject
      * @see JsonView
@@ -44,15 +44,14 @@ public class CustomModelAndView extends ModelAndView {
 
     /**
      * Creates new ModelAndView given a View object and a model. <emphasis>Note:
-     * the supplied model data is copied into
-     * the internal storage of this class. You should not consider
-     * to modify the supplied Map after supplying it to this class</emphasis>
-     *
-     * @param view  View object to render
-     * @param model Map of model names (Strings) to model objects (Objects). Model
-     *              entries may not be <code>null</code>,
-     *              but the model Map may be <code>null</code> if there is no
-     *              model data.
+     * the supplied model data is copied into the internal storage of this
+     * class. You should not consider to modify the supplied Map after supplying
+     * it to this class</emphasis>
+     * 
+     * @param view View object to render
+     * @param model Map of model names (Strings) to model objects (Objects).
+     *        Model entries may not be <code>null</code>, but the model Map may
+     *        be <code>null</code> if there is no model data.
      */
     public CustomModelAndView(View view, Map model) {
         setView(view);
@@ -63,9 +62,9 @@ public class CustomModelAndView extends ModelAndView {
 
     /**
      * Convenient constructor to take a single model object.
-     *
-     * @param view        View object to render
-     * @param modelName   name of the single entry in the model
+     * 
+     * @param view View object to render
+     * @param modelName name of the single entry in the model
      * @param modelObject the single model object
      */
     public CustomModelAndView(View view, String modelName, Object modelObject) {
@@ -86,7 +85,6 @@ public class CustomModelAndView extends ModelAndView {
         ret.put("success", Boolean.TRUE);
         ClearJsonView clearJsonView = new ClearJsonView();
         clearJsonView.setData(ret);
-
         return new CustomModelAndView(clearJsonView);
     }
 
@@ -96,7 +94,6 @@ public class CustomModelAndView extends ModelAndView {
         ret.put("errors", model);
         ClearJsonView clearJsonView = new ClearJsonView();
         clearJsonView.setData(ret);
-
         return new CustomModelAndView(clearJsonView);
     }
 }

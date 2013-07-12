@@ -14,6 +14,8 @@ import java.util.Map;
  */
 public class EmailForm implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private String from;
 
     private List<String> to;
