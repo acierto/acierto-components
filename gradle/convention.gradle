@@ -8,6 +8,8 @@ subprojects { project ->
 
     // Restore status after Java plugin
     status = rootProject.status
+	
+	buildDir = "target"
 
     task sourcesJar(type: Jar, dependsOn:classes) {
         from sourceSets.main.allSource
