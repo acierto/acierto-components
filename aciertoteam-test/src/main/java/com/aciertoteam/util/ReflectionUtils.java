@@ -1,18 +1,22 @@
 package com.aciertoteam.util;
 
-import static org.junit.Assert.fail;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
+import org.apache.commons.lang3.ClassUtils;
+import org.springframework.beans.BeanUtils;
+
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import org.apache.commons.lang3.ClassUtils;
-import org.springframework.beans.BeanUtils;
+import java.util.Map;
+import java.util.Set;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * @author ishestiporov
@@ -57,10 +61,47 @@ public final class ReflectionUtils {
                 }
             }
         }
+        if (parameterClass.isAssignableFrom(Set.class)) {
+            return Collections.emptySet();
+        }
+        if (parameterClass.isAssignableFrom(List.class)) {
+            return Collections.emptyList();
+        }
+        if (parameterClass.isAssignableFrom(Map.class)) {
+            return Collections.emptyMap();
+        }
         if (parameterClass.isEnum()) {
             return parameterClass.getEnumConstants()[0];
         }
-        return mock(parameterClass);
+        return mockParam(parameterClass);
+    }
+
+    private static Object mockParam(Class parameterClass) {
+        Object mock = mock(parameterClass);
+        mockChildGetters(parameterClass, mock);
+        return mock;
+    }
+
+    private static void mockChildGetters(Class parameterClass, Object mock) {
+        for (final Method method : parameterClass.getDeclaredMethods()) {
+            try {
+                if (ReflectionUtils.isGetter(method) && isCustomObjectToBeMocked(method)) {
+                    Object param = mock(method.getReturnType());
+                    when(method.invoke(mock)).thenReturn(param);
+                }
+            } catch (Exception e) {
+                throw new IllegalArgumentException(e.getMessage(), e);
+            }
+        }
+    }
+
+    private static boolean isCustomObjectToBeMocked(Method method) {
+        return isReturningCustomClass(method) && !method.getReturnType().isEnum();
+    }
+
+    private static boolean isReturningCustomClass(Method method) {
+        return method.getReturnType().getPackage() != null
+                && method.getReturnType().getPackage().getName().startsWith("com.acierto");
     }
 
     public static boolean hasField(Class clazz, String fieldName) {
@@ -97,7 +138,7 @@ public final class ReflectionUtils {
             return result;
         } catch (Exception e) {
             throw new IllegalArgumentException(String.format("Class = %s, method = %s. Reason: %s",
-                    method.getDeclaringClass(), method.getName(), e.getMessage()));
+                    method.getDeclaringClass(), method.getName(), e.getMessage()), e);
         }
     }
 
@@ -115,7 +156,12 @@ public final class ReflectionUtils {
         try {
             return constructor.newInstance(ReflectionUtils.getMethodParameters(constructor));
         } catch (Exception e) {
-            throw new IllegalArgumentException("Cannot instantiate class: " + constructor.getDeclaringClass());
+            throw new IllegalArgumentException("Cannot instantiate class: " + constructor.getDeclaringClass(), e);
         }
+    }
+
+    public static boolean isGetter(Method method) {
+        return (method.getName().startsWith("get") || method.getName().startsWith("is"))
+                && method.getParameterTypes().length == 0;
     }
 }
