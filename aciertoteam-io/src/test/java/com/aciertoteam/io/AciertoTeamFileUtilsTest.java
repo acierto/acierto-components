@@ -1,12 +1,10 @@
 package com.aciertoteam.io;
 
-import org.apache.commons.io.FileUtils;
-import org.junit.Test;
-
+import static junit.framework.Assert.assertEquals;
 import java.io.File;
 import java.io.IOException;
-
-import static junit.framework.Assert.assertEquals;
+import org.apache.commons.io.FileUtils;
+import org.junit.Test;
 
 /**
  * @author Bogdan Nechyporenko

@@ -1,11 +1,10 @@
 package com.aciertoteam.fastappoint.common.util;
 
+import java.util.List;
+import java.util.Locale;
 import com.aciertoteam.common.utils.PropertyUtil;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.List;
-import java.util.Locale;
 
 /**
  * @author Bogdan Nechyporenko

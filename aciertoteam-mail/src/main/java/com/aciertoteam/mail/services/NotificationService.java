@@ -1,13 +1,12 @@
 package com.aciertoteam.mail.services;
 
+import java.util.Collection;
+import java.util.Map;
 import com.aciertoteam.mail.dto.NotificationDTO;
 import com.aciertoteam.mail.entity.DecisionRequest;
 import com.aciertoteam.mail.entity.EmailVerification;
 import com.aciertoteam.mail.entity.Notification;
 import com.aciertoteam.mail.enums.NotificationStatus;
-
-import java.util.Collection;
-import java.util.Map;
 
 /**
  * @author Bogdan Nechyporenko

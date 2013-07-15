@@ -1,5 +1,11 @@
 package com.aciertoteam.common.utils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.Locale;
+import java.util.Map;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -7,13 +13,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.CharEncoding;
 import org.apache.log4j.Logger;
 import org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * @author Bogdan Nechyporenko

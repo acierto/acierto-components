@@ -1,9 +1,6 @@
 package com.aciertoteam.mail.dto;
 
 
-import com.aciertoteam.mail.entity.MailTemplate;
-import com.aciertoteam.mail.enums.NotificationStatus;
-
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
@@ -11,6 +8,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import com.aciertoteam.mail.entity.MailTemplate;
+import com.aciertoteam.mail.enums.NotificationStatus;
 
 /**
  * @author Bogdan Nechyporenko

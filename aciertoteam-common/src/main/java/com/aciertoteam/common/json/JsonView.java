@@ -1,5 +1,10 @@
 package com.aciertoteam.common.json;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONSerializer;
@@ -8,12 +13,6 @@ import net.sf.json.filters.OrPropertyFilter;
 import net.sf.json.util.PropertyFilter;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.view.AbstractView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
 
 /**
  * @author Bogdan Nechyporenko

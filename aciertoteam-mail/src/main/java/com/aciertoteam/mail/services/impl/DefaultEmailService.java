@@ -1,20 +1,17 @@
 package com.aciertoteam.mail.services.impl;
 
 import static com.aciertoteam.mail.routers.EmailRouteBuilder.MessageContainer;
-
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
+import com.aciertoteam.mail.EmailResultCallback;
+import com.aciertoteam.mail.dto.NotificationDTO;
+import com.aciertoteam.mail.services.EmailService;
 import org.apache.camel.CamelContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.aciertoteam.mail.EmailResultCallback;
-import com.aciertoteam.mail.dto.NotificationDTO;
-import com.aciertoteam.mail.services.EmailService;
 
 /**
  * @author Bogdan Nechyporenko

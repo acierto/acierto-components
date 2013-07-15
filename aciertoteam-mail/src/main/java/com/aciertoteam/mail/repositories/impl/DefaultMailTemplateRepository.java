@@ -1,12 +1,11 @@
 package com.aciertoteam.mail.repositories.impl;
 
+import java.util.Date;
 import com.aciertoteam.common.repository.impl.DefaultAbstractRepository;
 import com.aciertoteam.mail.entity.MailTemplate;
 import com.aciertoteam.mail.repositories.MailTemplateRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
 
 /**
  * @author Bogdan Nechyporenko

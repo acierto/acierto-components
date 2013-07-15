@@ -1,10 +1,9 @@
 package com.aciertoteam.common.dto;
 
+import java.util.Date;
 import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.interfaces.Identifiable;
 import org.codehaus.jackson.annotate.JsonProperty;
-
-import java.util.Date;
 
 /**
  * @author Bogdan Nechyporenko

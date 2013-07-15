@@ -1,7 +1,6 @@
 package com.aciertoteam.dbunit;
 
 import javax.sql.DataSource;
-
 import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.IDatabaseConnection;

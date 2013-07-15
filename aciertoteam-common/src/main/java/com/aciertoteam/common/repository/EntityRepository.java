@@ -1,9 +1,8 @@
 package com.aciertoteam.common.repository;
 
+import java.util.List;
 import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.interfaces.IAbstractEntity;
-
-import java.util.List;
 
 /**
  * @author Bogdan Nechyporenko

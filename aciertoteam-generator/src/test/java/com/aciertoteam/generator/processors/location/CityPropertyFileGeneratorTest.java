@@ -1,5 +1,9 @@
 package com.aciertoteam.generator.processors.location;
 
+import static junit.framework.Assert.assertTrue;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import com.aciertoteam.generator.model.DefaultFileResource;
 import com.aciertoteam.generator.model.FileResource;
 import com.aciertoteam.generator.model.enums.FileFormat;
@@ -13,12 +17,6 @@ import com.aciertoteam.generator.transformers.impl.SimplePropertyTransformer;
 import com.aciertoteam.generator.transformers.impl.SimpleTransformer;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-
-import static junit.framework.Assert.assertTrue;
 
 /**
  * @author Bogdan Nechyporenko

@@ -3,12 +3,11 @@
  */
 package com.aciertoteam.common.i18n;
 
+import java.util.Locale;
 import org.apache.log4j.Logger;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.web.context.request.RequestContextHolder;
-
-import java.util.Locale;
 
 /**
  * Utility class for resolving messaging from the property files. Wraps

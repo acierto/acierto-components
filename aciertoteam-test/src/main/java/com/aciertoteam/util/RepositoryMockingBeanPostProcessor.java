@@ -1,7 +1,6 @@
 package com.aciertoteam.util;
 
 import static org.mockito.Mockito.mock;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

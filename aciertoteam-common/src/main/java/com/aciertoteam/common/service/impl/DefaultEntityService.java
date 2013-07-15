@@ -4,16 +4,14 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.interfaces.IAbstractEntity;
 import com.aciertoteam.common.repository.EntityRepository;
 import com.aciertoteam.common.service.EntityService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Bogdan Nechyporenko

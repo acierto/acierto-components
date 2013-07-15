@@ -1,5 +1,6 @@
 package com.aciertoteam.repository;
 
+import java.net.MalformedURLException;
 import com.aciertoteam.common.repository.EntityRepository;
 import com.aciertoteam.dbunit.HsqlJdbcDatabaseTester;
 import org.dbunit.dataset.DataSetException;
@@ -10,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
-
-import java.net.MalformedURLException;
 
 /**
  * @author Bogdan Nechyporenko

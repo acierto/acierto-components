@@ -1,11 +1,10 @@
 package com.aciertoteam.common.service;
 
-import com.aciertoteam.common.entity.AbstractEntity;
-import com.aciertoteam.common.interfaces.IAbstractEntity;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import com.aciertoteam.common.entity.AbstractEntity;
+import com.aciertoteam.common.interfaces.IAbstractEntity;
 
 /**
  * @author Bogdan Nechyporenko

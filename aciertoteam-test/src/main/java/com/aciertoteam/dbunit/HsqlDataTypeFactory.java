@@ -1,7 +1,6 @@
 package com.aciertoteam.dbunit;
 
 import java.sql.Types;
-
 import org.dbunit.dataset.datatype.DataType;
 import org.dbunit.dataset.datatype.DataTypeException;
 import org.dbunit.dataset.datatype.DefaultDataTypeFactory;

@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,13 +15,11 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-
-import org.springframework.util.StringUtils;
-
 import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.utils.SerializeUtil;
 import com.aciertoteam.mail.dto.NotificationDTO;
 import com.aciertoteam.mail.enums.NotificationStatus;
+import org.springframework.util.StringUtils;
 
 /**
  * @author Bogdan Nechyporenko

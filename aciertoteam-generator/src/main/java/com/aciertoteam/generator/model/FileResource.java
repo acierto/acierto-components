@@ -1,8 +1,7 @@
 package com.aciertoteam.generator.model;
 
-import com.aciertoteam.generator.model.enums.FileFormat;
-
 import java.io.File;
+import com.aciertoteam.generator.model.enums.FileFormat;
 
 /**
  * @author Bogdan Nechyporenko

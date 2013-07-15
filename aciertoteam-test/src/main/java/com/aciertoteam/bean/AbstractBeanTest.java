@@ -1,18 +1,11 @@
 package com.aciertoteam.bean;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 import com.aciertoteam.util.ReflectionUtils;
-import org.apache.commons.lang3.ClassUtils;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
 
@@ -31,16 +24,25 @@ public abstract class AbstractBeanTest<T> {
     @Test
     public void testGettersSetters() {
         Class victimClass = getGenericsClass();
-        for (PropertyDescriptor descriptor : BeanUtils.getPropertyDescriptors(victimClass)) {
-            if (ReflectionUtils.hasField((victimClass), descriptor.getName())) {
-                Object victim = ReflectionUtils.constructNewObject(victimClass);
-                Object set = ReflectionUtils.invokeSetter(victim, descriptor);
-                Object returned = ReflectionUtils.invokeGetter(victim, descriptor);
-                if (set != null && returned != null) {
-                    assertEquals(set, returned);
+        if (!Exception.class.isAssignableFrom(victimClass)) {
+            for (PropertyDescriptor descriptor : BeanUtils.getPropertyDescriptors(victimClass)) {
+                if (descriptor.getWriteMethod() != null) {
+                    Object victim = ReflectionUtils.constructNewObject(victimClass);
+                    Object set = ReflectionUtils.invokeSetter(victim, descriptor);
+                    Object returned = ReflectionUtils.invokeGetter(victim, descriptor);
+                    if (set != null && returned != null) {
+                        assertField(victimClass, descriptor, set, returned);
+                    } else if (ReflectionUtils.hasField(victimClass, descriptor)) {
+                        returned = ReflectionUtils.getFieldValue(victim, descriptor);
+                        assertField(victimClass, descriptor, set, returned);
+                    }
                 }
             }
         }
+    }
+
+    private void assertField(Class clazz, PropertyDescriptor descriptor, Object set, Object returned) {
+        assertEquals(String.format("Class: %s, method: %s", clazz, descriptor.getName()), set, returned);
     }
 
     private Class getGenericsClass() {

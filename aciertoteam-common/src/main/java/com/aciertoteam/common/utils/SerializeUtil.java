@@ -1,13 +1,12 @@
 package com.aciertoteam.common.utils;
 
-import org.apache.log4j.Logger;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import org.apache.log4j.Logger;
 
 /**
  * @author Bogdan Nechyporenko

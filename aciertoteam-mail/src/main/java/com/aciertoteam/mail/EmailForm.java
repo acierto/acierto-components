@@ -1,13 +1,12 @@
 package com.aciertoteam.mail;
 
-import org.springframework.util.StringUtils;
-
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import org.springframework.util.StringUtils;
 
 /**
  * @author Bogdan Nechyporenko

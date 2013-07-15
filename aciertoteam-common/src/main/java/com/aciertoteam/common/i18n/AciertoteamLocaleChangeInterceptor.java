@@ -1,13 +1,12 @@
 package com.aciertoteam.common.i18n;
 
-import org.springframework.util.StringUtils;
-import org.springframework.web.context.ContextLoader;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-
+import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Locale;
+import org.springframework.util.StringUtils;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 /**
  * @author Bogdan Nechyporenko

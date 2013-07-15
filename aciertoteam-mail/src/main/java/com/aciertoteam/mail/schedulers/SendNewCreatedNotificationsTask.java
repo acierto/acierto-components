@@ -1,5 +1,11 @@
 package com.aciertoteam.mail.schedulers;
 
+import java.util.Collection;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import com.aciertoteam.mail.DeliveryResult;
 import com.aciertoteam.mail.EmailResultCallback;
 import com.aciertoteam.mail.beans.DefaultEmailResultCallback;
@@ -12,13 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.util.Collection;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author Bogdan Nechyporenko

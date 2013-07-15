@@ -1,9 +1,5 @@
 package com.aciertoteam.io;
 
-import com.aciertoteam.io.exceptions.FileException;
-import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,6 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import com.aciertoteam.io.exceptions.FileException;
+import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 
 /**
  * @author Bogdan Nechyporenko

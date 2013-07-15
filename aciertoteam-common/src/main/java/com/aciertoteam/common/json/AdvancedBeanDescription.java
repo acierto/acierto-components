@@ -1,15 +1,14 @@
 package com.aciertoteam.common.json;
 
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.introspect.AnnotatedClass;
 import org.codehaus.jackson.map.introspect.AnnotatedMethod;
 import org.codehaus.jackson.map.introspect.BasicBeanDescription;
 import org.codehaus.jackson.map.introspect.VisibilityChecker;
 import org.codehaus.jackson.type.JavaType;
-
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * @author Bogdan Nechyporenko

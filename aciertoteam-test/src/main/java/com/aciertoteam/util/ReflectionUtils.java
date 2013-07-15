@@ -1,29 +1,40 @@
 package com.aciertoteam.util;
 
-import org.apache.commons.lang3.ClassUtils;
-import org.springframework.beans.BeanUtils;
-
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import org.apache.commons.lang3.ClassUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.BeanUtils;
 
 /**
  * @author ishestiporov
  */
 public final class ReflectionUtils {
 
-    private static final Object[] PRIMITIVES = { "test", 1L, 1, Locale.getDefault(), new byte[] { 1 }, true };
+    private static final Log LOG = LogFactory.getLog(ReflectionUtils.class);
+
+    private static final Object[] PRIMITIVES = { "test", 1l, 1, Locale.getDefault(), true, 'a', 1f, 1d };
+
+    private static final Map<Class, Object> COLLECTION_MAP = new HashMap<Class, Object>();
+    static {
+        COLLECTION_MAP.put(Set.class, Collections.emptySet());
+        COLLECTION_MAP.put(List.class, Collections.emptyList());
+        COLLECTION_MAP.put(Map.class, Collections.emptyMap());
+    }
 
     private ReflectionUtils() {
         // restrict instantiation
@@ -31,10 +42,6 @@ public final class ReflectionUtils {
 
     public static Object[] getMethodParameters(Constructor constructor) {
         return getMethodParameters(constructor, constructor.getParameterTypes());
-    }
-
-    public static Object[] getMethodParameters(Method method) {
-        return getMethodParameters(method, method.getParameterTypes());
     }
 
     private static Object[] getMethodParameters(AccessibleObject method, Class[] parameterTypes) {
@@ -53,22 +60,18 @@ public final class ReflectionUtils {
     }
 
     private static Object getParamValue(Class parameterClass) {
-        if (ClassUtils.isPrimitiveOrWrapper(parameterClass) || BeanUtils.isSimpleProperty(parameterClass)
-                || parameterClass == byte[].class) {
+        if (ClassUtils.isPrimitiveOrWrapper(parameterClass) || BeanUtils.isSimpleProperty(parameterClass)) {
             for (Object primitive : PRIMITIVES) {
                 if (primitive.getClass().equals(ClassUtils.primitiveToWrapper(parameterClass))) {
                     return primitive;
                 }
             }
         }
-        if (parameterClass.isAssignableFrom(Set.class)) {
-            return Collections.emptySet();
+        if (parameterClass.isArray()) {
+            return Array.newInstance(parameterClass.getComponentType(), 0);
         }
-        if (parameterClass.isAssignableFrom(List.class)) {
-            return Collections.emptyList();
-        }
-        if (parameterClass.isAssignableFrom(Map.class)) {
-            return Collections.emptyMap();
+        if (COLLECTION_MAP.containsKey(parameterClass)) {
+            return COLLECTION_MAP.get(parameterClass);
         }
         if (parameterClass.isEnum()) {
             return parameterClass.getEnumConstants()[0];
@@ -87,6 +90,7 @@ public final class ReflectionUtils {
             try {
                 if (ReflectionUtils.isGetter(method) && isCustomObjectToBeMocked(method)) {
                     Object param = mock(method.getReturnType());
+                    makeAccessible(method);
                     when(method.invoke(mock)).thenReturn(param);
                 }
             } catch (Exception e) {
@@ -104,13 +108,24 @@ public final class ReflectionUtils {
                 && method.getReturnType().getPackage().getName().startsWith("com.acierto");
     }
 
-    public static boolean hasField(Class clazz, String fieldName) {
+    public static boolean hasField(Class clazz, PropertyDescriptor descriptor) {
         for (Field field : clazz.getDeclaredFields()) {
-            if (fieldName.equalsIgnoreCase(field.getName())) {
+            if (descriptor.getName().equalsIgnoreCase(field.getName())) {
                 return true;
             }
         }
         return false;
+    }
+
+    public static Object getFieldValue(Object object, PropertyDescriptor descriptor) {
+        try {
+            Field field = object.getClass().getDeclaredField(descriptor.getName());
+            makeAccessible(field);
+            return field.get(object);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return null;
     }
 
     public static Object invokeSetter(Object object, PropertyDescriptor descriptor) {
@@ -131,6 +146,7 @@ public final class ReflectionUtils {
     private static Object invokeMethod(Object object, Method method) {
         try {
             Object[] methodParameters = getMethodParameters(method, method.getParameterTypes());
+            makeAccessible(method);
             Object result = method.invoke(object, methodParameters);
             if (isSetter(method)) {
                 result = methodParameters[0];

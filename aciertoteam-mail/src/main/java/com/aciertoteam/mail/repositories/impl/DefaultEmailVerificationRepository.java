@@ -1,5 +1,6 @@
 package com.aciertoteam.mail.repositories.impl;
 
+import java.util.List;
 import com.aciertoteam.common.repository.impl.DefaultAbstractRepository;
 import com.aciertoteam.mail.entity.EmailVerification;
 import com.aciertoteam.mail.enums.RequestStatus;
@@ -7,8 +8,6 @@ import com.aciertoteam.mail.repositories.EmailVerificationRepository;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * @author Bogdan Nechyporenko

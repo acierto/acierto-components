@@ -3,12 +3,11 @@
  */
 package com.aciertoteam.common.i18n;
 
+import java.util.Locale;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
-
-import java.util.Locale;
 
 /**
  * Utility class that provided static method to access user locale set in the spring context.

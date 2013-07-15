@@ -1,10 +1,9 @@
 package com.aciertoteam.mail.beans;
 
-import com.aciertoteam.mail.DeliveryResult;
-import com.aciertoteam.mail.EmailResultCallback;
-
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import com.aciertoteam.mail.DeliveryResult;
+import com.aciertoteam.mail.EmailResultCallback;
 
 /**
  * @author Bogdan Nechyporenko

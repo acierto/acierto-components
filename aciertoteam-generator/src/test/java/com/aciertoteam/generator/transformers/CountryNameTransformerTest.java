@@ -1,9 +1,8 @@
 package com.aciertoteam.generator.transformers;
 
+import static junit.framework.Assert.assertEquals;
 import com.aciertoteam.generator.transformers.impl.CountryNameTransformer;
 import org.junit.Test;
-
-import static junit.framework.Assert.assertEquals;
 
 /**
  * @author Bogdan Nechyporenko

@@ -1,5 +1,7 @@
 package com.aciertoteam.generator.processors.location.impl;
 
+import java.io.IOException;
+import java.io.InputStream;
 import com.aciertoteam.generator.model.FileResource;
 import com.aciertoteam.generator.processors.location.CountryPropertyFileGenerator;
 import com.aciertoteam.generator.rules.parse.location.OneColumnValueRule;
@@ -7,9 +9,6 @@ import com.aciertoteam.generator.transformers.PropertyTransformer;
 import com.aciertoteam.generator.transformers.enums.PropertyType;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * @author Bogdan Nechyporenko

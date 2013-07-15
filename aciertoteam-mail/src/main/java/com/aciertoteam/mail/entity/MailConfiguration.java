@@ -1,10 +1,9 @@
 package com.aciertoteam.mail.entity;
 
-import com.aciertoteam.common.entity.AbstractEntity;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import com.aciertoteam.common.entity.AbstractEntity;
 
 /**
  * @author Bogdan Nechyporenko

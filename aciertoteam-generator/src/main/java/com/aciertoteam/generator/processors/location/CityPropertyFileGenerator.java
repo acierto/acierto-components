@@ -1,11 +1,10 @@
 package com.aciertoteam.generator.processors.location;
 
+import java.io.IOException;
+import java.io.InputStream;
 import com.aciertoteam.generator.model.FileResource;
 import com.aciertoteam.generator.rules.parse.location.OneColumnValueRule;
 import com.aciertoteam.generator.transformers.PropertyTransformer;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * @author Bogdan Nechyporenko

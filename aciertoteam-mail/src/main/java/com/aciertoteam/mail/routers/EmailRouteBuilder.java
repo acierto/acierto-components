@@ -1,5 +1,13 @@
 package com.aciertoteam.mail.routers;
 
+import static com.aciertoteam.mail.EmailForm.ImageAttachment;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import javax.activation.DataHandler;
+import javax.mail.util.ByteArrayDataSource;
+import com.aciertoteam.common.utils.FtlReader;
 import com.aciertoteam.mail.EmailForm;
 import com.aciertoteam.mail.EmailResultCallback;
 import com.aciertoteam.mail.dto.NotificationDTO;
@@ -7,7 +15,6 @@ import com.aciertoteam.mail.entity.MailConfiguration;
 import com.aciertoteam.mail.entity.MailTemplate;
 import com.aciertoteam.mail.exceptions.EmptyMessageBodyException;
 import com.aciertoteam.mail.services.MailConfigurationService;
-import com.aciertoteam.common.utils.FtlReader;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
@@ -18,15 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
-
-import javax.activation.DataHandler;
-import javax.mail.util.ByteArrayDataSource;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
-import static com.aciertoteam.mail.EmailForm.ImageAttachment;
 
 /**
  * @author Bogdan Nechyporenko

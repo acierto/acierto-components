@@ -1,10 +1,9 @@
 package com.aciertoteam.common.json;
 
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 /**
  * @author Bogdan Nechyporenko
