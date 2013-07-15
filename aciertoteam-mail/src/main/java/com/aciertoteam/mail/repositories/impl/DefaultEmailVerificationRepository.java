@@ -6,6 +6,7 @@ import com.aciertoteam.mail.entity.EmailVerification;
 import com.aciertoteam.mail.enums.RequestStatus;
 import com.aciertoteam.mail.repositories.EmailVerificationRepository;
 import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +28,7 @@ public class DefaultEmailVerificationRepository extends DefaultAbstractRepositor
 
         emailVerification.setEmail(email);
         emailVerification.setToken(token);
+        emailVerification.closeEndPeriod(new DateTime().plusDays(1).toDate());
         emailVerification.setRequestStatus(RequestStatus.REQUESTED);
 
         saveOrUpdate(emailVerification);

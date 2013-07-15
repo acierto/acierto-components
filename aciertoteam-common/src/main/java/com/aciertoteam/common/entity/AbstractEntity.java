@@ -100,4 +100,8 @@ public abstract class AbstractEntity implements IAbstractEntity {
     public void check() {
         /* By default do not check the internal state of the current entity */
     }
+
+    public void closeEndPeriod(Date date) {
+        this.validThru = date;
+    }
 }

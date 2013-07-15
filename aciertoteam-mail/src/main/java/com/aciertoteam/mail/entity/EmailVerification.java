@@ -19,6 +19,8 @@ import org.hibernate.annotations.CascadeType;
 @Entity
 public class EmailVerification extends AbstractEntity {
 
+    private static final long serialVersionUID = 1L;
+
     @Column
     private String token;
 
