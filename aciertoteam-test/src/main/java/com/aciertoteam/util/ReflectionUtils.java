@@ -8,6 +8,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -108,13 +109,17 @@ public final class ReflectionUtils {
                 && method.getReturnType().getPackage().getName().startsWith("com.acierto");
     }
 
-    public static boolean hasField(Class clazz, PropertyDescriptor descriptor) {
-        for (Field field : clazz.getDeclaredFields()) {
-            if (descriptor.getName().equalsIgnoreCase(field.getName())) {
+    public static boolean hasField(Object object, PropertyDescriptor descriptor) {
+        for (Field field : object.getClass().getDeclaredFields()) {
+            if (!isStatic(field) && descriptor.getName().equalsIgnoreCase(field.getName())) {
                 return true;
             }
         }
         return false;
+    }
+
+    public static boolean isStatic(Field field) {
+        return Modifier.isStatic(field.getModifiers());
     }
 
     public static Object getFieldValue(Object object, PropertyDescriptor descriptor) {
@@ -123,9 +128,9 @@ public final class ReflectionUtils {
             makeAccessible(field);
             return field.get(object);
         } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
+            throw new IllegalArgumentException(String.format("Error: %s; Method: %s; Reason: %s", object.getClass(),
+                    descriptor.getName(), e.getMessage()), e);
         }
-        return null;
     }
 
     public static Object invokeSetter(Object object, PropertyDescriptor descriptor) {
@@ -136,9 +141,20 @@ public final class ReflectionUtils {
         return invokeDescriptorMethod(object, descriptor.getReadMethod());
     }
 
-    private static Object invokeDescriptorMethod(Object object, Method setter) {
-        if (setter != null) {
-            return invokeMethod(object, setter);
+    public static Object callMethod(PropertyDescriptor descriptor, Method method, Object victim) {
+        Object returned = null;
+        if (method != null) {
+            returned = ReflectionUtils.invokeDescriptorMethod(victim, method);
+        }
+        if (returned == null && ReflectionUtils.hasField(victim, descriptor)) {
+            returned = ReflectionUtils.getFieldValue(victim, descriptor);
+        }
+        return returned;
+    }
+
+    private static Object invokeDescriptorMethod(Object object, Method method) {
+        if (method != null) {
+            return invokeMethod(object, method);
         }
         return null;
     }
@@ -153,9 +169,10 @@ public final class ReflectionUtils {
             }
             return result;
         } catch (Exception e) {
-            throw new IllegalArgumentException(String.format("Class = %s, method = %s. Reason: %s",
-                    method.getDeclaringClass(), method.getName(), e.getMessage()), e);
+            LOG.error(String.format("Class = %s, method = %s. Reason: %s", method.getDeclaringClass(),
+                    method.getName(), e.getMessage()), e);
         }
+        return null;
     }
 
     private static boolean isSetter(Method method) {
@@ -179,5 +196,18 @@ public final class ReflectionUtils {
     public static boolean isGetter(Method method) {
         return (method.getName().startsWith("get") || method.getName().startsWith("is"))
                 && method.getParameterTypes().length == 0;
+    }
+
+    public static Object setFieldValue(Object object, PropertyDescriptor descriptor) {
+        try {
+            Field field = object.getClass().getDeclaredField(descriptor.getName());
+            makeAccessible(field);
+            Object value = getParamValue(field.getType());
+            field.set(object, value);
+            return value;
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return null;
     }
 }
