@@ -10,6 +10,8 @@ import com.aciertoteam.common.entity.AbstractEntity;
 @Entity
 public class MailTemplate extends AbstractEntity {
 
+    private static final long serialVersionUID = 1L;
+
     @Column(unique = true, nullable = false)
     private String templateName;
 
