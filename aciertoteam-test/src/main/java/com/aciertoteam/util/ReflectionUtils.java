@@ -109,8 +109,8 @@ public final class ReflectionUtils {
                 && method.getReturnType().getPackage().getName().startsWith("com.acierto");
     }
 
-    public static boolean hasField(Object object, PropertyDescriptor descriptor) {
-        for (Field field : object.getClass().getDeclaredFields()) {
+    public static boolean hasField(Class clazz, PropertyDescriptor descriptor) {
+        for (Field field : clazz.getDeclaredFields()) {
             if (!isStatic(field) && descriptor.getName().equalsIgnoreCase(field.getName())) {
                 return true;
             }
@@ -141,13 +141,18 @@ public final class ReflectionUtils {
         return invokeDescriptorMethod(object, descriptor.getReadMethod());
     }
 
-    public static Object callMethod(PropertyDescriptor descriptor, Method method, Object victim) {
+    public static Object callMethodOrField(PropertyDescriptor descriptor, boolean isWrite, Object victim) {
         Object returned = null;
+        Method method = isWrite ? descriptor.getWriteMethod() : descriptor.getReadMethod();
         if (method != null) {
             returned = ReflectionUtils.invokeDescriptorMethod(victim, method);
         }
-        if (returned == null && ReflectionUtils.hasField(victim, descriptor)) {
-            returned = ReflectionUtils.getFieldValue(victim, descriptor);
+        if (returned == null && ReflectionUtils.hasField(victim.getClass(), descriptor)) {
+            if (isWrite) {
+                returned = ReflectionUtils.setFieldValue(victim, descriptor);
+            } else {
+                returned = ReflectionUtils.getFieldValue(victim, descriptor);
+            }
         }
         return returned;
     }
