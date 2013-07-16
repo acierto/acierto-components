@@ -1,6 +1,6 @@
 package com.aciertoteam.repository;
 
-import java.net.MalformedURLException;
+import com.aciertoteam.common.model.Clock;
 import com.aciertoteam.common.repository.EntityRepository;
 import com.aciertoteam.dbunit.HsqlJdbcDatabaseTester;
 import org.dbunit.dataset.DataSetException;
@@ -11,6 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
+
+import java.net.MalformedURLException;
+import java.util.Date;
+
+import static org.mockito.Mockito.when;
 
 /**
  * @author Bogdan Nechyporenko
@@ -30,6 +35,9 @@ public abstract class AbstractDbUnitRepositoryTest {
     @Autowired
     private EntityRepository entityRepository;
 
+    @Autowired
+    protected Clock clock;
+
     private TransactionTemplate transactionTemplate;
 
     public SessionFactory getSessionFactory() {
@@ -45,7 +53,7 @@ public abstract class AbstractDbUnitRepositoryTest {
     }
 
     protected void preDatabaseTesterSetup() throws DataSetException, MalformedURLException {
-        // do nothing by default
+        when(clock.getCurrentDate()).thenReturn(new Date());
     }
 
     protected void preSetUp() {
