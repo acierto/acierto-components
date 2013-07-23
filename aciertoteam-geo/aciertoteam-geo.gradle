@@ -1,0 +1,16 @@
+apply plugin: 'java'
+
+dependencies {
+	compile project(':fastappoint-common')
+	testCompile "com.aciertoteam:aciertoteam-test:${aciertoTeamComponentsVersion}"
+}
+
+sonarRunner {
+    sonarProperties {
+        property "sonar.projectName", ':fastappoint-model'
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.language", "java"
+    }
+}
+
+apply from: file('../gradle/jacoco.gradle')
