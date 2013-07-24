@@ -778,6 +778,7 @@
     <modules>
         <module>aciertoteam-common</module>
         <module>aciertoteam-generator</module>
+        <module>aciertoteam-geo</module>
         <module>aciertoteam-io</module>
         <module>aciertoteam-mail</module>
         <module>aciertoteam-test</module>
