@@ -76,10 +76,10 @@ public interface AbstractRepository<T> {
 
     /**
      * Saves or update transferred entity
-     * 
+     *
      * @param t
      */
-    void saveOrUpdate(T t);
+    T saveOrUpdate(T t);
 
     /**
      * Close end period of entity by id.

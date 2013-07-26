@@ -1,10 +1,5 @@
 package com.aciertoteam.common.repository.impl;
 
-import java.lang.reflect.ParameterizedType;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import com.aciertoteam.common.interfaces.IAbstractEntity;
 import com.aciertoteam.common.repository.AbstractRepository;
 import org.hibernate.Criteria;
@@ -14,6 +9,12 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.lang.reflect.ParameterizedType;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @param <T> IAbstractEntity
@@ -63,13 +64,13 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
     }
 
     @Override
-    public void saveOrUpdate(T t) {
+    public T saveOrUpdate(T t) {
         t.check();
-
         if (t.getId() == null) {
             getSession().saveOrUpdate(t);
+            return t;
         } else {
-            getSession().merge(t);
+            return (T) getSession().merge(t);
         }
     }
 

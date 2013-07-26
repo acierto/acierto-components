@@ -1,17 +1,19 @@
 package com.aciertoteam.common.service.impl;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.interfaces.IAbstractEntity;
+import com.aciertoteam.common.model.DeletionPropagated;
 import com.aciertoteam.common.repository.EntityRepository;
 import com.aciertoteam.common.service.EntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Bogdan Nechyporenko
@@ -54,10 +56,8 @@ public class DefaultEntityService implements EntityService {
     }
 
     @Override
-    public <T extends IAbstractEntity> void saveOrUpdate(T... list) {
-        for (T t : list) {
-            entityRepository.saveOrUpdate((AbstractEntity) t);
-        }
+    public <T extends IAbstractEntity> T saveOrUpdate(T entity) {
+        return (T) entityRepository.saveOrUpdate((AbstractEntity) entity);
     }
 
     @Override
@@ -68,9 +68,20 @@ public class DefaultEntityService implements EntityService {
     }
 
     @Override
-    public <T extends IAbstractEntity> void markAsDeleted(T t) {
-        t.closeEndPeriod();
-        entityRepository.saveOrUpdate((AbstractEntity) t);
+    public <T extends IAbstractEntity> void markAsDeleted(T entity) {
+        entity.closeEndPeriod();
+        entityRepository.saveOrUpdate((AbstractEntity) entity);
+        propagateDelete(entity);
+    }
+
+    private <T extends IAbstractEntity> void propagateDelete(T entity) {
+        if (entity instanceof DeletionPropagated) {
+            List<AbstractEntity> entitiesForDeletionPropagation = ((DeletionPropagated) entity)
+                    .getEntitiesForDeletionPropagation();
+            for (AbstractEntity entityToDelete : entitiesForDeletionPropagation) {
+                markAsDeleted(entityToDelete);
+            }
+        }
     }
 
     @Override

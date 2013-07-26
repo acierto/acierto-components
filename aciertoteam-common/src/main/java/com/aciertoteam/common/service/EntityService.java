@@ -1,10 +1,11 @@
 package com.aciertoteam.common.service;
 
+import com.aciertoteam.common.entity.AbstractEntity;
+import com.aciertoteam.common.interfaces.IAbstractEntity;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import com.aciertoteam.common.entity.AbstractEntity;
-import com.aciertoteam.common.interfaces.IAbstractEntity;
 
 /**
  * @author Bogdan Nechyporenko
@@ -13,7 +14,7 @@ public interface EntityService {
 
     /**
      * Returns the result if has any entity in the database of specified class.
-     *
+     * 
      * @param clazz
      * @return
      */
@@ -21,7 +22,7 @@ public interface EntityService {
 
     /**
      * Returns the entity of specified class by ID.
-     *
+     * 
      * @param clazz
      * @param id
      * @param <T>
@@ -31,7 +32,7 @@ public interface EntityService {
 
     /**
      * Returns the entities of specified class by the list of IDs.
-     *
+     * 
      * @param clazz
      * @param ids
      * @param <T>
@@ -41,7 +42,7 @@ public interface EntityService {
 
     /**
      * Returns all entities from the specified database
-     *
+     * 
      * @param clazz
      * @param <T>
      * @return
@@ -50,7 +51,7 @@ public interface EntityService {
 
     /**
      * Returns all entities from the specified database
-     *
+     * 
      * @param clazz
      * @param <T>
      * @return
@@ -59,7 +60,7 @@ public interface EntityService {
 
     /**
      * Returns all entities from the specified database
-     *
+     * 
      * @param clazz
      * @param <T>
      * @return
@@ -68,15 +69,7 @@ public interface EntityService {
 
     /**
      * Saves or updates entity depends on id
-     *
-     * @param t
-     * @param <T>
-     */
-    <T extends IAbstractEntity> void saveOrUpdate(T... t);
-
-    /**
-     * Saves or updates entity depends on id
-     *
+     * 
      * @param collection
      * @param <T>
      */
@@ -84,7 +77,7 @@ public interface EntityService {
 
     /**
      * Close validThru period for transferred entity
-     *
+     * 
      * @param t
      * @param <T>
      */
@@ -92,7 +85,7 @@ public interface EntityService {
 
     /**
      * Returns the entry from the specified table by specific field
-     *
+     * 
      * @param fieldName
      * @param value
      * @return
@@ -107,16 +100,23 @@ public interface EntityService {
 
     /**
      * Saves the list of entities
-     *
+     * 
      * @param entities
      */
     void saveAll(Collection<AbstractEntity> entities);
 
     /**
      * Returns the number of not-deleted entries for the specified entity.
-     *
+     * 
      * @param clazz
      * @return
      */
     long count(Class clazz);
+
+    /**
+     * Saves or updates entity depending on id
+     * @param entity IAbstractEntity
+     * @param <T> IAbstractEntity
+     */
+    <T extends IAbstractEntity> T saveOrUpdate(T entity);
 }
