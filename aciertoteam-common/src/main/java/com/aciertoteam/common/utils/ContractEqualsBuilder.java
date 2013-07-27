@@ -37,7 +37,7 @@ public final class ContractEqualsBuilder {
         if (otherObject == null) {
             return false;
         }
-        if (otherObject == thisObject) {
+        if (otherObject == thisObject) { //NOSONAR
             return true;
         }
         if (otherObject.getClass() != thisObject.getClass()) {
