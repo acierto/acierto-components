@@ -31,7 +31,7 @@ public class DefaultGeoIpServiceTest {
 
     @Test
     public void defineCountryTest() {
-        Country uk = new Country("Ukraine");
+        Country uk = new Country("label.country.ukraine");
         when(entityRepository.findByField(Country.class, "name", "label.country.ukraine")).thenReturn(uk);
         BeanUtil.setDeclaredPropertyForced(geoIpService, "geoIpFilePath", "/GeoIP.dat");
         geoIpService.defineCountry("91.218.213.156");

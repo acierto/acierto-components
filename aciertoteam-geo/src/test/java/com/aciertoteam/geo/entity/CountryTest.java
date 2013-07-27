@@ -11,7 +11,7 @@ public class CountryTest {
 
     @Test
     public void entityTest() {
-        String countryName = "Ukraine";
+        String countryName = "label.country.ukraine";
         String ipAddress = "127.0.0.1";
 
         Country country = new Country();
