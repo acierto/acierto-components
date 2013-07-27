@@ -110,7 +110,7 @@ public class EmailRouteBuilder extends RouteBuilder {
     }
 
     private EmailForm createEmailForm(NotificationDTO notification) {
-        final MailTemplate mailTemplate = notification.getMailTemplateName();
+        final MailTemplate mailTemplate = new MailTemplate(notification.getTemplateName(), notification.getSubjectName());
         final EmailForm emailForm = new EmailForm();
         final String body = ftlReader.read(mailTemplate.getTemplateName(), notification.getProperties(),
                 Locale.getDefault());
