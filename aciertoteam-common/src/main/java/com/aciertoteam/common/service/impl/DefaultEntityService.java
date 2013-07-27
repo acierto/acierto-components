@@ -7,7 +7,6 @@ import com.aciertoteam.common.repository.EntityRepository;
 import com.aciertoteam.common.service.EntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
@@ -19,7 +18,7 @@ import java.util.Set;
  * @author Bogdan Nechyporenko
  */
 @Service(value = "entityService")
-@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+@Transactional
 public class DefaultEntityService implements EntityService {
 
     @Autowired
@@ -79,7 +78,9 @@ public class DefaultEntityService implements EntityService {
             List<AbstractEntity> entitiesForDeletionPropagation = ((DeletionPropagated) entity)
                     .getEntitiesForDeletionPropagation();
             for (AbstractEntity entityToDelete : entitiesForDeletionPropagation) {
-                markAsDeleted(entityToDelete);
+                if (entityToDelete != null) {
+                    markAsDeleted(entityToDelete);
+                }
             }
         }
     }
