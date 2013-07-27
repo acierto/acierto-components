@@ -1,5 +1,7 @@
 package com.aciertoteam.common.stat;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -9,6 +11,8 @@ import java.util.Date;
  * @author Bogdan Nechyporenko
  */
 public class DefaultTimer implements Timer {
+
+    private static final Log LOG = LogFactory.getLog(DefaultTimer.class);
 
     private int current;
     private int percent;
@@ -35,8 +39,8 @@ public class DefaultTimer implements Timer {
         startWorkflow = System.nanoTime();
         startTime = startWorkflow;
 
-        System.out.println("Total size of items is: " + steps);
-        System.out.println("Started time is: " + printTime());
+        LOG.info("Total size of items is: " + steps);
+        LOG.info("Started time is: " + printTime());
     }
 
     public void next() {
@@ -44,7 +48,7 @@ public class DefaultTimer implements Timer {
         if (percent < current) {
             current = 0;
             long time = (System.nanoTime() - startTime) / DIVIDER;
-            System.out.println(String.format("Processed %s%% [Elapsed time is %sms]", ++percentCount, time));
+            LOG.info(String.format("Processed %s%% [Elapsed time is %sms]", ++percentCount, time));
             startTime = System.nanoTime();
         }
     }
@@ -54,8 +58,8 @@ public class DefaultTimer implements Timer {
         long ms = time % 1000;
         long sec = time / 1000 % 60;
         long min = time / 1000 / 60 % 60;
-        System.out.println(String.format("Processed 100%%. Total elapsed time is %smin %ss %sms", min, sec, ms));
-        System.out.println("Ended time is: " + printTime());
+        LOG.info(String.format("Processed 100%%. Total elapsed time is %smin %ss %sms", min, sec, ms));
+        LOG.info("Ended time is: " + printTime());
         return time;
     }
 
