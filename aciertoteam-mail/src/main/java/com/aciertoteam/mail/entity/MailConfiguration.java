@@ -3,18 +3,20 @@ package com.aciertoteam.mail.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
 import com.aciertoteam.common.entity.AbstractEntity;
 
 /**
  * @author Bogdan Nechyporenko
  */
 @Entity
-@Table
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"key", "validThru"})})
 public class MailConfiguration extends AbstractEntity {
 
     private static final long serialVersionUID = 3056671598908776995L;
 
-    @Column(name = "CONF_KEY", unique = true, nullable = false)
+    @Column(name = "CONF_KEY", nullable = false)
     private String key;
 
     @Column(name = "CONF_VALUE")

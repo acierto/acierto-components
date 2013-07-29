@@ -2,17 +2,21 @@ package com.aciertoteam.mail.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
 import com.aciertoteam.common.entity.AbstractEntity;
 
 /**
  * @author Bogdan Nechyporenko
  */
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"templateName", "validThru"})})
 public class MailTemplate extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String templateName;
 
     @Column(nullable = false)
