@@ -11,7 +11,7 @@ import com.aciertoteam.common.entity.AbstractEntity;
  * @author Bogdan Nechyporenko
  */
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"key", "validThru"})})
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"CONF_KEY", "validThru"})})
 public class MailConfiguration extends AbstractEntity {
 
     private static final long serialVersionUID = 3056671598908776995L;
