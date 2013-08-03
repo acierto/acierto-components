@@ -66,12 +66,8 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
     @Override
     public T saveOrUpdate(T t) {
         t.check();
-        if (t.getId() == null) {
-            getSession().saveOrUpdate(t);
-            return t;
-        } else {
-            return (T) getSession().merge(t);
-        }
+        getSession().saveOrUpdate(t);
+        return t;
     }
 
     @Override
