@@ -1,14 +1,10 @@
 package com.aciertoteam.common.entity;
 
-import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
 import com.aciertoteam.common.interfaces.IAbstractEntity;
 import org.codehaus.jackson.annotate.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @author Bogdan Nechyporenko
@@ -21,9 +17,6 @@ public abstract class AbstractEntity implements IAbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Version
-    private Integer version;
 
     @Column
     private Date validFrom;
@@ -65,10 +58,6 @@ public abstract class AbstractEntity implements IAbstractEntity {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public Integer getVersion() {
-        return version;
     }
 
     public boolean isDeleted() {
