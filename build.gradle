@@ -139,7 +139,7 @@ subprojects {
                 "com.sun.el:el-ri:1.0",
                 "org.primefaces:primefaces:$primefacesVersion",
                 "org.primefaces.extensions:primefaces-extensions:$primefacesExtensionsVersion",
-                "org.primefaces.themes:sunny:1.0.8",
+                "org.primefaces.themes:redmond:1.0.8",
                 "javax.inject:javax.inject:1",
                 "com.sun.faces:jsf-api:$jsfVersion",
                 "com.sun.faces:jsf-impl:$jsfVersion",
