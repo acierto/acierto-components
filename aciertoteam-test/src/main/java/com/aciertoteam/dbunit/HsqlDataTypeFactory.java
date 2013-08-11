@@ -6,6 +6,8 @@ import org.dbunit.dataset.datatype.DataTypeException;
 import org.dbunit.dataset.datatype.DefaultDataTypeFactory;
 
 /**
+ * Creates a factory
+ *
  * @author Bogdan Nechyporenko
  */
 public class HsqlDataTypeFactory extends DefaultDataTypeFactory {
