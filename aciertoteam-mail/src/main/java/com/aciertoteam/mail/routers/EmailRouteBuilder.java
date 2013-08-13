@@ -21,6 +21,7 @@ import org.apache.camel.Processor;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,6 +52,8 @@ public class EmailRouteBuilder extends RouteBuilder {
     @Value("${email.ssl.enabled}")
     private boolean emailSslEnabled;
 
+    private static final Logger LOG = Logger.getLogger(EmailRouteBuilder.class);
+
     @Override
     public void configure() throws Exception {
 
@@ -72,6 +75,7 @@ public class EmailRouteBuilder extends RouteBuilder {
                     producerTemplate.send(createSmtpEndpoint(), exchange);
                     messageContainer.getCallback().notifyThatMessageIsReceived();
                 } catch (Exception e) {
+                    LOG.error(e.getMessage(), e);
                     messageContainer.getCallback().notifyAboutFailedDelivery(e.getMessage());
                 }
             }
