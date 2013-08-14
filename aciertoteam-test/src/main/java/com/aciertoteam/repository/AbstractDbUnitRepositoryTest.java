@@ -66,8 +66,12 @@ public abstract class AbstractDbUnitRepositoryTest {
 
     @After
     public void tearDown() throws Exception {
-        getSessionFactory().openSession().createSQLQuery("delete from ROLE_PERMISSION").executeUpdate();
+        beforeTearDown();
         databaseTester.onTearDown();
+    }
+
+    protected void beforeTearDown() {
+        //performs nothing by default
     }
 
     public EntityRepository getEntityRepository() {
