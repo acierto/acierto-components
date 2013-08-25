@@ -27,6 +27,10 @@
             <artifactId>aciertoteam-common</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.aciertoteam</groupId>
+            <artifactId>aciertoteam-io</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
         </dependency>

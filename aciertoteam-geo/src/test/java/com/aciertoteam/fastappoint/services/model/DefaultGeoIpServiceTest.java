@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
 
@@ -31,10 +32,10 @@ public class DefaultGeoIpServiceTest {
 
     @Test
     public void defineCountryTest() {
-        Country uk = new Country("label.country.ukraine");
-        when(entityRepository.findByField(Country.class, "name", "label.country.ukraine")).thenReturn(uk);
+        Country netherlands = new Country("label.country.netherlands");
+        when(entityRepository.findByField(Country.class, "name", "label.country.netherlands")).thenReturn(netherlands);
         BeanUtil.setDeclaredPropertyForced(geoIpService, "geoIpFilePath", "/GeoIP.dat");
-        geoIpService.defineCountry("91.218.213.156");
+        assertEquals(netherlands, geoIpService.defineCountry("145.53.39.106"));
     }
 
     @Test
