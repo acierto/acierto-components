@@ -40,7 +40,9 @@ public class DefaultGeoIpService extends DefaultEntityService implements GeoIpSe
             String countryLabel = String.format("label.country.%s", countryName).toLowerCase();
             LOG.info("Country label: " + countryLabel);
             Country country = findByField(Country.class, "name", countryLabel);
-            country.setIpAddress(ipAddress);
+            if (country != null) {
+                country.setIpAddress(ipAddress);
+            }
             return country;
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);

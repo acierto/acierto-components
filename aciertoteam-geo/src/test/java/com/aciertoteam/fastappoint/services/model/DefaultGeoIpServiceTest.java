@@ -10,6 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.io.File;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
@@ -25,6 +27,8 @@ public class DefaultGeoIpServiceTest {
     @InjectMocks
     private DefaultGeoIpService geoIpService = new DefaultGeoIpService();
 
+    private static final String TARGET_DIR = new File(DefaultGeoIpService.class.getResource(".").getPath(), "target").getPath();
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -32,15 +36,18 @@ public class DefaultGeoIpServiceTest {
 
     @Test
     public void defineCountryTest() {
-        Country netherlands = new Country("label.country.netherlands");
-        when(entityRepository.findByField(Country.class, "name", "label.country.netherlands")).thenReturn(netherlands);
+        String netherlandsLabel = "label.country.netherlands";
+        Country netherlands = new Country(netherlandsLabel);
+        when(entityRepository.findByField(Country.class, "name", netherlandsLabel)).thenReturn(netherlands);
         BeanUtil.setDeclaredPropertyForced(geoIpService, "geoIpFilePath", "/GeoIP.dat");
+        BeanUtil.setDeclaredPropertyForced(geoIpService, "geoIpFileLocalPath", TARGET_DIR);
         assertEquals(netherlands, geoIpService.defineCountry("145.53.39.106"));
     }
 
     @Test
     public void defineCountryTestWithException() {
         BeanUtil.setDeclaredPropertyForced(geoIpService, "geoIpFilePath", "/emptyFile.txt");
+        BeanUtil.setDeclaredPropertyForced(geoIpService, "geoIpFileLocalPath", TARGET_DIR);
         assertNull(geoIpService.defineCountry("91.218.213.156"));
     }
 }
