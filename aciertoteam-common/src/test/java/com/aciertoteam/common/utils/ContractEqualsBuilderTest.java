@@ -68,8 +68,16 @@ public class ContractEqualsBuilderTest {
     }
 
     private class WithContractEqualsBuilder {
+        private String a;
+        private String b;
+        private String c;
+        private String d;
 
         private WithContractEqualsBuilder(String a, String b, String c, String d) {
+            this.a = a;
+            this.b = b;
+            this.c = c;
+            this.d = d;
         }
 
         @Override
