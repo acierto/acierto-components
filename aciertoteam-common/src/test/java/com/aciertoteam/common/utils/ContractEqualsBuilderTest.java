@@ -16,7 +16,7 @@ public class ContractEqualsBuilderTest {
 
     @Test
     public void equalsComparisonTest() {
-        int[] testSets = new int[]{1000, 10000, 100000, 1000000, 3000000};
+        int[] testSets = new int[]{1000, 10000, 100000};
         for (int testSet: testSets) {
             verticalIndent();
             runContractEqualsBuilder(testSet);
