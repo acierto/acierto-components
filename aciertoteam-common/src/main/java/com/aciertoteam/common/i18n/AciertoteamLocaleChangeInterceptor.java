@@ -16,7 +16,6 @@ public class AciertoteamLocaleChangeInterceptor extends LocaleChangeInterceptor 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws ServletException {
-
         String newLocale = request.getParameter(getParamName());
         if (newLocale != null) {
             Locale locale = StringUtils.parseLocaleString(newLocale);
