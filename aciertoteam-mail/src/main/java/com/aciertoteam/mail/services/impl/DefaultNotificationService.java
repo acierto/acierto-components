@@ -1,8 +1,5 @@
 package com.aciertoteam.mail.services.impl;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import com.aciertoteam.mail.dto.NotificationDTO;
 import com.aciertoteam.mail.entity.DecisionRequest;
 import com.aciertoteam.mail.entity.EmailVerification;
@@ -19,6 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Bogdan Nechyporenko
@@ -68,6 +69,7 @@ public class DefaultNotificationService implements NotificationService {
 
     private Notification createRegistrationRequestNotification(DecisionRequest decisionRequest) {
         Notification notification = new Notification(NotificationStatus.PENDING);
+        notification.setLocale(decisionRequest.getLocale());
         notification.setTo(decisionRequest.getRecipient());
         notification.setMailTemplate(mailTemplateRepository.findByTemplateName("registered_decision_request"));
         addNotificationImages(notification);
@@ -79,6 +81,7 @@ public class DefaultNotificationService implements NotificationService {
         boolean isAccepted = decisionRequest.getRequestStatus().isSuccess();
 
         Notification notification = new Notification(NotificationStatus.PENDING);
+        notification.setLocale(decisionRequest.getLocale());
         notification.setTo(decisionRequest.getRecipient());
         notification.setMailTemplate(mailTemplateRepository.findByTemplateName(
                 String.format("%s_decision_request", isAccepted ? "success" : "rejected")));

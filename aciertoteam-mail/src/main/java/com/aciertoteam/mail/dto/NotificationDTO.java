@@ -33,8 +33,11 @@ public class NotificationDTO implements Serializable {
 
     private Map<String, Object> attachments = new HashMap<String, Object>();
 
-    public NotificationDTO() {
-        timestamp = new Date();
+    private Locale locale;
+
+    public NotificationDTO(Locale locale) {
+        this.timestamp = new Date();
+        this.locale = locale;
     }
 
     public Long getId() {
@@ -121,5 +124,9 @@ public class NotificationDTO implements Serializable {
 
     public void setTemplateName(String templateName) {
         this.templateName = templateName;
+    }
+
+    public Locale getLocale() {
+        return locale;
     }
 }

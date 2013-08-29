@@ -1,25 +1,14 @@
 package com.aciertoteam.mail.entity;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.utils.SerializeUtil;
 import com.aciertoteam.mail.dto.NotificationDTO;
 import com.aciertoteam.mail.enums.NotificationStatus;
 import org.springframework.util.StringUtils;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author Bogdan Nechyporenko
@@ -44,6 +33,9 @@ public class Notification extends AbstractEntity {
     @Column(name = "NOTIFICATION_STATUS")
     @Enumerated(value = EnumType.STRING)
     private NotificationStatus status;
+
+    @Column(name = "LOCALE")
+    private String locale;
 
     @Lob
     @Basic(fetch = FetchType.EAGER)
@@ -103,6 +95,10 @@ public class Notification extends AbstractEntity {
         this.status = status;
     }
 
+    public void setLocale(Locale locale) {
+        this.locale = String.format("%s_%s", locale.getLanguage(), locale.getCountry());
+    }
+
     public byte[] getProperties() {
         return properties;
     }
@@ -127,12 +123,17 @@ public class Notification extends AbstractEntity {
         return result;
     }
 
+    private Locale resolveLocale() {
+        String[] localeValues = locale.split("_");
+        return new Locale(localeValues[0], localeValues[1]);
+    }
+
     public Long getSid() {
         return 12000 + getId();
     }
 
     public NotificationDTO createDTO() {
-        NotificationDTO dto = new NotificationDTO();
+        NotificationDTO dto = new NotificationDTO(resolveLocale());
 
         dto.setId(getId());
         dto.setComment(getComment());

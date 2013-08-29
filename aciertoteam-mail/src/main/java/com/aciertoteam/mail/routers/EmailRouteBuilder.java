@@ -1,13 +1,7 @@
 package com.aciertoteam.mail.routers;
 
-import static com.aciertoteam.mail.EmailForm.ImageAttachment;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import javax.activation.DataHandler;
-import javax.mail.util.ByteArrayDataSource;
 import com.aciertoteam.common.utils.FtlReader;
+import com.aciertoteam.common.utils.MessageResolverMethod;
 import com.aciertoteam.mail.EmailForm;
 import com.aciertoteam.mail.EmailResultCallback;
 import com.aciertoteam.mail.dto.NotificationDTO;
@@ -26,6 +20,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
+
+import javax.activation.DataHandler;
+import javax.mail.util.ByteArrayDataSource;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
+import static com.aciertoteam.mail.EmailForm.ImageAttachment;
 
 /**
  * @author Bogdan Nechyporenko
@@ -61,7 +64,7 @@ public class EmailRouteBuilder extends RouteBuilder {
             }
 
             private void sendMessage(ProducerTemplate producerTemplate, Exchange exchange,
-                    MessageContainer messageContainer) {
+                                     MessageContainer messageContainer) {
                 try {
                     populateMessageBeforeSending(exchange.getIn(), getEmailForm(messageContainer));
 
@@ -109,8 +112,7 @@ public class EmailRouteBuilder extends RouteBuilder {
     private EmailForm createEmailForm(NotificationDTO notification) {
         final MailTemplate mailTemplate = new MailTemplate(notification.getTemplateName(), notification.getSubjectName());
         final EmailForm emailForm = new EmailForm();
-        final String body = ftlReader.read(mailTemplate.getTemplateName(), notification.getProperties(),
-                Locale.getDefault());
+        final String body = ftlReader.read(mailTemplate.getTemplateName(), enrichedProperties(notification));
 
         emailForm.setTo(notification.getTo());
         emailForm.setSubject(getSubject(mailTemplate));
@@ -123,8 +125,13 @@ public class EmailRouteBuilder extends RouteBuilder {
         return emailForm;
     }
 
+    private Map<String, Object> enrichedProperties(NotificationDTO notification) {
+        notification.getProperties().put("msg", new MessageResolverMethod(messageSource, notification.getLocale()));
+        return notification.getProperties();
+    }
+
     private String getSubject(MailTemplate mailTemplate) {
-        return messageSource.getMessage(mailTemplate.getSubjectName(), new Object[] {}, Locale.getDefault());
+        return messageSource.getMessage(mailTemplate.getSubjectName(), new Object[]{}, Locale.getDefault());
     }
 
     private void checkEmailBody(Long notificationId, String body) {

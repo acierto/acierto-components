@@ -1,12 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 
 <meta property="og:title" content="Test email"/>
 <meta property="fb:page_id" content="43929265776"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Test email</title>
+<title>${msg("subject.name.email_verification")}</title>
 
 <!--[if gte mso 6]>
 <style>
@@ -526,143 +525,6 @@ h1 a, h2 a, h3 a, h4 a {
     }
 
 }</style>
-<script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-    try {
-        var _gaq = _gaq || [];
-        _gaq.push(["_setAccount", "UA-329148-88"]);
-        _gaq.push(["_setDomainName", ".campaign-archive.com"]);
-        _gaq.push(["_trackPageview"]);
-        _gaq.push(["_setAllowLinker", true]);
-    } catch (err) {
-        console.log(err);
-    }</script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<link rel="stylesheet" href="http://us7.campaign-archive2.com/css/archivebar-desktop.css" mc:nocompile>
-<script type="text/javascript" src="http://us7.campaign-archive2.com/js/archivebar-desktop-plugins.js"
-        mc:nocompile></script>
-<script src="http://downloads.mailchimp.com/ZeroClipboard.min.js" mc:nocompile></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        ZeroClipboard.setDefaults({ moviePath:"//downloads.mailchimp.com/ZeroClipboard.07.13.swf", trustedDomains:['us7.campaign-archive2.com']});
-        var clip = new ZeroClipboard($('#copyURL'));
-        clip.setHandCursor(true);
-        clip.on('complete', function (client, args) {
-            alert('Copied "' + args.text + '" to your clipboard.');
-        });
-        clip.on('mouseover', function (client) {
-            $('#copyURL').addClass('hover');
-        });
-        clip.on('mouseout', function (client) {
-            $('#copyURL').removeClass('hover');
-        });
-
-        $('li.more > a').click(function () {
-            var toToggle = $($(this).attr('href'));
-            if (toToggle.is(':visible')) {
-                toToggle.slideUp('fast');
-                $(this).removeClass('is-active');
-                if ($('#awesomebar').find('.is-active').length < 1) {
-                    $('#awesomebar').removeClass('sub-active');
-                }
-            } else {
-                toToggle.slideDown('fast');
-                $(this).addClass('is-active');
-                $('#awesomebar').addClass('sub-active');
-            }
-            return false;
-        });
-
-    });
-</script>
-<script src="http://us7.campaign-archive2.com/js/mailchimp/fancyzoom.mc.js"></script>
-<script type="text/javascript">
-    function updateFacebookCommentsCount(num) {
-        $('#campaign-fb-comments-btn span').fadeOut().html(num).fadeIn();
-    }
-</script>
-<script type="text/javascript">
-    function incrementFacebookLikeCount() {
-        var current = parseInt($('#campaign-fb-like-btn span').html());
-        $('#campaign-fb-like-btn span').fadeOut().html(++current).fadeIn();
-    }
-
-    function getUrlParams(str) {
-        var vars = {}, hash;
-        if (!str) return vars;
-        var hashes = str.slice(str.indexOf('?') + 1).split('&');
-        for (var i = 0; i < hashes.length; i++) {
-            hash = hashes[i].split('=');
-            vars[hash[0]] = hash[1];
-        }
-        return vars;
-    }
-
-    function setupSocialSharingStuffs() {
-        var numSocialElems = $('a[rel=socialproxy]').length;
-        var numSocialInitialized = 0;
-        var urlParams = getUrlParams(window.document.location.href);
-        var paramsToCopy = {'e':true, 'eo':true};
-        $('a[rel=socialproxy]').each(function () {
-            var href = $(this).attr('href');
-            var newHref = decodeURIComponent(href.match(/socialproxy=(.*)/)[1]);
-            // for facebook insanity to work well, it needs to all be run against just campaign-archive
-            newHref = newHref.replace(/campaign-archive(\d)/gi, 'campaign-archive');
-            var newHrefParams = getUrlParams(newHref);
-            for (var param in urlParams) {
-                if ((param in paramsToCopy) && !(param in newHrefParams)) {
-                    newHref += '&' + param + '=' + urlParams[param];
-                }
-            }
-            $(this).attr('href', newHref);
-            if (href.indexOf('facebook-comment') !== -1) {
-                $(this).fancyZoom({"zoom_id":"social-proxy", "width":620, "height":450, "iframe_height":450});
-            } else {
-                $(this).fancyZoom({"zoom_id":"social-proxy", "width":500, "height":200, "iframe_height":500});
-            }
-            numSocialInitialized++;
-        });
-    }
-    if (window.top != window.self) {
-        $(function () {
-            var iframeOffset = $("#archive", window.parent.document).offset();
-            $("a").each(function () {
-                var link = $(this);
-                var href = link.attr("href");
-                if (href && href[0] == "#") {
-                    var name = href.substring(1);
-                    $(this).click(function () {
-                        var nameElement = $("[name='" + name + "']");
-                        var idElement = $("#" + name);
-                        var element = null;
-                        if (nameElement.length > 0) {
-                            element = nameElement;
-                        } else if (idElement.length > 0) {
-                            element = idElement;
-                        }
-
-                        if (element) {
-                            var offset = element.offset();
-                            var height = element.height();
-                            //3 is totally arbitrary, but seems to work best.
-                            window.parent.scrollTo(offset.left, (offset.top + iframeOffset.top - (height * 3)));
-                        }
-
-                        return false;
-                    });
-                }
-            });
-        });
-    }
-</script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        setupSocialSharingStuffs();
-    });
-</script>
 </head>
 <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0"
       style="margin: 0;padding: 0;background-color: #F2F2F2;">
@@ -714,11 +576,6 @@ h1 a, h2 a, h3 a, h4 a {
                                         <td class="mcnTextContent"
                                             style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 0;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #606060;font-family: Helvetica;font-size: 11px;line-height: 125%;text-align: left;"
                                             valign="top">
-
-                                            <a href="http://us7.campaign-archive2.com/?u=f33288c11a49c5ce401bd1d80&id=de4a9eeeb7&e=[UNIQID]"
-                                               target="_blank"
-                                               style="color: #606060;font-weight: normal;text-decoration: underline;word-wrap: break-word !important;">View
-                                                this email in your browser</a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -867,11 +724,8 @@ h1 a, h2 a, h3 a, h4 a {
                                         <h4 class="null"
                                             style="display: block;font-family: Helvetica;font-size: 16px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: normal;margin: 0;text-align: left;color: #808080 !important;">
                                             <br>
-                                            <span class="short_text" id="result_box" lang="uk"><span class="hps">Verification of email </span></span></h4>
-                                        <br>
-                                        We ask you to verify your own email address by pressing on the button<br>
-                                        <br>
-
+                                            <span class="short_text" id="result_box" lang="uk"><span class="hps">${msg("subject.name.email_verification")}</span></span></h4>
+                                        <br>${msg("press.verify.button")}<br><br>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -891,12 +745,12 @@ h1 a, h2 a, h3 a, h4 a {
                                    class="mcnButtonContentContainer" border="0" cellpadding="0" cellspacing="0">
                                 <tbody>
                                 <tr>
-                                    <td style="font-family: Arial;font-size: 16px;padding: 15px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                    <td style="font-family: Arial;font-size: 16px;padding: 15px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 160px"
                                         class="mcnButtonContent" align="center" valign="middle">
-                                        <a class="mcnButton " title="Verify"
+                                        <a class="mcnButton " title="${msg("verify")}"
                                            href="${link}"
                                            target="_self"
-                                           style="font-weight: bold;letter-spacing: -0.5px;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;word-wrap: break-word !important;">Verify</a>
+                                           style="font-weight: bold;letter-spacing: -0.5px;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;word-wrap: break-word !important;">${msg("verify")}</a>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -1173,10 +1027,14 @@ h1 a, h2 a, h3 a, h4 a {
                                     <tr>
 
                                         <td class="mcnTextContent"
-                                            style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #606060;font-family: Helvetica;font-size: 11px;line-height: 125%;text-align: left;"
+                                            style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #606060;font-family: Helvetica;font-size: 11px;line-height: 125%;text-align: left;
+                                            vertical-align: middle;"
                                             valign="top">
 
                                             <em>Copyright © 2013 AciertoTeam, All rights reserved.</em><br>
+                                        </td>
+                                        <td>
+                                            <img src="cid:email_logo" style="margin-left: -40px; margin-top: 15px"/>
                                         </td>
                                     </tr>
                                     </tbody>

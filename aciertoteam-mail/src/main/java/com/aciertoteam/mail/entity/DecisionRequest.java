@@ -3,6 +3,8 @@ package com.aciertoteam.mail.entity;
 import com.aciertoteam.common.interfaces.Identifiable;
 import com.aciertoteam.mail.enums.RequestStatus;
 
+import java.util.Locale;
+
 /**
  * Marker interface for the requests which changes the status to REJECTED/SUCCESS only by manual user decision.
  *
@@ -54,5 +56,12 @@ public interface DecisionRequest extends Identifiable {
      * @return
      */
     String getRequestDescription();
+
+    /**
+     * Returns the locale of the request
+     *
+     * @return
+     */
+    Locale getLocale();
 
 }

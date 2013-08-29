@@ -1,11 +1,5 @@
 package com.aciertoteam.common.utils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.util.Locale;
-import java.util.Map;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -13,6 +7,12 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.CharEncoding;
 import org.apache.log4j.Logger;
 import org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.Map;
 
 /**
  * @author Bogdan Nechyporenko
@@ -29,8 +29,8 @@ public class FtlReader {
         this.templateLoaderPath = templateLoaderPath;
     }
 
-    public String read(String ftlFileName, Map<String, Object> root, Locale locale) {
-        String localizedFtlFileName = String.format(ftlFileName + "_%s_%s.ftl", locale.getLanguage(), locale.getCountry());
+    public String read(String ftlFileName, Map<String, Object> root) {
+        String localizedFtlFileName = String.format(ftlFileName + ".ftl");
 
         Writer out = null;
         try {
@@ -50,7 +50,7 @@ public class FtlReader {
     }
 
     private Configuration getConfiguration() throws IOException, TemplateException {
-        FreeMarkerConfigurationFactoryBean  factoryBean = new FreeMarkerConfigurationFactoryBean();
+        FreeMarkerConfigurationFactoryBean factoryBean = new FreeMarkerConfigurationFactoryBean();
         factoryBean.setDefaultEncoding(CharEncoding.UTF_8);
         factoryBean.setTemplateLoaderPath(templateLoaderPath);
         factoryBean.afterPropertiesSet();
