@@ -35,11 +35,6 @@ public class EmailRouteBuilder extends RouteBuilder {
     @Autowired
     private MailConfigurationService configurationService;
 
-    private String user;
-    private String password;
-    private int port;
-    private String host;
-
     private FtlReader ftlReader = new FtlReader("classpath:/com/aciertoteam/ftl/");
 
     @Autowired
@@ -56,8 +51,6 @@ public class EmailRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-
-        init();
 
         from(sendEmailEndpoint).process(new Processor() {
             @Override
@@ -109,7 +102,7 @@ public class EmailRouteBuilder extends RouteBuilder {
     }
 
     private String createSmtpEndpoint() {
-        return "smtps://" + host + "?username=" + user + "@gmail.com&password=" + password
+        return "smtps://" + getMailHost() + "?username=" + getMailUser() + "@gmail.com&password=" + getMailPassword()
                 + (emailSslEnabled ? "&sslContextParameters=#sslContextParameters" : "");
     }
 
@@ -146,12 +139,12 @@ public class EmailRouteBuilder extends RouteBuilder {
     private void addedMailProperties(Message message, EmailForm emailForm) {
         Map<String, Object> map = new HashMap<String, Object>();
 
-        map.put("Port", port);
-        map.put("Host", host);
-        map.put("Username", user);
-        map.put("Password", password);
+        map.put("Port", getIntValue("mail.port"));
+        map.put("Host", getMailHost());
+        map.put("Username", getMailUser());
+        map.put("Password", getMailPassword());
 
-        map.put("From", user + "@gmail.com");
+        map.put("From", getMailUser() + "@gmail.com");
         map.put("To", emailForm.getRecipients());
         map.put("Subject", emailForm.getSubject());
         map.put("ContentType", "text/html;charset=UTF-8");
@@ -159,13 +152,16 @@ public class EmailRouteBuilder extends RouteBuilder {
         message.setHeaders(map);
     }
 
-    private void init() {
-        user = getValue("mail.user");
-        password = getValue("mail.password");
-        port = getIntValue("mail.port");
-        host = getValue("mail.host");
-        getValue("mail.starttls.enable");
-        getValue("mail.auth");
+    private String getMailPassword() {
+        return getValue("mail.password");
+    }
+
+    private String getMailUser() {
+        return getValue("mail.user");
+    }
+
+    private String getMailHost() {
+        return getValue("mail.host");
     }
 
     private Integer getIntValue(String configKey) {

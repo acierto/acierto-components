@@ -811,8 +811,7 @@ h1 a, h2 a, h3 a, h4 a {
                                                     align="left" valign="top">
 
 
-                                                    <img alt=""
-                                                         src="https://gallery.mailchimp.com/f33288c11a49c5ce401bd1d80/images/blog_accept.png"
+                                                    <img alt="" src="cid:verify_button"
                                                          style="max-width: 128px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important;"
                                                          class="mcnImage" width="128">
 
@@ -843,310 +842,309 @@ h1 a, h2 a, h3 a, h4 a {
 </td>
 <td align="center" valign="top" width="390" class="sectionContainer"
     style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-<table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBodyInner"
-       style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-<tr>
-<td valign="top" class="bodyContainer"
-    style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-<table class="mcnTextBlock" border="0" cellpadding="0" cellspacing="0" width="100%"
-       style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-    <tbody class="mcnTextBlockOuter">
-    <tr>
-        <td class="mcnTextBlockInner" valign="top"
-            style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBodyInner"
+           style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+        <tr>
+            <td valign="top" class="bodyContainer"
+                style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                <table class="mcnTextBlock" border="0" cellpadding="0" cellspacing="0" width="100%"
+                       style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                    <tbody class="mcnTextBlockOuter">
+                    <tr>
+                        <td class="mcnTextBlockInner" valign="top"
+                            style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
 
-            <table class="mcnTextContentContainer" align="left" border="0" cellpadding="0"
-                   cellspacing="0" width="396"
-                   style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                <tbody>
-                <tr>
+                            <table class="mcnTextContentContainer" align="left" border="0" cellpadding="0"
+                                   cellspacing="0" width="396"
+                                   style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                <tbody>
+                                <tr>
 
-                    <td class="mcnTextContent"
-                        style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;"
-                        valign="top">
+                                    <td class="mcnTextContent"
+                                        style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;"
+                                        valign="top">
 
-                        <h4 class="null"
-                            style="display: block;font-family: Helvetica;font-size: 16px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: normal;margin: 0;text-align: left;color: #808080 !important;">
-                            <br>
-                                            <span class="short_text" id="result_box" lang="uk"><span class="hps">Підтвердження</span> <span
-                                                    class="hps">електронної скриньки</span></span></h4>
-                        <br>
-                        Просимо вас підтвердити власну електронну адресу, натиснувши на посилання<br>
-                        <br>
+                                        <h4 class="null"
+                                            style="display: block;font-family: Helvetica;font-size: 16px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: normal;margin: 0;text-align: left;color: #808080 !important;">
+                                            <br>
+                                            <span class="short_text" id="result_box" lang="uk"><span class="hps">Verification of email </span></span></h4>
+                                        <br>
+                                        We ask you to verify your own email address by pressing on the button<br>
+                                        <br>
 
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
 
-        </td>
-    </tr>
-    </tbody>
-</table>
-<table class="mcnButtonBlock" border="0" cellpadding="0" cellspacing="0" width="100%"
-       style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-    <tbody class="mcnButtonBlockOuter">
-    <tr>
-        <td style="padding-top: 0;padding-right: 18px;padding-bottom: 18px;padding-left: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-            class="mcnButtonBlockInner" align="center" valign="top">
-            <table style="border-radius: 5px 5px 5px 5px;background-color: #6DC4E5;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-                   class="mcnButtonContentContainer" border="0" cellpadding="0" cellspacing="0">
-                <tbody>
-                <tr>
-                    <td style="font-family: Arial;font-size: 16px;padding: 15px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-                        class="mcnButtonContent" align="center" valign="middle">
-                        <a class="mcnButton " title="Підтвердити"
-                           href="${link}"
-                           target="_self"
-                           style="font-weight: bold;letter-spacing: -0.5px;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;word-wrap: break-word !important;">Підтвердити</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<table class="mcnShareBlock" border="0" cellpadding="0" cellspacing="0" width="100%"
-       style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-<tbody class="mcnShareBlockOuter">
-<tr>
-<td style="padding: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-    class="mcnShareBlockInner" valign="top">
-<table class="mcnShareContentContainer" border="0" cellpadding="0" cellspacing="0"
-       width="100%"
-       style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-<tbody>
-<tr>
-<td style="padding-top: 9px;padding-left: 9px;padding-bottom: 0;padding-right: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-    align="left">
-<table class="mcnShareContent" border="0" cellpadding="0" cellspacing="0"
-       style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-<tbody>
-<tr>
-<td class="mcnShareContentItemContainer" valign="top"
-    style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="mcnButtonBlock" border="0" cellpadding="0" cellspacing="0" width="100%"
+                       style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                    <tbody class="mcnButtonBlockOuter">
+                    <tr>
+                        <td style="padding-top: 0;padding-right: 18px;padding-bottom: 18px;padding-left: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                            class="mcnButtonBlockInner" align="center" valign="top">
+                            <table style="border-radius: 5px 5px 5px 5px;background-color: #6DC4E5;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                   class="mcnButtonContentContainer" border="0" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                <tr>
+                                    <td style="font-family: Arial;font-size: 16px;padding: 15px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                        class="mcnButtonContent" align="center" valign="middle">
+                                        <a class="mcnButton " title="Verify"
+                                           href="${link}"
+                                           target="_self"
+                                           style="font-weight: bold;letter-spacing: -0.5px;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;word-wrap: break-word !important;">Verify</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="mcnShareBlock" border="0" cellpadding="0" cellspacing="0" width="100%"
+                       style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                    <tbody class="mcnShareBlockOuter">
+                    <tr>
+                        <td style="padding: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                            class="mcnShareBlockInner" valign="top">
+                            <table class="mcnShareContentContainer" border="0" cellpadding="0" cellspacing="0"
+                                   width="100%"
+                                   style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                <tbody>
+                                <tr>
+                                    <td style="padding-top: 9px;padding-left: 9px;padding-bottom: 0;padding-right: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                        align="left">
+                                        <table class="mcnShareContent" border="0" cellpadding="0" cellspacing="0"
+                                               style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                            <tbody>
+                                            <tr>
+                                                <td class="mcnShareContentItemContainer" valign="top"
+                                                    style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
 
-<table align="left" border="0" cellpadding="0" cellspacing="0"
-       style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-    <tbody>
-    <tr>
-        <td style="padding-right: 10px;padding-bottom: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-            class="mcnShareContentItemContainer" valign="top">
-            <table class="mcnShareContentItem"
-                   style="border-collapse: separate;background-color: #FFFFFF;border: 1px solid #CCCCCC;border-radius: 5px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-                   border="0" cellpadding="0" cellspacing="0"
-                   width="">
-                <tbody>
-                <tr>
-                    <td style="padding-top: 5px;padding-right: 10px;padding-bottom: 5px;padding-left: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-                        align="left" valign="middle">
-                        <table align="left" border="0"
-                               cellpadding="0" cellspacing="0"
-                               width=""
-                               style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                            <tbody>
-                            <tr>
-                                <td class="mcnShareIconContent"
-                                    align="center" valign="middle"
-                                    width="18"
-                                    style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                                    <a href="http://twitter.com/?status=Test+email: http%3A%2F%2Fus7.campaign-archive2.com%2F%3Fu%3Df33288c11a49c5ce401bd1d80%26id%3Dde4a9eeeb7"
-                                       target="_blank"
-                                       style="word-wrap: break-word !important;"><img
-                                            src="http://cdn-images.mailchimp.com/icons/social-block/color-twitter-128.png"
-                                            style="display: block;border: 0;line-height: 100%;outline: none;text-decoration: none;height: auto !important;"
-                                            class="" height="18"
-                                            width="18"></a>
-                                </td>
-                                <td class="mcnShareTextContent"
-                                    style="padding-left: 5px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-                                    align="left" valign="middle">
-                                    <a href="http://twitter.com/?status=Test+email: http%3A%2F%2Fus7.campaign-archive2.com%2F%3Fu%3Df33288c11a49c5ce401bd1d80%26id%3Dde4a9eeeb7"
-                                       target=""
-                                       style="color: #505050;font-family: Arial;font-size: 12px;text-decoration: none;font-weight: normal;line-height: 100%;text-align: center;word-wrap: break-word !important;">Tweet</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                                                    <table align="left" border="0" cellpadding="0" cellspacing="0"
+                                                           style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td style="padding-right: 10px;padding-bottom: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                                                class="mcnShareContentItemContainer" valign="top">
+                                                                <table class="mcnShareContentItem"
+                                                                       style="border-collapse: separate;background-color: #FFFFFF;border: 1px solid #CCCCCC;border-radius: 5px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                                                       border="0" cellpadding="0" cellspacing="0"
+                                                                       width="">
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td style="padding-top: 5px;padding-right: 10px;padding-bottom: 5px;padding-left: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                                                            align="left" valign="middle">
+                                                                            <table align="left" border="0"
+                                                                                   cellpadding="0" cellspacing="0"
+                                                                                   width=""
+                                                                                   style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                                                                <tbody>
+                                                                                <tr>
+                                                                                    <td class="mcnShareIconContent"
+                                                                                        align="center" valign="middle"
+                                                                                        width="18"
+                                                                                        style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                                                                        <a href="http://twitter.com/?status=Test+email: http%3A%2F%2Fus7.campaign-archive2.com%2F%3Fu%3Df33288c11a49c5ce401bd1d80%26id%3Dde4a9eeeb7"
+                                                                                           target="_blank"
+                                                                                           style="word-wrap: break-word !important;"><img
+                                                                                                src="cid:twitter"
+                                                                                                style="display: block;border: 0;line-height: 100%;outline: none;text-decoration: none;height: auto !important;"
+                                                                                                class="" height="18"
+                                                                                                width="18"></a>
+                                                                                    </td>
+                                                                                    <td class="mcnShareTextContent"
+                                                                                        style="padding-left: 5px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                                                                        align="left" valign="middle">
+                                                                                        <a href="http://twitter.com/?status=Test+email: http%3A%2F%2Fus7.campaign-archive2.com%2F%3Fu%3Df33288c11a49c5ce401bd1d80%26id%3Dde4a9eeeb7"
+                                                                                           target=""
+                                                                                           style="color: #505050;font-family: Arial;font-size: 12px;text-decoration: none;font-weight: normal;line-height: 100%;text-align: center;word-wrap: break-word !important;">Tweet</a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
 
-<table align="left" border="0" cellpadding="0" cellspacing="0"
-       style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-    <tbody>
-    <tr>
-        <td style="padding-right: 10px;padding-bottom: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-            class="mcnShareContentItemContainer" valign="top">
-            <table class="mcnShareContentItem"
-                   style="border-collapse: separate;background-color: #FFFFFF;border: 1px solid #CCCCCC;border-radius: 5px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-                   border="0" cellpadding="0" cellspacing="0"
-                   width="">
-                <tbody>
-                <tr>
-                    <td style="padding-top: 5px;padding-right: 10px;padding-bottom: 5px;padding-left: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-                        align="left" valign="middle">
-                        <table align="left" border="0"
-                               cellpadding="0" cellspacing="0"
-                               width=""
-                               style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                            <tbody>
-                            <tr>
-                                <td class="mcnShareIconContent"
-                                    align="center" valign="middle"
-                                    width="18"
-                                    style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                                    <a href="http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fus7.campaign-archive2.com%2F%3Fu%3Df33288c11a49c5ce401bd1d80%26id%3Dde4a9eeeb7&amp;t=Test+email"
-                                       target="_blank"
-                                       style="word-wrap: break-word !important;"><img
-                                            src="http://cdn-images.mailchimp.com/icons/social-block/color-facebook-128.png"
-                                            style="display: block;border: 0;line-height: 100%;outline: none;text-decoration: none;height: auto !important;"
-                                            class="" height="18"
-                                            width="18"></a>
-                                </td>
-                                <td class="mcnShareTextContent"
-                                    style="padding-left: 5px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-                                    align="left" valign="middle">
-                                    <a href="http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fus7.campaign-archive2.com%2F%3Fu%3Df33288c11a49c5ce401bd1d80%26id%3Dde4a9eeeb7&amp;t=Test+email"
-                                       target=""
-                                       style="color: #505050;font-family: Arial;font-size: 12px;text-decoration: none;font-weight: normal;line-height: 100%;text-align: center;word-wrap: break-word !important;">Share</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                                                    <table align="left" border="0" cellpadding="0" cellspacing="0"
+                                                           style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td style="padding-right: 10px;padding-bottom: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                                                class="mcnShareContentItemContainer" valign="top">
+                                                                <table class="mcnShareContentItem"
+                                                                       style="border-collapse: separate;background-color: #FFFFFF;border: 1px solid #CCCCCC;border-radius: 5px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                                                       border="0" cellpadding="0" cellspacing="0"
+                                                                       width="">
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td style="padding-top: 5px;padding-right: 10px;padding-bottom: 5px;padding-left: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                                                            align="left" valign="middle">
+                                                                            <table align="left" border="0"
+                                                                                   cellpadding="0" cellspacing="0"
+                                                                                   width=""
+                                                                                   style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                                                                <tbody>
+                                                                                <tr>
+                                                                                    <td class="mcnShareIconContent"
+                                                                                        align="center" valign="middle"
+                                                                                        width="18"
+                                                                                        style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                                                                        <a href="http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fus7.campaign-archive2.com%2F%3Fu%3Df33288c11a49c5ce401bd1d80%26id%3Dde4a9eeeb7&amp;t=Test+email"
+                                                                                           target="_blank"
+                                                                                           style="word-wrap: break-word !important;"><img
+                                                                                                src="cid:facebook"
+                                                                                                style="display: block;border: 0;line-height: 100%;outline: none;text-decoration: none;height: auto !important;"
+                                                                                                class="" height="18"
+                                                                                                width="18"></a>
+                                                                                    </td>
+                                                                                    <td class="mcnShareTextContent"
+                                                                                        style="padding-left: 5px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                                                                        align="left" valign="middle">
+                                                                                        <a href="http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fus7.campaign-archive2.com%2F%3Fu%3Df33288c11a49c5ce401bd1d80%26id%3Dde4a9eeeb7&amp;t=Test+email"
+                                                                                           target=""
+                                                                                           style="color: #505050;font-family: Arial;font-size: 12px;text-decoration: none;font-weight: normal;line-height: 100%;text-align: center;word-wrap: break-word !important;">Share</a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
 
-<table align="left" border="0" cellpadding="0" cellspacing="0"
-       style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-    <tbody>
-    <tr>
-        <td style="padding-right: 10px;padding-bottom: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-            class="mcnShareContentItemContainer" valign="top">
-            <table class="mcnShareContentItem"
-                   style="border-collapse: separate;background-color: #FFFFFF;border: 1px solid #CCCCCC;border-radius: 5px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-                   border="0" cellpadding="0" cellspacing="0"
-                   width="">
-                <tbody>
-                <tr>
-                    <td style="padding-top: 5px;padding-right: 10px;padding-bottom: 5px;padding-left: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-                        align="left" valign="middle">
-                        <table align="left" border="0"
-                               cellpadding="0" cellspacing="0"
-                               width=""
-                               style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                            <tbody>
-                            <tr>
-                                <td class="mcnShareIconContent"
-                                    align="center" valign="middle"
-                                    width="18"
-                                    style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                                    <a href="https://plus.google.com/share?url=http%3A%2F%2Fus7.campaign-archive2.com%2F%3Fu%3Df33288c11a49c5ce401bd1d80%26id%3Dde4a9eeeb7"
-                                       target="_blank"
-                                       style="word-wrap: break-word !important;"><img
-                                            src="http://cdn-images.mailchimp.com/icons/social-block/color-googleplus-128.png"
-                                            style="display: block;border: 0;line-height: 100%;outline: none;text-decoration: none;height: auto !important;"
-                                            class="" height="18"
-                                            width="18"></a>
-                                </td>
-                                <td class="mcnShareTextContent"
-                                    style="padding-left: 5px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-                                    align="left" valign="middle">
-                                    <a href="https://plus.google.com/share?url=http%3A%2F%2Fus7.campaign-archive2.com%2F%3Fu%3Df33288c11a49c5ce401bd1d80%26id%3Dde4a9eeeb7"
-                                       target=""
-                                       style="color: #505050;font-family: Arial;font-size: 12px;text-decoration: none;font-weight: normal;line-height: 100%;text-align: center;word-wrap: break-word !important;">+1</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                                                    <table align="left" border="0" cellpadding="0" cellspacing="0"
+                                                           style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td style="padding-right: 10px;padding-bottom: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                                                class="mcnShareContentItemContainer" valign="top">
+                                                                <table class="mcnShareContentItem"
+                                                                       style="border-collapse: separate;background-color: #FFFFFF;border: 1px solid #CCCCCC;border-radius: 5px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                                                       border="0" cellpadding="0" cellspacing="0"
+                                                                       width="">
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td style="padding-top: 5px;padding-right: 10px;padding-bottom: 5px;padding-left: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                                                            align="left" valign="middle">
+                                                                            <table align="left" border="0"
+                                                                                   cellpadding="0" cellspacing="0"
+                                                                                   width=""
+                                                                                   style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                                                                <tbody>
+                                                                                <tr>
+                                                                                    <td class="mcnShareIconContent"
+                                                                                        align="center" valign="middle"
+                                                                                        width="18"
+                                                                                        style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                                                                        <a href="https://plus.google.com/share?url=http%3A%2F%2Fus7.campaign-archive2.com%2F%3Fu%3Df33288c11a49c5ce401bd1d80%26id%3Dde4a9eeeb7"
+                                                                                           target="_blank"
+                                                                                           style="word-wrap: break-word !important;"><img
+                                                                                                src="cid:googleplus"
+                                                                                                style="display: block;border: 0;line-height: 100%;outline: none;text-decoration: none;height: auto !important;"
+                                                                                                class="" height="18"
+                                                                                                width="18"></a>
+                                                                                    </td>
+                                                                                    <td class="mcnShareTextContent"
+                                                                                        style="padding-left: 5px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                                                                        align="left" valign="middle">
+                                                                                        <a href="https://plus.google.com/share?url=http%3A%2F%2Fus7.campaign-archive2.com%2F%3Fu%3Df33288c11a49c5ce401bd1d80%26id%3Dde4a9eeeb7"
+                                                                                           target=""
+                                                                                           style="color: #505050;font-family: Arial;font-size: 12px;text-decoration: none;font-weight: normal;line-height: 100%;text-align: center;word-wrap: break-word !important;">+1</a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
 
-<table align="left" border="0" cellpadding="0" cellspacing="0"
-       style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-    <tbody>
-    <tr>
-        <td style="padding-right: 0;padding-bottom: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-            class="mcnShareContentItemContainer" valign="top">
-            <table class="mcnShareContentItem"
-                   style="border-collapse: separate;background-color: #FFFFFF;border: 1px solid #CCCCCC;border-radius: 5px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-                   border="0" cellpadding="0" cellspacing="0"
-                   width="">
-                <tbody>
-                <tr>
-                    <td style="padding-top: 5px;padding-right: 10px;padding-bottom: 5px;padding-left: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-                        align="left" valign="middle">
-                        <table align="left" border="0"
-                               cellpadding="0" cellspacing="0"
-                               width=""
-                               style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                            <tbody>
-                            <tr>
-                                <td class="mcnShareIconContent"
-                                    align="center" valign="middle"
-                                    width="18"
-                                    style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                                    <a href="http://www.linkedin.com/shareArticle?url=http%3A%2F%2Fus7.campaign-archive2.com%2F%3Fu%3Df33288c11a49c5ce401bd1d80%26id%3Dde4a9eeeb7&amp;mini=true&amp;title=Test+email"
-                                       target="_blank"
-                                       style="word-wrap: break-word !important;"><img
-                                            src="http://cdn-images.mailchimp.com/icons/social-block/color-linkedin-128.png"
-                                            style="display: block;border: 0;line-height: 100%;outline: none;text-decoration: none;height: auto !important;"
-                                            class="" height="18"
-                                            width="18"></a>
-                                </td>
-                                <td class="mcnShareTextContent"
-                                    style="padding-left: 5px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
-                                    align="left" valign="middle">
-                                    <a href="http://www.linkedin.com/shareArticle?url=http%3A%2F%2Fus7.campaign-archive2.com%2F%3Fu%3Df33288c11a49c5ce401bd1d80%26id%3Dde4a9eeeb7&amp;mini=true&amp;title=Test+email"
-                                       target=""
-                                       style="color: #505050;font-family: Arial;font-size: 12px;text-decoration: none;font-weight: normal;line-height: 100%;text-align: center;word-wrap: break-word !important;">Share</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                                                    <table align="left" border="0" cellpadding="0" cellspacing="0"
+                                                           style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td style="padding-right: 0;padding-bottom: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                                                class="mcnShareContentItemContainer" valign="top">
+                                                                <table class="mcnShareContentItem"
+                                                                       style="border-collapse: separate;background-color: #FFFFFF;border: 1px solid #CCCCCC;border-radius: 5px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                                                       border="0" cellpadding="0" cellspacing="0"
+                                                                       width="">
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td style="padding-top: 5px;padding-right: 10px;padding-bottom: 5px;padding-left: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                                                            align="left" valign="middle">
+                                                                            <table align="left" border="0"
+                                                                                   cellpadding="0" cellspacing="0"
+                                                                                   width=""
+                                                                                   style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                                                                <tbody>
+                                                                                <tr>
+                                                                                    <td class="mcnShareIconContent"
+                                                                                        align="center" valign="middle"
+                                                                                        width="18"
+                                                                                        style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                                                                        <a href="http://www.linkedin.com/shareArticle?url=http%3A%2F%2Fus7.campaign-archive2.com%2F%3Fu%3Df33288c11a49c5ce401bd1d80%26id%3Dde4a9eeeb7&amp;mini=true&amp;title=Test+email"
+                                                                                           target="_blank"
+                                                                                           style="word-wrap: break-word !important;"><img
+                                                                                                src="cid:linkedin"
+                                                                                                style="display: block;border: 0;line-height: 100%;outline: none;text-decoration: none;height: auto !important;"
+                                                                                                class="" height="18"
+                                                                                                width="18"></a>
+                                                                                    </td>
+                                                                                    <td class="mcnShareTextContent"
+                                                                                        style="padding-left: 5px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
+                                                                                        align="left" valign="middle">
+                                                                                        <a href="http://www.linkedin.com/shareArticle?url=http%3A%2F%2Fus7.campaign-archive2.com%2F%3Fu%3Df33288c11a49c5ce401bd1d80%26id%3Dde4a9eeeb7&amp;mini=true&amp;title=Test+email"
+                                                                                           target=""
+                                                                                           style="color: #505050;font-family: Arial;font-size: 12px;text-decoration: none;font-weight: normal;line-height: 100%;text-align: center;word-wrap: break-word !important;">Share</a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
 
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
 
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
 </td>
 </tr>
 </table>
