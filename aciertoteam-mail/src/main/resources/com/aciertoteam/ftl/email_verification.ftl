@@ -5,7 +5,7 @@
 <meta property="og:title" content="Test email"/>
 <meta property="fb:page_id" content="43929265776"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${msg("subject.name.email_verification")}</title>
+<title>${msg("subject.name.account_activated")}</title>
 
 <!--[if gte mso 6]>
 <style>
@@ -724,7 +724,7 @@ h1 a, h2 a, h3 a, h4 a {
                                         <h4 class="null"
                                             style="display: block;font-family: Helvetica;font-size: 16px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: normal;margin: 0;text-align: left;color: #808080 !important;">
                                             <br>
-                                            <span class="short_text" id="result_box" lang="uk"><span class="hps">${msg("subject.name.email_verification")}</span></span></h4>
+                                            <span class="short_text" id="result_box" lang="uk"><span class="hps">${msg("subject.name.account_activated")}</span></span></h4>
                                         <br>${msg("press.verify.button")}<br><br>
                                     </td>
                                 </tr>
