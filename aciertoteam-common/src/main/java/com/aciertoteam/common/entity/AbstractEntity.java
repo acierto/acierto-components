@@ -10,7 +10,7 @@ import java.util.Date;
  * @author Bogdan Nechyporenko
  */
 @MappedSuperclass
-public abstract class AbstractEntity implements IAbstractEntity {
+public abstract class AbstractEntity<T extends AbstractEntity> implements IAbstractEntity, Cloneable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,6 +26,9 @@ public abstract class AbstractEntity implements IAbstractEntity {
 
     @Column
     private Date timestamp;
+
+    @Column
+    private Long updatedBy;
 
     protected AbstractEntity() {
         this.validFrom = new Date();
@@ -68,6 +71,19 @@ public abstract class AbstractEntity implements IAbstractEntity {
         validThru = new Date();
     }
 
+    @Override
+    public void openEndPeriod() {
+        validThru = null;
+    }
+
+    public Long getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(Long updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
     @JsonIgnore
     public IAbstractEntity getEntity() {
         return this;
@@ -79,7 +95,7 @@ public abstract class AbstractEntity implements IAbstractEntity {
 
     /**
      * Additional options that will be added to the json object
-     * 
+     *
      * @return String[]
      */
     public String[] getSelectItemOptions() {
@@ -92,5 +108,15 @@ public abstract class AbstractEntity implements IAbstractEntity {
 
     public void closeEndPeriod(Date date) {
         this.validThru = date;
+    }
+
+    @SuppressWarnings({"unchecked", "CloneDoesntDeclareCloneNotSupportedException"})
+    @Override
+    public T clone() {
+        try {
+            return (T) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
+        }
     }
 }

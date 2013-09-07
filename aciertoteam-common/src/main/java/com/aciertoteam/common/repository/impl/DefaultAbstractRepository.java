@@ -1,6 +1,7 @@
 package com.aciertoteam.common.repository.impl;
 
 import com.aciertoteam.common.interfaces.IAbstractEntity;
+import com.aciertoteam.common.model.Clock;
 import com.aciertoteam.common.repository.AbstractRepository;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -26,10 +27,29 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Autowired
+    private Clock clock;
+
     @Override
     @Transactional(readOnly = true)
     public List<T> getAll() {
-        return getSession().createQuery("from " + getClazz().getSimpleName()).list();
+        return (List<T>) getSession().createCriteria(getClazz()).
+                add(Restrictions.or(Restrictions.isNull("validThru"), Restrictions.gt("validThru", clock.getCurrentDate()))).
+                list();
+    }
+
+    @Override
+    public List<T> getAll(int from, int to) {
+        return (List<T>) getSession().createCriteria(getClazz()).
+                add(Restrictions.or(Restrictions.isNull("validThru"), Restrictions.gt("validThru", clock.getCurrentDate()))).
+                setFirstResult(from).setMaxResults(to - from).
+                list();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<T> getAllIncludingDeleted() {
+        return (List<T>) getSession().createCriteria(getClazz()).list();
     }
 
     @Override
@@ -55,6 +75,22 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
     public T findByField(String fieldName, Object value) {
         Criteria criteria = getSession().createCriteria(getClazz());
         return (T) criteria.add(Restrictions.like(fieldName, value)).uniqueResult();
+    }
+
+    @Override
+    public T findByField(String fieldName, Object value, boolean includingDeleted) {
+        Criteria criteria = getSession().createCriteria(getClazz());
+        if (!includingDeleted) {
+            criteria = criteria.add(Restrictions.or(
+                    Restrictions.isNull("validThru"), Restrictions.gt("validThru", clock.getCurrentDate())));
+        }
+        return (T) criteria.add(Restrictions.like(fieldName, value)).uniqueResult();
+    }
+
+    @Override
+    public List<T> findListByField(String fieldName, Object value) {
+        Criteria criteria = getSession().createCriteria(getClazz());
+        return criteria.add(Restrictions.like(fieldName, value)).list();
     }
 
     @Override
@@ -100,11 +136,21 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
         getSession().delete(get(id));
     }
 
+    public void deleteByIds(final List<Long> ids) {
+        getSession().createQuery("delete from " + getClazz() + " sc where sc.id in (:ids)").setParameterList("ids", ids)
+                .executeUpdate();
+    }
+
     @Override
     public void delete(List<T> entities) {
         for (T entity : entities) {
             delete(entity);
         }
+    }
+
+    @Override
+    public void deleteByFieldName(String fieldName, Object value) {
+        getSession().createQuery("delete from " + getClazz().getSimpleName() + " where " + fieldName + " = " + value).executeUpdate();
     }
 
     @Override

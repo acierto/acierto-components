@@ -36,9 +36,21 @@ public interface IAbstractEntity extends Identifiable, IdentifiableEntity {
     boolean isDeleted();
 
     /**
+     * Returns the ID of the person who changed the entity last time.
+     *
+     * @return
+     */
+    Long getUpdatedBy();
+
+    /**
      * Set expiration time with the current time
      */
     void closeEndPeriod();
+
+    /**
+     * Removes the expiration stamp from the entity
+     */
+    void openEndPeriod();
 
     /**
      * Executes checking of the entity before performing any actions with it, i.e. saving if some conditions

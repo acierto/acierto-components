@@ -11,11 +11,25 @@ import java.util.Set;
 public interface AbstractRepository<T> {
 
     /**
-     * Returns all entries from the database
+     * Returns all including deleted entries from the database
      * 
      * @return
      */
     List<T> getAll();
+
+    /**
+     * Returns entries by restricted bounds, aka pagination approach.
+     *
+     * @return
+     */
+    List<T> getAll(int from, int to);
+
+    /**
+     * Returns all not deleted entries from the database
+     *
+     * @return
+     */
+    List<T> getAllIncludingDeleted();
 
     /**
      * Returns an entry by identifier
@@ -66,6 +80,23 @@ public interface AbstractRepository<T> {
     T findByField(String fieldName, Object value);
 
     /**
+     * Returns the entry from the specified table by specific field
+     *
+     * @param fieldName
+     * @param value
+     * @return
+     */
+    T findByField(String fieldName, Object value, boolean includingDeleted);
+
+    /**
+     * Returns the list of entries from the specified table by specific field
+     * @param fieldName
+     * @param value
+     * @return
+     */
+    List<T> findListByField(String fieldName, Object value);
+
+    /**
      * Returns the entries from the specified table by specific field
      * 
      * @param fieldName
@@ -107,6 +138,21 @@ public interface AbstractRepository<T> {
      * @param id
      */
     void delete(Long id);
+
+    /**
+     * Deletes entities from the database by specified list of identifiers
+     *
+     * @param ids
+     */
+    void deleteByIds(final List<Long> ids);
+
+    /**
+     * Deletes from the table the entry(-ies) which has the specified value by selected field.
+     *
+     * @param fieldName
+     * @param value
+     */
+    void deleteByFieldName(String fieldName, Object value);
 
     /**
      * Deletes the list of entities

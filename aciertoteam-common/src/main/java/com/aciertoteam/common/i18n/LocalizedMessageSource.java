@@ -3,11 +3,12 @@
  */
 package com.aciertoteam.common.i18n;
 
-import java.util.Locale;
 import org.apache.log4j.Logger;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.web.context.request.RequestContextHolder;
+
+import java.util.Locale;
 
 /**
  * Utility class for resolving messaging from the property files. Wraps
@@ -26,17 +27,16 @@ public class LocalizedMessageSource extends RequestContextHolder {
     private UserSessionLocale userSessionLocale;
 
     public String getMessage(String code) {
-        try {
-            return messageSource.getMessage(code, null, getLocale());
-        } catch (NoSuchMessageException e) {
-            LOGGER.error(e.getMessage(), e);
-            return "";
-        }
+        return getMessage(getLocale(), code);
     }
 
     public String getMessage(String code, Object... args) {
+        return getMessage(getLocale(), code, args);
+    }
+
+    public String getMessage(Locale locale, String code, Object... args) {
         try {
-            return messageSource.getMessage(code, args, getLocale());
+            return messageSource.getMessage(code, args, locale);
         } catch (NoSuchMessageException e) {
             LOGGER.error(e.getMessage(), e);
             return "";
