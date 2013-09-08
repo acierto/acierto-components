@@ -13,9 +13,9 @@ import java.util.Locale;
 /**
  * Utility class for resolving messaging from the property files. Wraps
  * {@link MessageSource} from Spring and is using the locale to resolve
- * messages. Works together with {@link AciertoteamLocaleChangeInterceptor} which sets
- * here changes locale.
- *
+ * messages. Works together with {@link AciertoteamLocaleChangeInterceptor}
+ * which sets here locale changes.
+ * 
  * @author ishestiporov
  */
 public class LocalizedMessageSource extends RequestContextHolder {
@@ -34,7 +34,7 @@ public class LocalizedMessageSource extends RequestContextHolder {
         return getMessage(getLocale(), code, args);
     }
 
-    public String getMessage(Locale locale, String code, Object... args) {
+    private String getMessage(Locale locale, String code, Object... args) {
         try {
             return messageSource.getMessage(code, args, locale);
         } catch (NoSuchMessageException e) {
