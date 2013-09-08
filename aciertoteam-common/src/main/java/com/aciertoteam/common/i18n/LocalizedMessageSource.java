@@ -34,7 +34,7 @@ public class LocalizedMessageSource extends RequestContextHolder {
         return getMessage(getLocale(), code, args);
     }
 
-    private String getMessage(Locale locale, String code, Object... args) {
+    public String getMessage(Locale locale, String code, Object... args) {
         try {
             return messageSource.getMessage(code, args, locale);
         } catch (NoSuchMessageException e) {
