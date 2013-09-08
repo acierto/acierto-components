@@ -34,6 +34,15 @@ public class LocalizedMessageSource extends RequestContextHolder {
         return getMessage(getLocale(), code, args);
     }
 
+    /**
+     * This method is keeping with public accessor as batch process doesn't have session scope bean and
+     * at this case we need to transfer Locale value directly.
+     *
+     * @param locale
+     * @param code
+     * @param args
+     * @return
+     */
     public String getMessage(Locale locale, String code, Object... args) {
         try {
             return messageSource.getMessage(code, args, locale);
