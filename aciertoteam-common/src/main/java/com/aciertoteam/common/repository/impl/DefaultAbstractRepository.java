@@ -59,7 +59,7 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
     }
 
     @Override
-    public void saveAll(Collection<T> coll) {
+    public void saveAll(Collection<? extends T> coll) {
         for (T t : coll) {
             save(t);
         }

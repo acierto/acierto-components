@@ -103,7 +103,7 @@ public interface EntityService {
      * 
      * @param entities
      */
-    void saveAll(Collection<AbstractEntity> entities);
+    void saveAll(Collection<? extends AbstractEntity> entities);
 
     /**
      * Returns the number of not-deleted entries for the specified entity.

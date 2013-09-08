@@ -96,7 +96,7 @@ public class DefaultEntityService implements EntityService {
     }
 
     @Override
-    public void saveAll(Collection<AbstractEntity> entities) {
+    public void saveAll(Collection<? extends AbstractEntity> entities) {
         entityRepository.saveAll(entities);
     }
 

@@ -1,5 +1,7 @@
 package com.aciertoteam.common.repository;
 
+import com.aciertoteam.common.entity.AbstractEntity;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -60,7 +62,7 @@ public interface AbstractRepository<T> {
      * 
      * @param entities
      */
-    void saveAll(Collection<T> entities);
+    void saveAll(Collection<? extends T> entities);
 
     /**
      * Saves an entry
