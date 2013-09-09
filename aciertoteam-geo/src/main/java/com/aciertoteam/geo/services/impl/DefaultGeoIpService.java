@@ -26,6 +26,7 @@ import java.io.InputStream;
 public class DefaultGeoIpService extends DefaultEntityService implements GeoIpService {
 
     private static final Logger LOG = Logger.getLogger(DefaultGeoIpService.class);
+    public static final String UNKNOWN_COUNTRY = "n/a";
 
     @Value("${geo.ip.file.path}")
     private String geoIpFilePath;
@@ -55,7 +56,7 @@ public class DefaultGeoIpService extends DefaultEntityService implements GeoIpSe
 
     private String getCountryName(String ipAddress) throws IOException {
         String countryName = getGeoLookupService().getCountry(ipAddress).getName();
-        if ("n/a".equals(countryName)) {
+        if (UNKNOWN_COUNTRY.equalsIgnoreCase(countryName)) {
             return  DEFAULT_COUNTRY;
         }
         return countryName;
