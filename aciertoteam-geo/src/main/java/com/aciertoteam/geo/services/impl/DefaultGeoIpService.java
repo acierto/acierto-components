@@ -33,10 +33,13 @@ public class DefaultGeoIpService extends DefaultEntityService implements GeoIpSe
     @Value("${geo.ip.file.local.path}")
     private String geoIpFileLocalPath;
 
+    private static final String DEFAULT_COUNTRY = "netherlands";
+
     @Override
     public Country defineCountry(String ipAddress) {
         try {
-            String countryName = getLookupService().getCountry(ipAddress).getName();
+            LOG.info(String.format("Ip Address: %s", ipAddress));
+            String countryName = getCountryName(ipAddress);
             String countryLabel = String.format("label.country.%s", countryName).toLowerCase();
             LOG.info("Country label: " + countryLabel);
             Country country = findByField(Country.class, "name", countryLabel);
@@ -50,7 +53,15 @@ public class DefaultGeoIpService extends DefaultEntityService implements GeoIpSe
         return null;
     }
 
-    private LookupService getLookupService() throws IOException {
+    private String getCountryName(String ipAddress) throws IOException {
+        String countryName = getGeoLookupService().getCountry(ipAddress).getName();
+        if ("n/a".equals(countryName)) {
+            return  DEFAULT_COUNTRY;
+        }
+        return countryName;
+    }
+
+    private LookupService getGeoLookupService() throws IOException {
         return new LookupService(getLocalGeoFilePath(), LookupService.GEOIP_MEMORY_CACHE);
     }
 
