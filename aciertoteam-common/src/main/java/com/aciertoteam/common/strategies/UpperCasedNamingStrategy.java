@@ -9,54 +9,58 @@ public class UpperCasedNamingStrategy extends ImprovedNamingStrategy {
 
     @Override
     public String classToTableName(String className) {
-        return super.classToTableName(className.toUpperCase());
+        return super.classToTableName(upper(className));
     }
 
     @Override
     public String propertyToColumnName(String propertyName) {
-        return super.propertyToColumnName(propertyName.toUpperCase());
+        return super.propertyToColumnName(upper(propertyName));
     }
 
     @Override
     public String tableName(String tableName) {
-        return super.tableName(tableName.toUpperCase());
+        return super.tableName(upper(tableName));
     }
 
     @Override
     public String columnName(String columnName) {
-        return super.columnName(columnName.toUpperCase());
+        return super.columnName(upper(columnName));
     }
 
     @Override
     public String collectionTableName(String ownerEntity, String ownerEntityTable, String associatedEntity, String associatedEntityTable, String propertyName) {
-        return super.collectionTableName(ownerEntity.toUpperCase(), ownerEntityTable.toUpperCase(),
-                associatedEntity.toUpperCase(), associatedEntityTable.toUpperCase(), propertyName.toUpperCase());
+        return super.collectionTableName(upper(ownerEntity), upper(ownerEntityTable),
+                upper(associatedEntity), upper(associatedEntityTable), upper(propertyName));
     }
 
     @Override
     public String joinKeyColumnName(String joinedColumn, String joinedTable) {
-        return super.joinKeyColumnName(joinedColumn.toUpperCase(), joinedTable.toUpperCase());
+        return super.joinKeyColumnName(upper(joinedColumn), upper(joinedTable));
     }
 
     @Override
     public String foreignKeyColumnName(String propertyName, String propertyEntityName, String propertyTableName, String referencedColumnName) {
-        return super.foreignKeyColumnName(propertyName.toUpperCase(), propertyEntityName.toUpperCase(),
-                propertyTableName.toUpperCase(), referencedColumnName.toUpperCase());
+        return super.foreignKeyColumnName(upper(propertyName), upper(propertyEntityName),
+                upper(propertyTableName), upper(referencedColumnName));
     }
 
     @Override
     public String logicalColumnName(String columnName, String propertyName) {
-        return super.logicalColumnName(columnName.toUpperCase(), propertyName.toUpperCase());
+        return super.logicalColumnName(upper(columnName), upper(propertyName));
     }
 
     @Override
     public String logicalCollectionTableName(String tableName, String ownerEntityTable, String associatedEntityTable, String propertyName) {
-        return super.logicalCollectionTableName(tableName.toUpperCase(), ownerEntityTable.toUpperCase(),
-                associatedEntityTable.toUpperCase(), propertyName.toUpperCase());
+        return super.logicalCollectionTableName(upper(tableName), upper(ownerEntityTable),
+                upper(associatedEntityTable), upper(propertyName));
     }
 
     @Override
     public String logicalCollectionColumnName(String columnName, String propertyName, String referencedColumn) {
-        return super.logicalCollectionColumnName(columnName.toUpperCase(), propertyName.toUpperCase(), referencedColumn.toUpperCase());
+        return super.logicalCollectionColumnName(upper(columnName), upper(propertyName), upper(referencedColumn));
+    }
+
+    private String upper(String value) {
+        return value == null ? null : value.toUpperCase();
     }
 }
