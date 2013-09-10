@@ -9,55 +9,52 @@ public class UpperCasedNamingStrategy extends ImprovedNamingStrategy {
 
     @Override
     public String classToTableName(String className) {
-        return super.classToTableName(upper(className));
+        return upper(super.classToTableName(className));
     }
 
     @Override
     public String propertyToColumnName(String propertyName) {
-        return super.propertyToColumnName(upper(propertyName));
+        return upper(super.propertyToColumnName(propertyName));
     }
 
     @Override
     public String tableName(String tableName) {
-        return super.tableName(upper(tableName));
+        return upper(super.tableName(tableName));
     }
 
     @Override
     public String columnName(String columnName) {
-        return super.columnName(upper(columnName));
+        return upper(super.columnName(columnName));
     }
 
     @Override
     public String collectionTableName(String ownerEntity, String ownerEntityTable, String associatedEntity, String associatedEntityTable, String propertyName) {
-        return super.collectionTableName(upper(ownerEntity), upper(ownerEntityTable),
-                upper(associatedEntity), upper(associatedEntityTable), upper(propertyName));
+        return upper(super.collectionTableName(ownerEntity, ownerEntityTable, associatedEntity, associatedEntityTable, propertyName));
     }
 
     @Override
     public String joinKeyColumnName(String joinedColumn, String joinedTable) {
-        return super.joinKeyColumnName(upper(joinedColumn), upper(joinedTable));
+        return upper(super.joinKeyColumnName(joinedColumn, joinedTable));
     }
 
     @Override
     public String foreignKeyColumnName(String propertyName, String propertyEntityName, String propertyTableName, String referencedColumnName) {
-        return super.foreignKeyColumnName(upper(propertyName), upper(propertyEntityName),
-                upper(propertyTableName), upper(referencedColumnName));
+        return upper(super.foreignKeyColumnName(propertyName, propertyEntityName, propertyTableName, referencedColumnName));
     }
 
     @Override
     public String logicalColumnName(String columnName, String propertyName) {
-        return super.logicalColumnName(upper(columnName), upper(propertyName));
+        return upper(super.logicalColumnName(columnName, propertyName));
     }
 
     @Override
     public String logicalCollectionTableName(String tableName, String ownerEntityTable, String associatedEntityTable, String propertyName) {
-        return super.logicalCollectionTableName(upper(tableName), upper(ownerEntityTable),
-                upper(associatedEntityTable), upper(propertyName));
+        return upper(super.logicalCollectionTableName(tableName, ownerEntityTable, associatedEntityTable, propertyName));
     }
 
     @Override
     public String logicalCollectionColumnName(String columnName, String propertyName, String referencedColumn) {
-        return super.logicalCollectionColumnName(upper(columnName), upper(propertyName), upper(referencedColumn));
+        return upper(super.logicalCollectionColumnName(columnName, propertyName, referencedColumn));
     }
 
     private String upper(String value) {
