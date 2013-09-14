@@ -129,4 +129,8 @@ public class NotificationDTO implements Serializable {
     public Locale getLocale() {
         return locale;
     }
+
+    public boolean isCreated() {
+        return status.isCreated();
+    }
 }

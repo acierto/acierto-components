@@ -5,13 +5,13 @@ package com.aciertoteam.mail.enums;
  */
 public enum RequestStatus {
 
-    NOT_FOUND, REQUESTED, PENDING, SUCCESS, FAILED, REJECTED, EXPIRED;
+    NOT_FOUND, REQUESTED, PENDING, ACCEPTED, FAILED, REJECTED, EXPIRED;
 
     public boolean isFailed() {
         return FAILED.equals(this) || REJECTED.equals(this) || EXPIRED.equals(this);
     }
 
-    public boolean isSuccess() {
-        return SUCCESS.equals(this);
+    public boolean isAccepted() {
+        return ACCEPTED.equals(this);
     }
 }

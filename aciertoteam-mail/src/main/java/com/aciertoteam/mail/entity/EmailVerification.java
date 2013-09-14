@@ -69,14 +69,14 @@ public class EmailVerification extends AbstractEntity {
     }
 
     public boolean isVerified() {
-        return requestStatus.isSuccess();
+        return requestStatus.isAccepted();
     }
 
     public RequestStatus updateVerificationStatus(String token) {
         if (isExpired()) {
             requestStatus = RequestStatus.EXPIRED;
         } else if (isValidToken(token)) {
-            requestStatus = RequestStatus.SUCCESS;
+            requestStatus = RequestStatus.ACCEPTED;
         } else {
             requestStatus = RequestStatus.FAILED;
         }

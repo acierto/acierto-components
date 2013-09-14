@@ -51,13 +51,6 @@ public interface DecisionRequest extends Identifiable {
     String getRejectCause();
 
     /**
-     * The description of the request made by user.
-     *
-     * @return
-     */
-    String getRequestDescription();
-
-    /**
      * Returns the locale of the request
      *
      * @return

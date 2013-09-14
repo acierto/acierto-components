@@ -442,7 +442,7 @@
 
 
 
-                        <img alt="" src="https://gallery.mailchimp.com/f33288c11a49c5ce401bd1d80/images/logo_big.png" style="max-width: 1011px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important;" class="mcnImage" width="264">
+                        <img alt="" src="cid:logo_big" style="max-width: 1011px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important;" class="mcnImage" width="264">
 
 
 
@@ -470,13 +470,7 @@
     <tbody class="mcnDividerBlockOuter">
         <tr>
             <td class="mcnDividerBlockInner" style="padding: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                <table style="border-top: 1px solid #999999;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
-                    <tbody><tr>
-                        <td style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                            <span></span>
-                        </td>
-                    </tr>
-                </tbody></table>
+
             </td>
         </tr>
     </tbody>
@@ -520,7 +514,7 @@
 
 
 
-            <img alt="" src="https://gallery.mailchimp.com/f33288c11a49c5ce401bd1d80/images/rejected_decision_request.png" style="max-width: 128px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important;" class="mcnImage" width="128">
+            <img alt="" src="cid:rejected_decision_request" style="max-width: 128px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important;" class="mcnImage" width="128">
 
 
         </td>
@@ -560,9 +554,9 @@
                         <td class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;" valign="top">
 
                             <h1 class="null" style="display: block;font-family: Helvetica;font-size: 40px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: -1px;margin: 0;text-align: left;color: #606060 !important;">
-	<span style="font-size:18px;">Your request has been rejected</span></h1>
-Dear $(user),<br>
-&nbsp;&nbsp; we have considered your request but we rejected it because of:<br>
+	<span style="font-size:18px;">${msg("request.rejected")}</span></h1>
+                        ${msg("dear")} ${user},<br>
+&nbsp;&nbsp; ${msg("request.considered")} #${requestSid} ${msg("rejected.because")}:<br>
 <br>
 ${cause}
                         </td>
@@ -597,6 +591,9 @@ ${cause}
                         <td class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #606060;font-family: Helvetica;font-size: 11px;line-height: 125%;text-align: left;" valign="top">
 
                             <em>Copyright © 2013 AciertoTeam, All rights reserved.</em>
+                        </td>
+                        <td>
+                            <img src="cid:email_logo" style="margin-left: -40px; margin-top: 15px"/>
                         </td>
                     </tr>
                 </tbody></table>

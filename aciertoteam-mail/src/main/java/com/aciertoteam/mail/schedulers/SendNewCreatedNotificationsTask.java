@@ -1,6 +1,8 @@
 package com.aciertoteam.mail.schedulers;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -46,7 +48,8 @@ public class SendNewCreatedNotificationsTask {
             LOG.info("The notification process is started");
             lock.lock();
             try {
-                Collection<NotificationDTO> notifications = notificationService.findNotifications(NotificationStatus.CREATED);
+                List<NotificationStatus> statuses = Arrays.asList(NotificationStatus.CREATED, NotificationStatus.PENDING);
+                Collection<NotificationDTO> notifications = notificationService.findNotifications(statuses);
                 updateNotificationsToPendingStatus(notifications);
                 EmailResultCallback callback = new DefaultEmailResultCallback();
                 for (NotificationDTO notification : notifications) {

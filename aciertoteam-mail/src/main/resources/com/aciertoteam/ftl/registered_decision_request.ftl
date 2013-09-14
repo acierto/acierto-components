@@ -453,7 +453,7 @@
 
 
 
-                        <img alt="" src="https://gallery.mailchimp.com/f33288c11a49c5ce401bd1d80/images/logo_big.png" style="max-width: 1011px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important;" class="mcnImage" width="264">
+                        <img alt="" src="cid:logo_big" style="max-width: 1011px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important;" class="mcnImage" width="264">
 
 
 
@@ -481,13 +481,7 @@
     <tbody class="mcnDividerBlockOuter">
         <tr>
             <td class="mcnDividerBlockInner" style="padding: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                <table style="border-top: 1px solid #999999;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
-                    <tbody><tr>
-                        <td style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                            <span></span>
-                        </td>
-                    </tr>
-                </tbody></table>
+
             </td>
         </tr>
     </tbody>
@@ -520,7 +514,7 @@
 
 
 
-            <img alt="" src="https://gallery.mailchimp.com/f33288c11a49c5ce401bd1d80/images/new_request.png" style="max-width: 128px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important;" class="mcnImage" width="128">
+            <img alt="" src="cid:new_request" style="max-width: 128px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important;" class="mcnImage" width="128">
 
 
         </td>
@@ -560,12 +554,12 @@
                         <td class="mcnTextContent" style="padding: 9px 18px;font-size: 11px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #606060;font-family: Helvetica;line-height: 150%;text-align: left;" valign="top">
 
                             <h2 class="null" style="display: block;font-family: Helvetica;font-size: 26px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: -.75px;margin: 0;text-align: left;color: #404040 !important;">
-	Your request is registered</h2>
+	${msg("request.registered")}</h2>
 <p style="color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
 	<br>
-	<span style="font-size:12px;"><span><span class="mc-toc-title">Dear ${user},<br>
-	&nbsp;&nbsp; &nbsp; we have received your request registered with number: ${requestSid}. We will consider it during next 3 working days.</span></span></span><br>
-	&nbsp;</p>
+	<span style="font-size:12px;"><span><span class="mc-toc-title">${msg("dear")} ${user},<br>
+	${msg("request.received.and.registered")}: #${requestSid}. ${msg("request.to.be.considered")}.</span></span></span><br>
+	</p>
 
                         </td>
                     </tr>
@@ -599,6 +593,9 @@
                         <td class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #606060;font-family: Helvetica;font-size: 11px;line-height: 125%;text-align: left;" valign="top">
 
                             <em>Copyright © 2013 AciertoTeam, All rights reserved.</em><br>
+                        </td>
+                        <td>
+                            <img src="cid:email_logo" style="margin-left: -40px; margin-top: 15px"/>
                         </td>
                     </tr>
                 </tbody></table>

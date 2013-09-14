@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Success decision request</title>
 
         <!--[if gte mso 6]>
         <style>
@@ -439,13 +438,7 @@
             <table class="mcnCaptionRightImageContentContainer" align="left" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
                 <tbody><tr>
                     <td class="mcnCaptionRightImageContent" valign="top" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-
-
-
-                        <img alt="" src="https://gallery.mailchimp.com/f33288c11a49c5ce401bd1d80/images/logo_big.png" style="max-width: 1011px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important;" class="mcnImage" width="264">
-
-
-
+                        <img alt="" src="cid:logo_big" style="max-width: 1011px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important;" class="mcnImage" width="264">
                     </td>
                 </tr>
             </tbody></table>
@@ -503,12 +496,7 @@
 <table class="mcnCaptionBottomContent" align="left" border="0" cellpadding="0" cellspacing="0" width="false" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
     <tbody><tr>
         <td class="mcnCaptionBottomImageContent" style="padding: 0 9px 9px 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" align="left" valign="top">
-
-
-
-            <img alt="" src="https://gallery.mailchimp.com/f33288c11a49c5ce401bd1d80/images/accepted_decision_request.png" style="max-width: 128px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important;" class="mcnImage" width="128">
-
-
+            <img alt="" src="cid:accepted_decision_request" style="max-width: 128px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important;" class="mcnImage" width="128">
         </td>
     </tr>
     <tr>
@@ -546,7 +534,8 @@
                         <td class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;" valign="top">
 
                             <h3 style="text-align: left;display: block;font-family: Helvetica;font-size: 18px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: -.5px;margin: 0;color: #606060 !important;">
-	Your decision request ${requestSid} has been accepted</h3>
+                                ${msg("dear")} ${user},<br>
+                                &nbsp;&nbsp; ${msg("your.request")} #${requestSid} ${msg("has.been.accepted")}.</h3>
 
                         </td>
                     </tr>
@@ -580,6 +569,9 @@
                         <td class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #606060;font-family: Helvetica;font-size: 11px;line-height: 125%;text-align: left;" valign="top">
 
                             <em>Copyright © 2013 AciertoTeam, All rights reserved.</em>
+                        </td>
+                        <td>
+                            <img src="cid:email_logo" style="margin-left: -40px; margin-top: 15px"/>
                         </td>
                     </tr>
                 </tbody></table>
