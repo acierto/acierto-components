@@ -18,13 +18,13 @@ public class EmailVerificationTest extends AbstractBeanTest<EmailVerification> {
     @Test
     public void testIsVerified() {
         EmailVerification emailVerification = new EmailVerification();
-        emailVerification.setRequestStatus(RequestStatus.SUCCESS);
+        emailVerification.setRequestStatus(RequestStatus.ACCEPTED);
         assertTrue(emailVerification.isVerified());
     }
 
     @Test
     public void testUpdateVerificationStatus() {
-        assertEmailVerificationStatusUpdate(new DateTime().plusDays(1).toDate(), TOKEN, RequestStatus.SUCCESS);
+        assertEmailVerificationStatusUpdate(new DateTime().plusDays(1).toDate(), TOKEN, RequestStatus.ACCEPTED);
     }
 
     @Test
