@@ -274,10 +274,7 @@
                                         style="border-collapse: collapse;color: #202020;font-family: Arial;font-size: 34px;font-weight: bold;line-height: 100%;padding: 0;text-align: center;vertical-align: middle;">
 
                                         <!-- // Begin Module: Standard Header Image \\ -->
-                                        <img src="http://gallery.mailchimp.com/653153ae841fd11de66ad181a/images/placeholder_600.gif"
-                                             alt="" border="0"
-                                             style="margin: 0;padding: 0;max-width: 600px;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;"
-                                             id="headerImage campaign-icon">
+                                        <img alt="" src="cid:logo_big" style="max-width: 1011px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important; float:left; margin-top:15px" class="mcnImage" width="264">
                                         <!-- // End Module: Standard Header Image \\ -->
 
                                     </td>
@@ -341,7 +338,7 @@
                                             <tr>
                                                 <td style="padding-top: 0;padding-right: 18px;padding-bottom: 18px;padding-left: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
                                                     class="mcnButtonBlockInner" align="center" valign="top">
-                                                    <img alt="" src="cid:logo_big" style="max-width: 1011px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important;" class="mcnImage" width="264">
+
                                                     <table style="border-radius: 5px 5px 5px 5px;background-color: #6DC4E5;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
                                                            class="mcnButtonContentContainer" border="0" cellpadding="0" cellspacing="0">
                                                         <tbody>
