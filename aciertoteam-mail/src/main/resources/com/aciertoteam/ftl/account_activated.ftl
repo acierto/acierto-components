@@ -341,6 +341,7 @@
                                             <tr>
                                                 <td style="padding-top: 0;padding-right: 18px;padding-bottom: 18px;padding-left: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
                                                     class="mcnButtonBlockInner" align="center" valign="top">
+                                                    <img alt="" src="cid:logo_big" style="max-width: 1011px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important;" class="mcnImage" width="264">
                                                     <table style="border-radius: 5px 5px 5px 5px;background-color: #6DC4E5;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
                                                            class="mcnButtonContentContainer" border="0" cellpadding="0" cellspacing="0">
                                                         <tbody>

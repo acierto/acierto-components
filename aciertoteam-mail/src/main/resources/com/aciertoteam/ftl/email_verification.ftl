@@ -605,6 +605,7 @@ h1 a, h2 a, h3 a, h4 a {
                         <tr>
                             <td style="padding: 9px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"
                                 class="mcnImageBlockInner" valign="top">
+                                <img alt="" src="cid:logo_big" style="max-width: 1011px;border: 0;line-height: 100%;outline: none;text-decoration: none;vertical-align: bottom;height: auto !important;" class="mcnImage" width="264">
                                 <table class="mcnImageContentContainer" align="left" border="0" cellpadding="0"
                                        cellspacing="0" width="100%"
                                        style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
