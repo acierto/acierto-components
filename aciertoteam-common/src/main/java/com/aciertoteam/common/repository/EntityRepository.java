@@ -27,6 +27,14 @@ public interface EntityRepository extends AbstractRepository<AbstractEntity> {
     <T> T findByField(Class clazz, String fieldName, Object value);
 
     /**
+     * Returns the list of entries from the specified table by specific field
+     * @param fieldName
+     * @param value
+     * @return
+     */
+    <T> List<T> findListByField(Class clazz, String fieldName, Object value);
+
+    /**
      * Returns the entity of specified class by ID.
      *
      * @param clazz

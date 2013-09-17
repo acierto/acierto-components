@@ -5,6 +5,7 @@ import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.interfaces.IAbstractEntity;
 import com.aciertoteam.common.model.Clock;
 import com.aciertoteam.common.repository.EntityRepository;
+import org.hibernate.Criteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,12 @@ public class DefaultEntityRepository extends DefaultAbstractRepository<AbstractE
         return (T) getSession().createCriteria(clazz).add(Restrictions.eq(fieldName, value)).
                 add(Restrictions.or(Restrictions.isNull("validThru"), Restrictions.gt("validThru", clock.getCurrentDate()))).
                 uniqueResult();
+    }
+
+    @Override
+    public <T> List<T> findListByField(Class clazz, String fieldName, Object value) {
+        Criteria criteria = getSession().createCriteria(clazz);
+        return criteria.add(Restrictions.like(fieldName, value)).list();
     }
 
     @Override
