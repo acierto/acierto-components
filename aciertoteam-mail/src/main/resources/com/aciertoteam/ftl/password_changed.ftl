@@ -534,7 +534,7 @@
                         <td class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;" valign="top">
 
                             <h3 style="text-align: left;display: block;font-family: Helvetica;font-size: 18px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: -.5px;margin: 0;color: #606060 !important;">
-                                ${msg("dear")} <#if person.name??>${person.name}<#else> user </#if>,<br>
+                                ${msg("dear")} <#if person.name?has_content>${person.name}<#else> user </#if>,<br>
                                 &nbsp;&nbsp; Your password has been changed.</h3>
 
                         </td>
