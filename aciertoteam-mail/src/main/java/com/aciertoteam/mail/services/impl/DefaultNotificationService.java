@@ -114,7 +114,7 @@ public class DefaultNotificationService implements NotificationService {
 
     private HashMap<String, Object> getCommonNotificationImages() {
         HashMap<String, Object> attachments = new HashMap<String, Object>();
-        attachments.put("cid:email_logo", "/com/aciertoteam/images/email_logo.jpg");
+        attachments.put("cid:email_logo", "/com/aciertoteam/images/logo.gif");
         attachments.put("cid:logo_big", "/com/aciertoteam/images/logo_big.png");
         return attachments;
     }
