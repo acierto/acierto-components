@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate3.SessionFactoryUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.ParameterizedType;
@@ -190,7 +191,7 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
     }
 
     protected final Session getSession() {
-        return sessionFactory.getCurrentSession();
+        return SessionFactoryUtils.getSession(sessionFactory, true);
     }
 
 }
