@@ -84,6 +84,13 @@ public interface EntityService {
     <T extends IAbstractEntity> void markAsDeleted(T t);
 
     /**
+     * Close validThru period for the found entity
+     *
+     * @param <T>
+     */
+    <T extends IAbstractEntity> void markAsDeletedById(Class<T> clazz, Long id);
+
+    /**
      * Returns the entry from the specified table by specific field
      * 
      * @param fieldName

@@ -54,6 +54,7 @@ public class DefaultEntityService implements EntityService {
         return new HashSet<T>(findAll(clazz));
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public <T extends IAbstractEntity> T saveOrUpdate(T entity) {
         return (T) entityRepository.saveOrUpdate((AbstractEntity) entity);
@@ -71,6 +72,14 @@ public class DefaultEntityService implements EntityService {
         entity.closeEndPeriod();
         entityRepository.saveOrUpdate((AbstractEntity) entity);
         propagateDelete(entity);
+    }
+
+    @Override
+    public <T extends IAbstractEntity> void markAsDeletedById(Class<T> clazz, Long id) {
+        IAbstractEntity entity = findById(clazz, id);
+        if (entity != null) {
+            markAsDeleted(entity);
+        }
     }
 
     private <T extends IAbstractEntity> void propagateDelete(T entity) {
