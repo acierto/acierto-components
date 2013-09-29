@@ -6,7 +6,6 @@ package com.aciertoteam.common.i18n;
 import org.apache.log4j.Logger;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import java.util.Locale;
 
@@ -18,7 +17,7 @@ import java.util.Locale;
  * 
  * @author ishestiporov
  */
-public class LocalizedMessageSource extends RequestContextHolder {
+public class LocalizedMessageSource {
 
     private static final Logger LOGGER = Logger.getLogger(LocalizedMessageSource.class);
 
