@@ -8,7 +8,7 @@
 
     <camel:camelContext id="camelContext" trace="true">
         <camel:contextScan/>
-        <camel:jmxAgent id="jmxAgent" usePlatformMBeanServer="true" registryPort="2097" createConnector="true"/>
+        <camel:jmxAgent id="agent" disabled="true"/>
     </camel:camelContext>
 
     <bean id="emailRouteBuilder" class="com.aciertoteam.mail.routers.EmailRouteBuilder"/>
