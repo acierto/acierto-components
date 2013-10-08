@@ -1,6 +1,7 @@
 package com.aciertoteam.mail.entity;
 
 import com.aciertoteam.common.entity.AbstractEntity;
+import com.aciertoteam.common.utils.LocaleUtil;
 import com.aciertoteam.common.utils.SerializeUtil;
 import com.aciertoteam.mail.dto.NotificationDTO;
 import com.aciertoteam.mail.enums.NotificationStatus;
@@ -96,7 +97,7 @@ public class Notification extends AbstractEntity {
     }
 
     public void setLocale(Locale locale) {
-        this.locale = String.format("%s_%s", locale.getLanguage(), locale.getCountry());
+        this.locale = LocaleUtil.toString(locale);
     }
 
     public byte[] getProperties() {
@@ -123,17 +124,12 @@ public class Notification extends AbstractEntity {
         return result;
     }
 
-    private Locale resolveLocale() {
-        String[] localeValues = locale.split("_");
-        return new Locale(localeValues[0], localeValues[1]);
-    }
-
     public Long getSid() {
         return 12000 + getId();
     }
 
     public NotificationDTO createDTO() {
-        NotificationDTO dto = new NotificationDTO(resolveLocale());
+        NotificationDTO dto = new NotificationDTO(LocaleUtil.toLocale(locale));
 
         dto.setId(getId());
         dto.setComment(getComment());
