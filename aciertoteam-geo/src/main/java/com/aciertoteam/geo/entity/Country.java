@@ -22,6 +22,7 @@ public class Country extends AbstractEntity {
     @Column
     private String name;
 
+    // TODO fix this, doesn't belong here
     private transient String ipAddress;
 
     Country() {
@@ -64,4 +65,3 @@ public class Country extends AbstractEntity {
     }
 
 }
-
