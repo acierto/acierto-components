@@ -3,6 +3,7 @@ package com.aciertoteam.common.dto;
 import java.util.Date;
 import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.interfaces.Identifiable;
+import org.apache.commons.lang3.ObjectUtils;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
@@ -10,7 +11,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
  */
 public class AbstractDTO implements Identifiable {
 
-    @JsonProperty("id")
+    private static final long serialVersionUID = 1L;
+
+    @JsonProperty
     private Long id;
 
     @JsonProperty("valid_from")
@@ -19,7 +22,7 @@ public class AbstractDTO implements Identifiable {
     @JsonProperty("valid_thru")
     private Date validThru;
 
-    @JsonProperty("timestamp")
+    @JsonProperty
     private Date timestamp;
 
     public Long getId() {
@@ -59,5 +62,10 @@ public class AbstractDTO implements Identifiable {
         dto.setTimestamp(entity.getTimestamp());
         dto.setValidFrom(entity.getValidFrom());
         dto.setValidThru(entity.getValidThru());
+    }
+
+    @Override
+    public String getStringId() {
+        return ObjectUtils.toString(id);
     }
 }

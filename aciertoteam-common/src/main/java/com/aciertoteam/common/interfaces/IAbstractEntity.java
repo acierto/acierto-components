@@ -9,35 +9,36 @@ public interface IAbstractEntity extends Identifiable, IdentifiableEntity {
 
     /**
      * The time when entity starts to be valid.
-     *
+     * 
      * @return
      */
     Date getValidFrom();
 
     /**
-     * The expiration time of entity. It could be equal null in case of endless validity.
-     *
+     * The expiration time of entity. It could be equal null in case of endless
+     * validity.
+     * 
      * @return
      */
     Date getValidThru();
 
     /**
      * The time when the entity has been created.
-     *
+     * 
      * @return
      */
     Date getTimestamp();
 
     /**
      * Checks whether the entity expiration time has been exceeded.
-     *
+     * 
      * @return
      */
     boolean isDeleted();
 
     /**
      * Returns the ID of the person who changed the entity last time.
-     *
+     * 
      * @return
      */
     Long getUpdatedBy();
@@ -53,8 +54,9 @@ public interface IAbstractEntity extends Identifiable, IdentifiableEntity {
     void openEndPeriod();
 
     /**
-     * Executes checking of the entity before performing any actions with it, i.e. saving if some conditions
-     * are not matching with expected values range.
+     * Executes checking of the entity before performing any actions with it,
+     * i.e. saving if some conditions are not matching with expected values
+     * range.
      */
     void check();
 }

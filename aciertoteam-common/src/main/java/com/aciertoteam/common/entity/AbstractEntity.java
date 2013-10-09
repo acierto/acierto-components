@@ -1,10 +1,14 @@
 package com.aciertoteam.common.entity;
 
-import com.aciertoteam.common.interfaces.IAbstractEntity;
-import org.codehaus.jackson.annotate.JsonIgnore;
-
-import javax.persistence.*;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import com.aciertoteam.common.interfaces.IAbstractEntity;
+import org.apache.commons.lang3.ObjectUtils;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * @author Bogdan Nechyporenko
@@ -95,7 +99,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements IAbstr
 
     /**
      * Additional options that will be added to the json object
-     *
+     * 
      * @return String[]
      */
     public String[] getSelectItemOptions() {
@@ -110,7 +114,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements IAbstr
         this.validThru = date;
     }
 
-    @SuppressWarnings({"unchecked", "CloneDoesntDeclareCloneNotSupportedException"})
+    @SuppressWarnings({ "unchecked", "CloneDoesntDeclareCloneNotSupportedException" })
     @Override
     public T clone() {
         try {
@@ -118,5 +122,10 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements IAbstr
         } catch (CloneNotSupportedException e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         }
+    }
+
+    @Override
+    public String getStringId() {
+        return ObjectUtils.toString(id);
     }
 }
