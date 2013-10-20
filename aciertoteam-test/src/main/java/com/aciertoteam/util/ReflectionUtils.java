@@ -1,7 +1,10 @@
 package com.aciertoteam.util;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import org.apache.commons.lang3.ClassUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.BeanUtils;
+
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Array;
@@ -9,17 +12,18 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import org.apache.commons.lang3.ClassUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.BeanUtils;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * @author ishestiporov
@@ -28,7 +32,8 @@ public final class ReflectionUtils {
 
     private static final Log LOG = LogFactory.getLog(ReflectionUtils.class);
 
-    private static final Object[] PRIMITIVES = { "test", 1l, 1, Locale.getDefault(), true, 'a', 1f, 1d };
+    private static final Object[] PRIMITIVES = { "test", 1l, 1, Locale.getDefault(), true, 'a', 1f, 1d,
+            Currency.getInstance("EUR"), BigDecimal.ZERO };
 
     private static final Map<Class, Object> COLLECTION_MAP = new HashMap<Class, Object>();
     static {
