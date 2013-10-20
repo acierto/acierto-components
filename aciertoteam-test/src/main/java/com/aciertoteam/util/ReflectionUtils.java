@@ -86,6 +86,9 @@ public final class ReflectionUtils {
     }
 
     private static Object mockParam(Class parameterClass) {
+        if (Modifier.isFinal(parameterClass.getModifiers())) {
+            return null;
+        }
         Object mock = mock(parameterClass);
         mockChildGetters(parameterClass, mock);
         return mock;
