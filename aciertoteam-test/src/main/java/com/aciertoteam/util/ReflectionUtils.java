@@ -1,10 +1,7 @@
 package com.aciertoteam.util;
 
-import org.apache.commons.lang3.ClassUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.BeanUtils;
-
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Array;
@@ -21,9 +18,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import org.apache.commons.lang3.ClassUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * @author ishestiporov
@@ -66,11 +63,9 @@ public final class ReflectionUtils {
     }
 
     private static Object getParamValue(Class parameterClass) {
-        if (ClassUtils.isPrimitiveOrWrapper(parameterClass) || BeanUtils.isSimpleProperty(parameterClass)) {
-            for (Object primitive : PRIMITIVES) {
-                if (primitive.getClass().equals(ClassUtils.primitiveToWrapper(parameterClass))) {
-                    return primitive;
-                }
+        for (Object primitive : PRIMITIVES) {
+            if (primitive.getClass().equals(ClassUtils.primitiveToWrapper(parameterClass))) {
+                return primitive;
             }
         }
         if (parameterClass.isArray()) {
@@ -86,16 +81,13 @@ public final class ReflectionUtils {
     }
 
     private static Object mockParam(Class parameterClass) {
-        if (Modifier.isFinal(parameterClass.getModifiers())) {
-            return null;
-        }
         Object mock = mock(parameterClass);
         mockChildGetters(parameterClass, mock);
         return mock;
     }
 
     private static void mockChildGetters(Class parameterClass, Object mock) {
-        for (final Method method : parameterClass.getDeclaredMethods()) {
+        for (Method method : parameterClass.getDeclaredMethods()) {
             try {
                 if (ReflectionUtils.isGetter(method) && isCustomObjectToBeMocked(method)) {
                     Object param = mock(method.getReturnType());
