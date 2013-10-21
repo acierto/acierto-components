@@ -4,6 +4,7 @@ def String[] modules = [
     'aciertoteam-io',
     'aciertoteam-mail',
     'aciertoteam-geo',
+    'aciertoteam-osm',
 	'aciertoteam-test'
 ]
 
