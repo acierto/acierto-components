@@ -1,3 +1,10 @@
+apply plugin: 'java'
+
+dependencies {
+    compile project(':aciertoteam-common')
+    testCompile project(':aciertoteam-test')
+}
+
 sonarRunner {
     sonarProperties {
         property "sonar.projectName", ':aciertoteam-osm'
