@@ -41,8 +41,10 @@ public abstract class StaticOsmRequest implements OsmRequest {
         return Collections.unmodifiableList(markers);
     }
 
-    public void addMarker(Coordinate coordinate) {
+    @SuppressWarnings("unchecked")
+    public <T extends OsmRequest> T addMarker(Coordinate coordinate) {
         markers.add(coordinate);
+        return (T) this;
     }
 
     @Override

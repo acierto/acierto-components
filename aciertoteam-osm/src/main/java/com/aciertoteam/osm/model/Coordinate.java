@@ -3,6 +3,7 @@ package com.aciertoteam.osm.model;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.MessageFormat;
 
 /**
@@ -36,8 +37,16 @@ public class Coordinate implements Serializable {
         return new Coordinate(x, y);
     }
 
+    public static Coordinate createCenter(BigDecimal latitude, BigDecimal longitude) {
+        return new Coordinate(latitude.toString(), longitude.toString());
+    }
+
     public static Coordinate createMarker(String x, String y, String color) {
         return new Coordinate(x, y, color);
+    }
+
+    public static Coordinate createMarker(BigDecimal latitude, BigDecimal longitude, String color) {
+        return new Coordinate(latitude.toString(), longitude.toString(), color);
     }
 
     private void checkOnBlank(String... params) {
