@@ -43,7 +43,9 @@ public abstract class StaticOsmRequest implements OsmRequest {
 
     @SuppressWarnings("unchecked")
     public <T extends OsmRequest> T addMarker(Coordinate coordinate) {
-        markers.add(coordinate);
+        if (coordinate != null) {
+            markers.add(coordinate);
+        }
         return (T) this;
     }
 
