@@ -18,8 +18,8 @@ public class DefaultStaticOsmRequestTest {
         String y = "-76.305801";
         String url = DefaultStaticOsmRequest.createRequest(x, y).getUrl(appKey);
 
-        assertEquals("http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd%7Cluubnu0and%2C72%3Do5-9u1sqf&size=300," +
-                "200&zoom=18&center=40.0378,-76.305801&imageType=PNG", url);
+        assertEquals("http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd%7Cluubnu0and%2C72%3Do5-9u1sqf&size=200," +
+                "150&zoom=15&center=40.0378,-76.305801&imageType=PNG&scalebar=false", url);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class DefaultStaticOsmRequestTest {
 
         String url = osmRequest.getUrl(appKey);
         System.out.println(url);
-        assertEquals("http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd%7Cluubnu0and%2C72%3Do5-9u1sqf&size=300," +
-                "200&zoom=18&center=40.0378,-76.305801&imageType=PNG&pois=green,40.0378,-76.305801|yellow,40.0379,-76.305802", url);
+        assertEquals("http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd%7Cluubnu0and%2C72%3Do5-9u1sqf&size=200," +
+                "150&zoom=15&center=40.0378,-76.305801&imageType=PNG&scalebar=false&pois=green,40.0378,-76.305801|yellow,40.0379,-76.305802", url);
     }
 }
