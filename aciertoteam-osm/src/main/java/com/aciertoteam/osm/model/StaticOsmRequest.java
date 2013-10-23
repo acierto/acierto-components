@@ -49,7 +49,7 @@ public abstract class StaticOsmRequest implements OsmRequest {
 
     @Override
     public String getUrl(String appKey) {
-        return MessageFormat.format("{0}?key={1}&size={2}&zoom={3}&center={4}&imageType={5}{6}",
+        return MessageFormat.format("{0}?key={1}&size={2}&zoom={3}&center={4}&imageType={5}&scalebar=false{6}",
                 STATIC_MAP, appKey, size, zoom, center, imageType, getMarkersToString());
     }
 
