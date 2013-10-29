@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Locale;
 
 /**
- * User session locale holder.
+ * User session locale holder. TODO get locale from user country
  * 
  * @author ishestiporov
  */

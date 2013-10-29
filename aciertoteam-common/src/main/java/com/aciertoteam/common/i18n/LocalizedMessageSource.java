@@ -7,6 +7,8 @@ import org.apache.log4j.Logger;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
 
+import java.math.BigDecimal;
+import java.util.Currency;
 import java.util.Locale;
 
 /**
@@ -34,9 +36,10 @@ public class LocalizedMessageSource {
     }
 
     /**
-     * This method is keeping with public accessor as batch process doesn't have session scope bean and
-     * at this case we need to transfer Locale value directly.
-     *
+     * This method is keeping with public accessor as batch process doesn't have
+     * session scope bean and at this case we need to transfer Locale value
+     * directly.
+     * 
      * @param locale
      * @param code
      * @param args
@@ -61,6 +64,14 @@ public class LocalizedMessageSource {
 
     public void setUserSessionLocale(UserSessionLocale userSessionLocale) {
         this.userSessionLocale = userSessionLocale;
+    }
+
+    public String getPriceAsString(Currency currency, BigDecimal price) {
+        return String.format("%s %s", currency.getSymbol(getLocale()), price.toPlainString());
+    }
+
+    private Currency getNullSafeCurrency(Currency currency) {
+        return currency != null ? currency : Currency.getInstance("EUR");
     }
 
 }
