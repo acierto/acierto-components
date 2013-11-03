@@ -29,7 +29,7 @@ public final class ReflectionUtils {
 
     private static final Log LOG = LogFactory.getLog(ReflectionUtils.class);
 
-    private static final Object[] PRIMITIVES = { "test", 1l, 1, Locale.getDefault(), true, 'a', 1f, 1d,
+    private static final Object[] PRIMITIVES = { "Test", 1l, 1, Locale.getDefault(), true, 'a', 1f, 1d,
             Currency.getInstance("EUR"), BigDecimal.ZERO };
 
     private static final Map<Class, Object> COLLECTION_MAP = new HashMap<Class, Object>();
