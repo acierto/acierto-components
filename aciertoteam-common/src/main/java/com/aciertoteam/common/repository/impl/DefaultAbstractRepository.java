@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,14 +36,14 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
     @Transactional(readOnly = true)
     public List<T> getAll() {
         return (List<T>) getSession().createCriteria(getClazz()).
-                add(Restrictions.or(Restrictions.isNull("validThru"), Restrictions.gt("validThru", clock.getCurrentDate()))).
+                add(Restrictions.or(Restrictions.isNull("validThru"), Restrictions.gt("validThru", getCurrentDate()))).
                 list();
     }
 
     @Override
     public List<T> getAll(int from, int to) {
         return (List<T>) getSession().createCriteria(getClazz()).
-                add(Restrictions.or(Restrictions.isNull("validThru"), Restrictions.gt("validThru", clock.getCurrentDate()))).
+                add(Restrictions.or(Restrictions.isNull("validThru"), Restrictions.gt("validThru", getCurrentDate()))).
                 setFirstResult(from).setMaxResults(to - from).
                 list();
     }
@@ -83,7 +84,7 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
         Criteria criteria = getSession().createCriteria(getClazz());
         if (!includingDeleted) {
             criteria = criteria.add(Restrictions.or(
-                    Restrictions.isNull("validThru"), Restrictions.gt("validThru", clock.getCurrentDate())));
+                    Restrictions.isNull("validThru"), Restrictions.gt("validThru", getCurrentDate())));
         }
         return (T) criteria.add(Restrictions.like(fieldName, value)).uniqueResult();
     }
@@ -192,6 +193,10 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
 
     protected final Session getSession() {
         return SessionFactoryUtils.getSession(sessionFactory, true);
+    }
+
+    protected Date getCurrentDate() {
+        return clock.getCurrentDate();
     }
 
 }
