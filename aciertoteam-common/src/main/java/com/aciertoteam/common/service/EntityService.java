@@ -106,6 +106,13 @@ public interface EntityService {
     void delete(List<AbstractEntity> entities);
 
     /**
+     * Physically delete record from the database
+     *
+     * @param entity
+     */
+    void delete(AbstractEntity entity);
+
+    /**
      * Saves the list of entities
      * 
      * @param entities

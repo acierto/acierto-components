@@ -105,6 +105,13 @@ public class DefaultEntityService implements EntityService {
     }
 
     @Override
+    public void delete(AbstractEntity entity) {
+        if (entity != null) {
+            entityRepository.delete(entity);
+        }
+    }
+
+    @Override
     public void saveAll(Collection<? extends AbstractEntity> entities) {
         entityRepository.saveAll(entities);
     }
