@@ -7,6 +7,22 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
 /**
+ * Class that replaces equals with just a single line. Can be used only on small
+ * lists of objects as it uses reflection which slows down the performance. This
+ * is null safe and type safe implementation which is in accordance with the
+ * equals contract.
+ * 
+ * <p>
+ * A typical invocation for this method would look like:
+ * </p>
+ * 
+ * <pre>
+ * &#064;Override
+ * public final boolean equals(Object obj) {
+ *     return ContractEqualsBuilder.isEquals(this, obj, &quot;name&quot;);
+ * }
+ * </pre>
+ * 
  * @author ishestiporov
  */
 public final class ContractEqualsBuilder {
@@ -15,6 +31,12 @@ public final class ContractEqualsBuilder {
         // restrict instantiation
     }
 
+    /**
+     * @param thisObject current object to compare
+     * @param otherObject other object to compare
+     * @param fields object fields to include in comparison
+     * @return true if objects are equal
+     */
     public static boolean isEquals(Object thisObject, Object otherObject, String... fields) {
         return isEquals(thisObject, otherObject, false, false, fields);
     }
@@ -37,7 +59,7 @@ public final class ContractEqualsBuilder {
         if (otherObject == null) {
             return false;
         }
-        if (otherObject == thisObject) { //NOSONAR
+        if (otherObject == thisObject) {
             return true;
         }
         if (otherObject.getClass() != thisObject.getClass()) {
