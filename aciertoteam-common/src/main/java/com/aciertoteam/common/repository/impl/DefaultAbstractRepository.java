@@ -35,17 +35,16 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
     @Override
     @Transactional(readOnly = true)
     public List<T> getAll() {
-        return (List<T>) getSession().createCriteria(getClazz()).
-                add(Restrictions.or(Restrictions.isNull("validThru"), Restrictions.gt("validThru", getCurrentDate()))).
-                list();
+        return (List<T>) getSession().createCriteria(getClazz())
+                .add(Restrictions.or(Restrictions.isNull("validThru"), Restrictions.gt("validThru", getCurrentDate())))
+                .list();
     }
 
     @Override
     public List<T> getAll(int from, int to) {
-        return (List<T>) getSession().createCriteria(getClazz()).
-                add(Restrictions.or(Restrictions.isNull("validThru"), Restrictions.gt("validThru", getCurrentDate()))).
-                setFirstResult(from).setMaxResults(to - from).
-                list();
+        return (List<T>) getSession().createCriteria(getClazz())
+                .add(Restrictions.or(Restrictions.isNull("validThru"), Restrictions.gt("validThru", getCurrentDate())))
+                .setFirstResult(from).setMaxResults(to - from).list();
     }
 
     @Override
@@ -83,8 +82,8 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
     public T findByField(String fieldName, Object value, boolean includingDeleted) {
         Criteria criteria = getSession().createCriteria(getClazz());
         if (!includingDeleted) {
-            criteria = criteria.add(Restrictions.or(
-                    Restrictions.isNull("validThru"), Restrictions.gt("validThru", getCurrentDate())));
+            criteria = criteria.add(Restrictions.or(Restrictions.isNull("validThru"),
+                    Restrictions.gt("validThru", getCurrentDate())));
         }
         return (T) criteria.add(Restrictions.like(fieldName, value)).uniqueResult();
     }
@@ -139,8 +138,8 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
     }
 
     public void deleteByIds(final List<Long> ids) {
-        getSession().createQuery("delete from " + getClazz() + " sc where sc.id in (:ids)").setParameterList("ids", ids)
-                .executeUpdate();
+        getSession().createQuery("delete from " + getClazz() + " sc where sc.id in (:ids)")
+                .setParameterList("ids", ids).executeUpdate();
     }
 
     @Override
@@ -152,7 +151,8 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
 
     @Override
     public void deleteByFieldName(String fieldName, Object value) {
-        getSession().createQuery("delete from " + getClazz().getSimpleName() + " where " + fieldName + " = " + value).executeUpdate();
+        getSession().createQuery("delete from " + getClazz().getSimpleName() + " where " + fieldName + " = " + value)
+                .executeUpdate();
     }
 
     @Override
@@ -198,5 +198,4 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
     protected Date getCurrentDate() {
         return clock.getCurrentDate();
     }
-
 }
