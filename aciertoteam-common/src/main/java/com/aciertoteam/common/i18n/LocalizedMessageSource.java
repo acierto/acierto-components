@@ -3,13 +3,13 @@
  */
 package com.aciertoteam.common.i18n;
 
-import org.apache.log4j.Logger;
-import org.springframework.context.MessageSource;
-import org.springframework.context.NoSuchMessageException;
-
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.Locale;
+import java.util.Properties;
+import org.apache.log4j.Logger;
+import org.springframework.context.MessageSource;
+import org.springframework.context.NoSuchMessageException;
 
 /**
  * Utility class for resolving messaging from the property files. Wraps
@@ -74,4 +74,7 @@ public class LocalizedMessageSource {
         return currency != null ? currency : Currency.getInstance("EUR");
     }
 
+    public Properties getAllProperties() {
+        return ((MergedReloadableResourceBundleMessageSource) messageSource).getAllProperties(getLocale());
+    }
 }
