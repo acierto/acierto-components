@@ -4,13 +4,14 @@ import com.aciertoteam.io.exceptions.FileException;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -54,32 +55,48 @@ public final class AciertoTeamFileUtils {
         }
     }
 
-    public static File unzipFile(InputStream fin, String outputFolderPath, String newFileName) {
-        File outputFile = new File(outputFolderPath, newFileName);
-        ZipInputStream zin;
-        FileOutputStream fout = null;
+    public static List<File> unzipArchive(InputStream fin, String outputFolder) {
+        List<File> files = new ArrayList<File>();
+        byte[] buffer = new byte[1024];
 
+        FileOutputStream fos = null;
+        ZipInputStream zis;
         try {
-            BufferedInputStream bin = new BufferedInputStream(fin);
-            zin = new ZipInputStream(bin);
-            fout = new FileOutputStream(outputFile);
 
-            while (zin.getNextEntry() != null) {
-                byte[] buffer = new byte[8192];
-                int len;
-                while ((len = zin.read(buffer)) != -1) {
-                    fout.write(buffer, 0, len);
-                }
+            File folder = new File(outputFolder);
+            if (!folder.exists()) {
+                folder.mkdir();
             }
-            return outputFile;
-        } catch (FileNotFoundException e) {
-            throw new FileException(e.getMessage(), e);
+
+            zis = new ZipInputStream(fin);
+            ZipEntry ze = zis.getNextEntry();
+
+            while (ze != null) {
+
+                String fileName = ze.getName();
+                File newFile = new File(outputFolder, fileName);
+
+                new File(newFile.getParent()).mkdirs();
+
+                fos = new FileOutputStream(newFile);
+
+                int len;
+                while ((len = zis.read(buffer)) > 0) {
+                    fos.write(buffer, 0, len);
+                }
+
+                files.add(newFile);
+                IOUtils.closeQuietly(fos);
+                ze = zis.getNextEntry();
+            }
+
         } catch (IOException e) {
-            throw new FileException(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         } finally {
-            IOUtils.closeQuietly(fout);
             IOUtils.closeQuietly(fin);
+            IOUtils.closeQuietly(fos);
         }
+        return files;
     }
 
 }
