@@ -78,6 +78,7 @@ public final class AciertoTeamFileUtils {
             throw new FileException(e.getMessage(), e);
         } finally {
             IOUtils.closeQuietly(fout);
+            IOUtils.closeQuietly(fin);
         }
     }
 
