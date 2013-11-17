@@ -4,6 +4,7 @@ import com.aciertoteam.io.exceptions.FileException;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -55,17 +56,19 @@ public final class AciertoTeamFileUtils {
 
     public static File unzipFile(InputStream fin, String outputFolderPath, String newFileName) {
         File outputFile = new File(outputFolderPath, newFileName);
-        ZipInputStream zin = null;
+        ZipInputStream zin;
         FileOutputStream fout = null;
 
         try {
-            zin = new ZipInputStream(fin);
-            ZipEntry ze;
-            while ((ze = zin.getNextEntry()) != null) {
-                LOG.info("Unzipping " + ze.getName());
-                fout = new FileOutputStream(outputFile);
-                for (int c = zin.read(); c != -1; c = zin.read()) {
-                    fout.write(c);
+            BufferedInputStream bin = new BufferedInputStream(fin);
+            zin = new ZipInputStream(bin);
+            fout = new FileOutputStream(outputFile);
+
+            while (zin.getNextEntry() != null) {
+                byte[] buffer = new byte[8192];
+                int len;
+                while ((len = zin.read(buffer)) != -1) {
+                    fout.write(buffer, 0, len);
                 }
             }
             return outputFile;
@@ -74,8 +77,6 @@ public final class AciertoTeamFileUtils {
         } catch (IOException e) {
             throw new FileException(e.getMessage(), e);
         } finally {
-            IOUtils.closeQuietly(fin);
-            IOUtils.closeQuietly(zin);
             IOUtils.closeQuietly(fout);
         }
     }
