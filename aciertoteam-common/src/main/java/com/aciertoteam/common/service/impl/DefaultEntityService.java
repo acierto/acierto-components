@@ -6,6 +6,7 @@ import com.aciertoteam.common.model.DeletionPropagated;
 import com.aciertoteam.common.repository.EntityRepository;
 import com.aciertoteam.common.service.EntityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +43,11 @@ public class DefaultEntityService implements EntityService {
     @Override
     public <T extends IAbstractEntity> List<T> findAll(Class<T> clazz) {
         return entityRepository.findAll(clazz);
+    }
+
+    @Override
+    public <T extends IAbstractEntity> List<T> findAll(Class<T> clazz, Pageable pageable) {
+        return entityRepository.findAll(clazz, pageable);
     }
 
     @Override

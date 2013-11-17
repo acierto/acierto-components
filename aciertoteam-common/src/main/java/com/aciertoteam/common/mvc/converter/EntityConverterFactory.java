@@ -2,7 +2,6 @@ package com.aciertoteam.common.mvc.converter;
 
 import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.repository.EntityRepository;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,9 +43,8 @@ public class EntityConverterFactory implements ConverterFactory<String, Abstract
             if (isLongValue(source)) {
                 return entityRepository.findById(clazz, Long.parseLong(source));
             }
-            String errorMessage = String.format("Cannot convert non long value %s to entity id.", source);
-            LOG.error(errorMessage);
-            throw new IllegalArgumentException(errorMessage);
+            LOG.debug(String.format("Received empty id property for %s", clazz.getSimpleName()));
+            return null;
         }
 
         private boolean isLongValue(String source) {

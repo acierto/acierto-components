@@ -2,6 +2,7 @@ package com.aciertoteam.common.service;
 
 import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.interfaces.IAbstractEntity;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Collection;
 import java.util.List;
@@ -50,6 +51,16 @@ public interface EntityService {
     <T extends IAbstractEntity> List<T> findAll(Class<T> clazz);
 
     /**
+     * Returns all entities from the specified database with paging
+     * 
+     * @param clazz
+     * @param <T>
+     * @param pageable paging specifcation
+     * @return
+     */
+    <T extends IAbstractEntity> List<T> findAll(Class<T> clazz, Pageable pageable);
+
+    /**
      * Returns all entities from the specified database
      * 
      * @param clazz
@@ -85,7 +96,7 @@ public interface EntityService {
 
     /**
      * Close validThru period for the found entity
-     *
+     * 
      * @param <T>
      */
     <T extends IAbstractEntity> void markAsDeletedById(Class<T> clazz, Long id);
@@ -107,7 +118,7 @@ public interface EntityService {
 
     /**
      * Physically delete record from the database
-     *
+     * 
      * @param entity
      */
     void delete(AbstractEntity entity);

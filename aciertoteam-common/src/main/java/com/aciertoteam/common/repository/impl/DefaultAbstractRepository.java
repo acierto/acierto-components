@@ -4,11 +4,14 @@ import com.aciertoteam.common.interfaces.IAbstractEntity;
 import com.aciertoteam.common.model.Clock;
 import com.aciertoteam.common.repository.AbstractRepository;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.orm.hibernate3.SessionFactoryUtils;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -197,5 +200,49 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
 
     protected Date getCurrentDate() {
         return clock.getCurrentDate();
+    }
+
+    protected <T extends IAbstractEntity> List<T> executeWithPaging(String querySql, Pageable pageable) {
+        return executeWithPaging(querySql, pageable, null);
+    }
+
+    /**
+     * Executes query with paging parameters
+     * @param querySql query to execute
+     * @param pageable paging specification that can contain sort
+     * @return results in list
+     */
+    protected <T extends IAbstractEntity> List<T> executeWithPaging(String querySql, Pageable pageable, Params params) {
+        String sql = addSort(querySql, pageable);
+        Query query = getSession().createQuery(sql);
+        query.setFirstResult(pageable.getOffset());
+        query.setFetchSize(pageable.getPageSize());
+        addParams(params, query);
+        return query.list();
+    }
+
+    private void addParams(Params params, Query query) {
+        if (params != null) {
+            params.addToQuery(query);
+        }
+    }
+
+    private String addSort(String query, Pageable pageable) {
+        if (pageable.getSort() != null) {
+            return addOrderBy(query, pageable);
+        }
+        return query;
+    }
+
+    private String addOrderBy(String query, Pageable pageable) {
+        StringBuilder builder = new StringBuilder(query).append(" order by ");
+        for (Sort.Order order : pageable.getSort()) {
+            builder.append(addOrderByProperty(order)).append(" ");
+        }
+        return builder.toString();
+    }
+
+    private String addOrderByProperty(Sort.Order order) {
+        return String.format("%s %s", order.getProperty(), order.getDirection());
     }
 }

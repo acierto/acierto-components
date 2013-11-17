@@ -1,8 +1,10 @@
 package com.aciertoteam.common.repository;
 
-import java.util.List;
 import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.interfaces.IAbstractEntity;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
  * @author Bogdan Nechyporenko
@@ -11,7 +13,7 @@ public interface EntityRepository extends AbstractRepository<AbstractEntity> {
 
     /**
      * Returns the number of entities in the specified database.
-     *
+     * 
      * @param clazz
      * @return
      */
@@ -19,7 +21,7 @@ public interface EntityRepository extends AbstractRepository<AbstractEntity> {
 
     /**
      * Returns the entry from the specified table by specific field
-     *
+     * 
      * @param fieldName
      * @param value
      * @return
@@ -36,7 +38,7 @@ public interface EntityRepository extends AbstractRepository<AbstractEntity> {
 
     /**
      * Returns the entity of specified class by ID.
-     *
+     * 
      * @param clazz
      * @param id
      * @param <T>
@@ -46,7 +48,7 @@ public interface EntityRepository extends AbstractRepository<AbstractEntity> {
 
     /**
      * Deletes the entity of specified class by ID.
-     *
+     * 
      * @param clazz
      * @param id
      * @return
@@ -55,7 +57,7 @@ public interface EntityRepository extends AbstractRepository<AbstractEntity> {
 
     /**
      * Returns the entities of specified class by IDs.
-     *
+     * 
      * @param clazz
      * @param ids
      * @param <T>
@@ -65,7 +67,7 @@ public interface EntityRepository extends AbstractRepository<AbstractEntity> {
 
     /**
      * Returns all entities from the specified database
-     *
+     * 
      * @param clazz
      * @param <T>
      * @return
@@ -73,8 +75,18 @@ public interface EntityRepository extends AbstractRepository<AbstractEntity> {
     <T extends IAbstractEntity> List<T> findAll(Class<T> clazz);
 
     /**
+     * Returns all entities from the specified database with paging
+     * 
+     * @param clazz
+     * @param <T>
+     * @param pageable paging specification
+     * @return
+     */
+    <T extends IAbstractEntity> List<T> findAll(Class<T> clazz, Pageable pageable);
+
+    /**
      * Returns all entities from the specified database
-     *
+     * 
      * @param clazz
      * @param <T>
      * @return
