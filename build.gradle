@@ -136,6 +136,8 @@ subprojects {
                 "com.lowagie:itext:2.1.7",
                 "net.sf.json-lib:json-lib:2.2.1:jdk15",
                 "org.springframework.springfaces:springfaces-mvc:$springFacesVersion",
+                "org.springframework.data:spring-data-commons:1.6.0.M1",
+                "org.springframework.data:spring-data-commons-core:1.4.1.RELEASE",
                 "com.sun.el:el-ri:1.0",
                 "org.primefaces:primefaces:$primefacesVersion",
                 "org.primefaces.extensions:primefaces-extensions:$primefacesExtensionsVersion",
