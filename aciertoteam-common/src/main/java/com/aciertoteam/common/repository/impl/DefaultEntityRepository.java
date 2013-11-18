@@ -74,21 +74,24 @@ public class DefaultEntityRepository extends DefaultAbstractRepository<AbstractE
     @Override
     public <T extends IAbstractEntity> List<T> findAll(Class<T> clazz) {
         return getSession()
-                .createQuery("from " + clazz.getSimpleName() + " where validThru is null or validThru > :now")
+                .createQuery(
+                        String.format("from %s where validThru is null or validThru > :now", clazz.getSimpleName()))
                 .setParameter("now", clock.getCurrentDate()).list();
     }
 
     @Override
     public <T extends IAbstractEntity> List<T> findAll(Class<T> clazz, Pageable pageable) {
-        return executeWithPaging(String.format("from %s", clazz.getSimpleName()), pageable);
+        return executeWithPaging(
+                String.format("from %s where validThru is null or validThru > :now", clazz.getSimpleName()), pageable,
+                new Params("now", clock.getCurrentDate()));
     }
 
     @Override
     public <T extends IAbstractEntity> List<T> findAllOrderedByTimestamp(Class<T> clazz, boolean asc) {
         return getSession()
                 .createQuery(
-                        "from " + clazz.getSimpleName() + " where validThru is null or validThru > :now"
-                                + " order by timestamp " + (asc ? "asc" : "desc"))
+                        String.format("from %s where validThru is null or validThru > :now order by timestamp %s",
+                                clazz.getSimpleName(), asc ? "asc" : "desc"))
                 .setParameter("now", clock.getCurrentDate()).list();
     }
 }

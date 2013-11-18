@@ -1,5 +1,11 @@
 package com.aciertoteam.common.repository.impl;
 
+import java.lang.reflect.ParameterizedType;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import com.aciertoteam.common.interfaces.IAbstractEntity;
 import com.aciertoteam.common.model.Clock;
 import com.aciertoteam.common.repository.AbstractRepository;
@@ -14,13 +20,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.orm.hibernate3.SessionFactoryUtils;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.lang.reflect.ParameterizedType;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * @param <T> IAbstractEntity
@@ -216,7 +215,7 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
         String sql = addSort(querySql, pageable);
         Query query = getSession().createQuery(sql);
         query.setFirstResult(pageable.getOffset());
-        query.setFetchSize(pageable.getPageSize());
+        query.setMaxResults(pageable.getPageSize());
         addParams(params, query);
         return query.list();
     }

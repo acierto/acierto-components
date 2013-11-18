@@ -9,14 +9,21 @@ import javax.persistence.MappedSuperclass;
 import com.aciertoteam.common.interfaces.IAbstractEntity;
 import org.apache.commons.lang3.ObjectUtils;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
 
 /**
  * @author Bogdan Nechyporenko
  */
 @MappedSuperclass
+@FilterDef(name = AbstractEntity.VALID_THRU_FILTER, parameters = @ParamDef(name = "now", type = "date"))
+@Filter(name = "AbstractEntity.VALID_THRU_FILTER", condition = "(validThru is null or validThru > :now)")
 public abstract class AbstractEntity<T extends AbstractEntity> implements IAbstractEntity, Cloneable {
 
     private static final long serialVersionUID = 1L;
+
+    public static final String VALID_THRU_FILTER = "validThruFilter";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
