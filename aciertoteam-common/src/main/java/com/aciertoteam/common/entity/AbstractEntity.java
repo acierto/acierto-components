@@ -18,8 +18,8 @@ import java.util.Date;
  * @author Bogdan Nechyporenko
  */
 @MappedSuperclass
-@FilterDef(name = AbstractEntity.VALID_THRU_FILTER, parameters = @ParamDef(name = AbstractEntity.NOW_PARAM, type = "date"))
-@Filter(name = AbstractEntity.VALID_THRU_FILTER, condition = "(valid_thru is null or valid_thru > :now)")
+@FilterDef(name = AbstractEntity.VALID_THRU_FILTER, parameters = @ParamDef(name = AbstractEntity.NOW_PARAM, type = "date"), defaultCondition = "(valid_thru is null or valid_thru > :now)")
+@Filter(name = AbstractEntity.VALID_THRU_FILTER)
 public abstract class AbstractEntity<T extends AbstractEntity> implements IAbstractEntity, Cloneable {
 
     private static final long serialVersionUID = 1L;
