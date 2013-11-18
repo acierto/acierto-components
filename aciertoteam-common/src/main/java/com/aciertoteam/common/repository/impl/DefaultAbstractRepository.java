@@ -196,6 +196,8 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
         if (applyValidThruFilter) {
             session.enableFilter(AbstractEntity.VALID_THRU_FILTER).setParameter(AbstractEntity.NOW_PARAM,
                     getCurrentDate());
+        } else {
+            session.disableFilter(AbstractEntity.VALID_THRU_FILTER);
         }
         return session;
     }
