@@ -1,11 +1,6 @@
 package com.aciertoteam.common.repository.impl;
 
-import java.lang.reflect.ParameterizedType;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.interfaces.IAbstractEntity;
 import com.aciertoteam.common.model.Clock;
 import com.aciertoteam.common.repository.AbstractRepository;
@@ -20,6 +15,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.orm.hibernate3.SessionFactoryUtils;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.lang.reflect.ParameterizedType;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @param <T> IAbstractEntity
@@ -37,16 +39,12 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
     @Override
     @Transactional(readOnly = true)
     public List<T> getAll() {
-        return (List<T>) getSession().createCriteria(getClazz())
-                .add(Restrictions.or(Restrictions.isNull("validThru"), Restrictions.gt("validThru", getCurrentDate())))
-                .list();
+        return (List<T>) getSession().createCriteria(getClazz()).list();
     }
 
     @Override
     public List<T> getAll(int from, int to) {
-        return (List<T>) getSession().createCriteria(getClazz())
-                .add(Restrictions.or(Restrictions.isNull("validThru"), Restrictions.gt("validThru", getCurrentDate())))
-                .setFirstResult(from).setMaxResults(to - from).list();
+        return (List<T>) getSession().createCriteria(getClazz()).setFirstResult(from).setMaxResults(to - from).list();
     }
 
     @Override
@@ -81,12 +79,8 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
     }
 
     @Override
-    public T findByField(String fieldName, Object value, boolean includingDeleted) {
-        Criteria criteria = getSession().createCriteria(getClazz());
-        if (!includingDeleted) {
-            criteria = criteria.add(Restrictions.or(Restrictions.isNull("validThru"),
-                    Restrictions.gt("validThru", getCurrentDate())));
-        }
+    public T findByField(String fieldName, Object value, boolean onlyActive) {
+        Criteria criteria = getSession(onlyActive).createCriteria(getClazz());
         return (T) criteria.add(Restrictions.like(fieldName, value)).uniqueResult();
     }
 
@@ -194,7 +188,16 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
     }
 
     protected final Session getSession() {
-        return SessionFactoryUtils.getSession(sessionFactory, true);
+        return getSession(true);
+    }
+
+    protected final Session getSession(boolean applyValidThruFilter) {
+        Session session = SessionFactoryUtils.getSession(sessionFactory, true);
+        if (applyValidThruFilter) {
+            session.enableFilter(AbstractEntity.VALID_THRU_FILTER).setParameter(AbstractEntity.NOW_PARAM,
+                    getCurrentDate());
+        }
+        return session;
     }
 
     protected Date getCurrentDate() {

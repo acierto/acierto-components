@@ -1,11 +1,5 @@
 package com.aciertoteam.common.entity;
 
-import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 import com.aciertoteam.common.interfaces.IAbstractEntity;
 import org.apache.commons.lang3.ObjectUtils;
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -13,17 +7,25 @@ import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.ParamDef;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import java.util.Date;
+
 /**
  * @author Bogdan Nechyporenko
  */
 @MappedSuperclass
-@FilterDef(name = AbstractEntity.VALID_THRU_FILTER, parameters = @ParamDef(name = "now", type = "date"))
-@Filter(name = "AbstractEntity.VALID_THRU_FILTER", condition = "(validThru is null or validThru > :now)")
+@FilterDef(name = AbstractEntity.VALID_THRU_FILTER, parameters = @ParamDef(name = AbstractEntity.NOW_PARAM, type = "date"))
+@Filter(name = AbstractEntity.VALID_THRU_FILTER, condition = "(valid_thru is null or valid_thru > :now)")
 public abstract class AbstractEntity<T extends AbstractEntity> implements IAbstractEntity, Cloneable {
 
     private static final long serialVersionUID = 1L;
 
     public static final String VALID_THRU_FILTER = "validThruFilter";
+    public static final String NOW_PARAM = "now";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

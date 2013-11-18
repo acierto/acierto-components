@@ -2,12 +2,10 @@ package com.aciertoteam.common.repository.impl;
 
 import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.interfaces.IAbstractEntity;
-import com.aciertoteam.common.model.Clock;
 import com.aciertoteam.common.repository.EntityRepository;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,24 +20,14 @@ import java.util.List;
 @Transactional
 public class DefaultEntityRepository extends DefaultAbstractRepository<AbstractEntity> implements EntityRepository {
 
-    @Autowired
-    private Clock clock;
-
     public long count(Class clazz) {
-        return Long.valueOf(String.valueOf(getSession()
-                .createCriteria(clazz)
-                .add(Restrictions.or(Restrictions.isNull("validThru"),
-                        Restrictions.gt("validThru", clock.getCurrentDate()))).setProjection(Projections.rowCount())
+        return Long.valueOf(String.valueOf(getSession().createCriteria(clazz).setProjection(Projections.rowCount())
                 .uniqueResult()));
     }
 
     @Override
     public <T> T findByField(Class clazz, String fieldName, Object value) {
-        return (T) getSession()
-                .createCriteria(clazz)
-                .add(Restrictions.eq(fieldName, value))
-                .add(Restrictions.or(Restrictions.isNull("validThru"),
-                        Restrictions.gt("validThru", clock.getCurrentDate()))).uniqueResult();
+        return (T) getSession().createCriteria(clazz).add(Restrictions.eq(fieldName, value)).uniqueResult();
     }
 
     @Override
@@ -50,11 +38,7 @@ public class DefaultEntityRepository extends DefaultAbstractRepository<AbstractE
 
     @Override
     public <T> T findById(Class<T> clazz, Long id) {
-        return (T) getSession()
-                .createCriteria(clazz)
-                .add(Restrictions.eq("id", id))
-                .add(Restrictions.or(Restrictions.isNull("validThru"),
-                        Restrictions.gt("validThru", clock.getCurrentDate()))).uniqueResult();
+        return (T) getSession().createCriteria(clazz).add(Restrictions.eq("id", id)).uniqueResult();
     }
 
     public void deleteById(Class clazz, Long id) {
@@ -64,34 +48,22 @@ public class DefaultEntityRepository extends DefaultAbstractRepository<AbstractE
 
     @Override
     public <T> List<T> findByIds(Class<T> clazz, List<Long> ids) {
-        return getSession()
-                .createCriteria(clazz)
-                .add(Restrictions.in("id", ids))
-                .add(Restrictions.or(Restrictions.isNull("validThru"),
-                        Restrictions.gt("validThru", clock.getCurrentDate()))).list();
+        return getSession().createCriteria(clazz).add(Restrictions.in("id", ids)).list();
     }
 
     @Override
     public <T extends IAbstractEntity> List<T> findAll(Class<T> clazz) {
-        return getSession()
-                .createQuery(
-                        String.format("from %s where validThru is null or validThru > :now", clazz.getSimpleName()))
-                .setParameter("now", clock.getCurrentDate()).list();
+        return getSession().createQuery(String.format("from %s", clazz.getSimpleName())).list();
     }
 
     @Override
     public <T extends IAbstractEntity> List<T> findAll(Class<T> clazz, Pageable pageable) {
-        return executeWithPaging(
-                String.format("from %s where validThru is null or validThru > :now", clazz.getSimpleName()), pageable,
-                new Params("now", clock.getCurrentDate()));
+        return executeWithPaging(String.format("from %s", clazz.getSimpleName()), pageable);
     }
 
     @Override
     public <T extends IAbstractEntity> List<T> findAllOrderedByTimestamp(Class<T> clazz, boolean asc) {
-        return getSession()
-                .createQuery(
-                        String.format("from %s where validThru is null or validThru > :now order by timestamp %s",
-                                clazz.getSimpleName(), asc ? "asc" : "desc"))
-                .setParameter("now", clock.getCurrentDate()).list();
+        return getSession().createQuery(
+                String.format("from %s order by timestamp %s", clazz.getSimpleName(), asc ? "asc" : "desc")).list();
     }
 }
