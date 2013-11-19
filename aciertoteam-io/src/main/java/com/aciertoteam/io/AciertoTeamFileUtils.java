@@ -99,4 +99,27 @@ public final class AciertoTeamFileUtils {
         return files;
     }
 
+    public static List<String> scanJarFolder(InputStream jarFile, String folder) {
+        List<String> scannedFiles = new ArrayList<String>();
+        ZipInputStream zip = null;
+
+        try {
+            zip = new ZipInputStream(jarFile);
+            while (true) {
+                ZipEntry e = zip.getNextEntry();
+                if (e == null) break;
+                String name = e.getName();
+                if (name.startsWith(folder) && !e.isDirectory()) {
+                    scannedFiles.add(name.substring(folder.length()) + 1);
+                }
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        } finally {
+            IOUtils.closeQuietly(zip);
+            IOUtils.closeQuietly(jarFile);
+        }
+        return scannedFiles;
+    }
+
 }
