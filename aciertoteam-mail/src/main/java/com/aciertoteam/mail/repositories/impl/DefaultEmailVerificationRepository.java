@@ -39,7 +39,7 @@ public class DefaultEmailVerificationRepository extends DefaultAbstractRepositor
     @SuppressWarnings("unchecked")
     @Override
     public EmailVerification getByEmail(String email) {
-        List<EmailVerification> emailVerificationList = getSession()
+        List<EmailVerification> emailVerificationList = getSession(false)
                 .createQuery("from EmailVerification where email = :email order by timestamp desc")
                 .setParameter("email", email).list();
 
