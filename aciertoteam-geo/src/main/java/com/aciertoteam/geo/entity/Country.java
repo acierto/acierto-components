@@ -5,9 +5,17 @@ import com.aciertoteam.common.utils.ContractEqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.UniqueConstraint;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Bogdan Nechyporenko
@@ -21,6 +29,14 @@ public class Country extends AbstractEntity {
 
     @Column
     private String name;
+
+    @ManyToMany
+    @JoinTable(name = "COUNTRY_LANGUAGES",
+            joinColumns = @JoinColumn(name = "COUNTRY_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "LANGUAGE_ID", referencedColumnName = "ID"),
+            uniqueConstraints = @UniqueConstraint(name = "UNIQUE_COUNTRY_LANG", columnNames = {"COUNTRY_ID", "LANGUAGE_ID"}))
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.MERGE})
+    private Set<Language> languages = new HashSet<Language>();
 
     // TODO fix this, doesn't belong here
     private transient String ipAddress;
@@ -47,6 +63,14 @@ public class Country extends AbstractEntity {
 
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
+    }
+
+    public Set<Language> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(Set<Language> languages) {
+        this.languages = languages;
     }
 
     @Override
