@@ -110,7 +110,7 @@ public final class AciertoTeamFileUtils {
                 if (e == null) break;
                 String name = e.getName();
                 if (name.startsWith(folder) && !e.isDirectory()) {
-                    scannedFiles.add(name.substring(folder.length()) + 1);
+                    scannedFiles.add(name.substring(folder.length() + 1));
                 }
             }
         } catch (Exception e) {

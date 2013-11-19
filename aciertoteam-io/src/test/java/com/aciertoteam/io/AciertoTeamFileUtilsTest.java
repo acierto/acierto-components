@@ -34,7 +34,7 @@ public class AciertoTeamFileUtilsTest {
     @Test
     public void scanJarFolderTest() {
         InputStream jarStream = getClass().getResourceAsStream("/com/aciertoteam/io/aciertoteam-common-1.0.0-sources.jar");
-        List<String> actualFiles = AciertoTeamFileUtils.scanJarFolder(jarStream, "com/aciertoteam/common/i18n/");
+        List<String> actualFiles = AciertoTeamFileUtils.scanJarFolder(jarStream, "com/aciertoteam/common/i18n");
         List<String> expectedFiles = Arrays.asList("AciertoteamLocaleChangeInterceptor.java", "LocalizedMessageSource.java",
                 "MergedReloadableResourceBundleMessageSource.java", "UserSessionLocale.java", "UserSessionLocalHolder.java");
         assertTrue(actualFiles.containsAll(expectedFiles));
