@@ -15,10 +15,24 @@ import java.lang.annotation.Target;
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Updatable {
+public @interface BindEntity {
+
+    public static final String ALL = "*";
 
     /**
      * The name of the entity fields to bind parameters to.
      */
     String[] fields();
+
+    /**
+     * Specify required fields. Set {ALL} to make all fields required
+     * @return
+     */
+    String[] required() default ALL;
+
+    /**
+     * Set to false to restrict creation of entities
+     * @return
+     */
+    boolean allowCreate() default true;
 }

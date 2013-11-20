@@ -1,18 +1,17 @@
 package com.aciertoteam.common.entity;
 
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import com.aciertoteam.common.interfaces.IAbstractEntity;
 import org.apache.commons.lang3.ObjectUtils;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.ParamDef;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import java.util.Date;
 
 /**
  * @author Bogdan Nechyporenko
@@ -31,13 +30,13 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements IAbstr
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private Date validFrom;
 
     @Column
     private Date validThru;
 
-    @Column
+    @Column(nullable = false)
     private Date timestamp;
 
     @Column
