@@ -17,13 +17,13 @@ import javax.persistence.Entity;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Language extends AbstractEntity {
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String code;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String englishName;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String nativeLanguageName;
 
     Language() {

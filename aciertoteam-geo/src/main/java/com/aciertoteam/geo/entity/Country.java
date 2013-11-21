@@ -27,7 +27,7 @@ public class Country extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String name;
 
     @ManyToMany
