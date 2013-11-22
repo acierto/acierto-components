@@ -69,8 +69,12 @@ public class Country extends AbstractEntity {
         return languages;
     }
 
-    public void setLanguages(Set<Language> languages) {
+    void setLanguages(Set<Language> languages) {
         this.languages = languages;
+    }
+
+    public void addLanguages(Set<Language> languages) {
+        this.languages.addAll(languages);
     }
 
     @Override
