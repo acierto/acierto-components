@@ -10,6 +10,7 @@ import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -30,12 +31,10 @@ public class Country extends AbstractEntity {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "COUNTRY_LANGUAGES",
-            joinColumns = @JoinColumn(name = "COUNTRY_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "LANGUAGE_ID", referencedColumnName = "ID"),
-            uniqueConstraints = @UniqueConstraint(name = "UNIQUE_COUNTRY_LANG", columnNames = {"COUNTRY_ID", "LANGUAGE_ID"}))
-    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "COUNTRY_LANGUAGES", joinColumns = @JoinColumn(name = "COUNTRY_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "LANGUAGE_ID", referencedColumnName = "ID"), uniqueConstraints = @UniqueConstraint(name = "UNIQUE_COUNTRY_LANG", columnNames = {
+            "COUNTRY_ID", "LANGUAGE_ID" }))
+    @Cascade({ CascadeType.SAVE_UPDATE, CascadeType.MERGE })
     private Set<Language> languages = new HashSet<Language>();
 
     // TODO fix this, doesn't belong here

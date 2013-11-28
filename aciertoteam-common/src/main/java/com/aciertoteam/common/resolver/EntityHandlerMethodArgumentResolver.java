@@ -1,11 +1,12 @@
 package com.aciertoteam.common.resolver;
 
-import java.util.Arrays;
-import java.util.List;
 import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.service.EntityService;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
@@ -14,15 +15,24 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
+ * TODO create test
  * @author ishestiporov
  */
+@SuppressWarnings("unchecked")
 public class EntityHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(EntityHandlerMethodArgumentResolver.class);
 
     private static final String ID_PARAM = "id";
 
     @Autowired
     private EntityService entityService;
+
+    private EntityArgumentResolverPostProcessor postProcessor = new DefaultLoggingPostProcessor();
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -44,42 +54,90 @@ public class EntityHandlerMethodArgumentResolver implements HandlerMethodArgumen
     private Object resolveToEntity(MethodParameter parameter, NativeWebRequest webRequest, BindEntity bindEntity)
             throws IllegalAccessException {
 
-        AbstractEntity entity = getOrCreateEntity(parameter, webRequest, bindEntity);
-        List<String> requiredParams = Arrays.asList(bindEntity.required());
+        AbstractEntity entity = getOrCreateParentEntity(parameter, webRequest, bindEntity);
+
+        Map<String, AbstractEntity> associations = new HashMap<String, AbstractEntity>();
         for (String field : bindEntity.fields()) {
-            bindSingleProperty(webRequest, entity, requiredParams, field);
+            bindSingleProperty(webRequest, entity, bindEntity, field, associations);
         }
         return entity;
     }
 
-    private void bindSingleProperty(NativeWebRequest webRequest, AbstractEntity entity, List<String> requiredParams,
-            String field) throws IllegalAccessException {
+    private AbstractEntity getOrCreateParentEntity(MethodParameter parameter, NativeWebRequest webRequest,
+            BindEntity bindEntity) {
+        Class<? extends AbstractEntity> parameterType = (Class<? extends AbstractEntity>) parameter.getParameterType();
+        String idParam = webRequest.getParameter(ID_PARAM);
+        return getAndValidateEntity(idParam, parameterType, bindEntity);
+    }
+
+    private void bindSingleProperty(NativeWebRequest webRequest, AbstractEntity entity, BindEntity bindEntity,
+            String field, Map<String, AbstractEntity> associations) throws IllegalAccessException {
+
         String paramValue = webRequest.getParameter(field);
-        if (canBind(field, paramValue, requiredParams)) {
+        assertCanBind(field, paramValue, bindEntity.required());
+        if (field.contains(".")) {
+            bindAssociationProperty(webRequest, entity, bindEntity, field, associations);
+        } else {
             FieldUtils.writeField(entity, field, StringUtils.trim(paramValue), true);
         }
     }
 
-    private boolean canBind(String field, String paramValue, List<String> requiredParams) {
-        if (requiredParams.contains(field) && StringUtils.isBlank(paramValue)) {
-            throw new MissingRequestParameterException(field, "java.lang.String");
+    // TODO incapsulate logic into the object to avoid so many params 
+    private void bindAssociationProperty(NativeWebRequest webRequest, AbstractEntity parentEntity,
+            BindEntity bindEntity, String field, Map<String, AbstractEntity> associations)
+            throws IllegalAccessException {
+
+        String paramValue = webRequest.getParameter(field);
+        String[] splitField = StringUtils.split(field, ".");
+
+        String association = splitField[0];
+        Class<? extends AbstractEntity> associationClass = (Class<? extends AbstractEntity>) BeanUtils
+                .getPropertyDescriptor(parentEntity.getClass(), association).getPropertyType();
+        AbstractEntity child = associations.get(association);
+        if (child == null) {
+            child = getAndValidateEntity(webRequest.getParameter(String.format("%s.%s", association, ID_PARAM)),
+                    associationClass, bindEntity);
+            associations.put(association, child);
+            FieldUtils.writeField(parentEntity, association, child, true);
         }
-        return true;
+        String childField = splitField[1];
+        FieldUtils.writeField(child, childField, StringUtils.trim(paramValue), true);
     }
 
-    private <T extends AbstractEntity> T getOrCreateEntity(MethodParameter parameter, NativeWebRequest webRequest,
-            BindEntity bindEntity) {
-        Class<T> parameterType = (Class<T>) parameter.getParameterType();
-        String idParam = webRequest.getParameter(ID_PARAM);
-        if (StringUtils.isBlank(idParam)) {
-            return instantiateEntity(bindEntity, parameterType);
+    private void assertCanBind(String field, String paramValue, String[] requiredParams) {
+        if (isRequired(field, requiredParams) && StringUtils.isBlank(paramValue)) {
+            throw new MissingRequestParameterException(field, "java.lang.String");
         }
-        return entityService.findById(parameterType, Long.valueOf(idParam));
+    }
+
+    private boolean isRequired(String field, String[] requiredParams) {
+        return ArrayUtils.contains(requiredParams, BindEntity.ALL) || ArrayUtils.contains(requiredParams, field);
+    }
+
+    private <T extends AbstractEntity> T getAndValidateEntity(String id, Class<T> clazz, BindEntity bindEntity) {
+        T entity = getOrCreateEntity(id, clazz, bindEntity);
+        assertNotNull(entity, clazz, id);
+        postProcessor.process(entity);
+        return entity;
+    }
+
+    private <T extends AbstractEntity> T getOrCreateEntity(String id, Class<T> clazz, BindEntity bindEntity) {
+        if (StringUtils.isBlank(id)) {
+            return instantiateEntity(bindEntity, clazz);
+        }
+        return entityService.findById(clazz, Long.valueOf(id));
+    }
+
+    private void assertNotNull(AbstractEntity entity, Class clazz, String id) {
+        if (entity == null) {
+            LOGGER.error(String.format("Request for entity by id which does not exist. Class: %s, id: %s", clazz, id));
+            throw new IllegalArgumentException("Entity is not found");
+        }
     }
 
     private <T extends AbstractEntity> T instantiateEntity(BindEntity bindEntity, Class<T> parameterType) {
         if (bindEntity.allowCreate()) {
-            return BeanUtils.instantiate(parameterType);
+            return BeanUtils.instantiateClass(parameterType);
         }
         throw new MissingRequestParameterException(ID_PARAM, "java.lang.Long");
     }
@@ -96,5 +154,9 @@ public class EntityHandlerMethodArgumentResolver implements HandlerMethodArgumen
      */
     private BindEntity getParameterBindEntityAnnotation(MethodParameter parameter) {
         return parameter.getParameterAnnotation(BindEntity.class);
+    }
+
+    public void setPostProcessor(EntityArgumentResolverPostProcessor postProcessor) {
+        this.postProcessor = postProcessor;
     }
 }

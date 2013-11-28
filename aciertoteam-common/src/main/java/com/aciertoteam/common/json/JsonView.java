@@ -1,10 +1,5 @@
 package com.aciertoteam.common.json;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONSerializer;
@@ -13,6 +8,12 @@ import net.sf.json.filters.OrPropertyFilter;
 import net.sf.json.util.PropertyFilter;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.view.AbstractView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * @author Bogdan Nechyporenko
@@ -60,10 +61,12 @@ public class JsonView extends AbstractView {
     }
 
     /**
-     * Create a {@link JsonView} that renders using text/html content type, for uploads.
+     * Create a {@link JsonView} that renders using text/html content type, for
+     * uploads.
      * 
-     * @param fileUpload if this is a fileupload view or not, if true will use {@link #FILE_UPLOAD_CONTENT_TYPE} instead
-     *            of {@link #DEFAULT_JSON_CONTENT_TYPE}
+     * @param fileUpload if this is a fileupload view or not, if true will use
+     *        {@link #FILE_UPLOAD_CONTENT_TYPE} instead of
+     *        {@link #DEFAULT_JSON_CONTENT_TYPE}
      */
     public JsonView(boolean fileUpload) {
         this();
@@ -85,16 +88,19 @@ public class JsonView extends AbstractView {
     }
 
     /**
-     * Returns whether the JSONSerializer will ignore or not its internal property exclusions.
+     * Returns whether the JSONSerializer will ignore or not its internal
+     * property exclusions.
      */
     public boolean isIgnoreDefaultExcludes() {
         return jsonConfig.isIgnoreDefaultExcludes();
     }
 
     /**
-     * Returns whether the JSONSerializer will skip or not any BindingResult related keys on the model.
+     * Returns whether the JSONSerializer will skip or not any BindingResult
+     * related keys on the model.
      * <p/>
-     * Models in Spring >= 2.5 will cause an exception as they contain a BindingResult that cycles back.
+     * Models in Spring >= 2.5 will cause an exception as they contain a
+     * BindingResult that cycles back.
      */
     public boolean isSkipBindingResult() {
         return skipBindingResult;
@@ -112,7 +118,8 @@ public class JsonView extends AbstractView {
     }
 
     /**
-     * Sets whether the JSONSerializer will ignore or not its internal property exclusions.
+     * Sets whether the JSONSerializer will ignore or not its internal property
+     * exclusions.
      */
     public void setIgnoreDefaultExcludes(boolean ignoreDefaultExcludes) {
         jsonConfig.setIgnoreDefaultExcludes(ignoreDefaultExcludes);
@@ -132,9 +139,11 @@ public class JsonView extends AbstractView {
     }
 
     /**
-     * Sets whether the JSONSerializer will skip or not any BindingResult related keys on the model.
+     * Sets whether the JSONSerializer will skip or not any BindingResult
+     * related keys on the model.
      * <p/>
-     * Models in Spring >= 2.5 will cause an exception as they contain a BindingResult that cycles back.
+     * Models in Spring >= 2.5 will cause an exception as they contain a
+     * BindingResult that cycles back.
      */
     public void setSkipBindingResult(boolean skipBindingResult) {
         this.skipBindingResult = skipBindingResult;

@@ -41,10 +41,18 @@ public class EntityConverterFactory implements ConverterFactory<String, Abstract
         @Override
         public T convert(String source) {
             if (isLongValue(source)) {
-                return entityRepository.findById(clazz, Long.parseLong(source));
+                return getEntity(source);
             }
-            LOG.debug(String.format("Received empty id property for %s", clazz.getSimpleName()));
             return null;
+        }
+
+        private T getEntity(String source) {
+            T entity = entityRepository.findById(clazz, Long.parseLong(source));
+            if (entity == null) {
+                LOG.error(String.format("Cannot find entity %s by id %s", clazz, source));
+                throw new IllegalArgumentException("Cannot find entity by id");
+            }
+            return entity;
         }
 
         private boolean isLongValue(String source) {
