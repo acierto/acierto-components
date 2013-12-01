@@ -23,7 +23,7 @@ public class Language extends AbstractEntity {
     @Column(unique = true, nullable = false)
     private String englishName;
 
-    @Column(unique = true, nullable = false)
+    @Column//(unique = true, nullable = false)
     private String nativeLanguageName;
 
     Language() {
