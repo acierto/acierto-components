@@ -1,15 +1,16 @@
 package com.aciertoteam.common.json;
 
-import flexjson.JSONSerializer;
-import org.apache.commons.io.IOUtils;
+import org.codehaus.jackson.JsonEncoding;
+import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,35 +35,20 @@ public class CustomJsonView extends AbstractView {
     @Override
     protected void renderMergedOutputModel(Map model, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        String serialized = prepareSerializer().serialize(raw ? targetObject : getResultMap(targetObject));
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        IOUtils.write(serialized, out);
-        prepareResponse(request, response, out);
-        IOUtils.write(out.toByteArray(), response.getOutputStream());
+        ObjectMapper mapper = createMapper();
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream(FileCopyUtils.BUFFER_SIZE);
+        JsonGenerator generator = mapper.getJsonFactory().createJsonGenerator(bos, JsonEncoding.UTF8);
+        mapper.writeValue(generator, raw ? targetObject : getResultMap(targetObject));
+        prepareResponse(request, response, bos);
+        FileCopyUtils.copy(bos.toByteArray(), response.getOutputStream());
     }
 
-    private JSONSerializer prepareSerializer() {
-        JSONSerializer jsonSerializer = new JSONSerializer().exclude("*.class").include("data.id", "success.*")
-                .include(getErichedAttributes());
-        if (!includeAll()) {
-            jsonSerializer.exclude("*");
-        }
-        return jsonSerializer;
-    }
-
-    private boolean includeAll() {
-        return attributes != null && attributes.length > 0 && attributes[0].equals("*");
-    }
-
-    private String[] getErichedAttributes() {
-        if (!raw && attributes != null) {
-            List<String> enriched = new ArrayList<String>();
-            for (String attribute : attributes) {
-                enriched.add("data." + attribute);
-            }
-            return enriched.toArray(new String[enriched.size()]);
-        }
-        return attributes;
+    private ObjectMapper createMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.getSerializationConfig().setDateFormat(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss"));
+        mapper.getSerializationConfig().setIntrospector(new AdvancedClassIntrospector(attributes));
+        return mapper;
     }
 
     private Map<String, Object> getResultMap(Object callResult) {
@@ -73,7 +59,7 @@ public class CustomJsonView extends AbstractView {
     }
 
     private static void prepareResponse(HttpServletRequest request, HttpServletResponse response,
-            ByteArrayOutputStream bos) {
+                                        ByteArrayOutputStream bos) {
         String contentType = request.getContentType();
         if (contentType != null && contentType.startsWith("multipart/form-data")) {
             response.setContentType("text/html; charset=UTF-8");
