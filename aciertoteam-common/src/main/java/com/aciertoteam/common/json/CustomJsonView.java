@@ -35,7 +35,7 @@ public class CustomJsonView extends AbstractView {
     @Override
     protected void renderMergedOutputModel(Map model, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        ObjectMapper mapper = createMapper();
+        ObjectMapper mapper = createMapper(targetObject.getClass());
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream(FileCopyUtils.BUFFER_SIZE);
         JsonGenerator generator = mapper.getJsonFactory().createJsonGenerator(bos, JsonEncoding.UTF8);
@@ -44,10 +44,10 @@ public class CustomJsonView extends AbstractView {
         FileCopyUtils.copy(bos.toByteArray(), response.getOutputStream());
     }
 
-    private ObjectMapper createMapper() {
+    private ObjectMapper createMapper(Class clazz) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.getSerializationConfig().setDateFormat(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss"));
-        mapper.getSerializationConfig().setIntrospector(new AdvancedClassIntrospector(attributes));
+        mapper.getSerializationConfig().setIntrospector(new AdvancedClassIntrospector(clazz, attributes));
         return mapper;
     }
 
