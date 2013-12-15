@@ -1,6 +1,7 @@
 package com.aciertoteam.geo.entity;
 
 import com.aciertoteam.common.entity.AbstractEntity;
+import com.aciertoteam.common.i18n.LocalizedMessageSource;
 import com.aciertoteam.common.utils.ContractEqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
@@ -89,6 +90,10 @@ public class Country extends AbstractEntity {
     @Override
     public String toString() {
         return "Country{" + "name='" + name + '\'' + '}';
+    }
+
+    public String getLabel(LocalizedMessageSource messageSource) {
+        return messageSource.getMessage(getName());
     }
 
 }
