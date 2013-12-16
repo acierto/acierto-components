@@ -1,7 +1,6 @@
 package com.aciertoteam.geo.entity;
 
 import com.aciertoteam.common.entity.AbstractEntity;
-import com.aciertoteam.common.i18n.LocalizedMessageSource;
 import com.aciertoteam.common.utils.ContractEqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
@@ -34,8 +33,8 @@ public class Country extends AbstractEntity {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "COUNTRY_LANGUAGES", joinColumns = @JoinColumn(name = "COUNTRY_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "LANGUAGE_ID", referencedColumnName = "ID"), uniqueConstraints = @UniqueConstraint(name = "UNIQUE_COUNTRY_LANG", columnNames = {
-            "COUNTRY_ID", "LANGUAGE_ID" }))
-    @Cascade({ CascadeType.SAVE_UPDATE, CascadeType.MERGE })
+            "COUNTRY_ID", "LANGUAGE_ID"}))
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.MERGE})
     private Set<Language> languages = new HashSet<Language>();
 
     // TODO fix this, doesn't belong here
@@ -90,10 +89,6 @@ public class Country extends AbstractEntity {
     @Override
     public String toString() {
         return "Country{" + "name='" + name + '\'' + '}';
-    }
-
-    public String getLabel(LocalizedMessageSource messageSource) {
-        return messageSource.getMessage(getName());
     }
 
 }
