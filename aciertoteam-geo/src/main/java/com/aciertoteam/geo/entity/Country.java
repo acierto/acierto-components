@@ -31,6 +31,9 @@ public class Country extends AbstractEntity {
     @Column(unique = true, nullable = false)
     private String name;
 
+    @Column
+    private boolean supported;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "COUNTRY_LANGUAGES", joinColumns = @JoinColumn(name = "COUNTRY_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "LANGUAGE_ID", referencedColumnName = "ID"), uniqueConstraints = @UniqueConstraint(name = "UNIQUE_COUNTRY_LANG", columnNames = {
             "COUNTRY_ID", "LANGUAGE_ID"}))
@@ -74,6 +77,14 @@ public class Country extends AbstractEntity {
 
     public void addLanguages(Set<Language> languages) {
         this.languages.addAll(languages);
+    }
+
+    public void markAsSupported() {
+        this.supported = true;
+    }
+
+    public boolean isSupported() {
+        return supported;
     }
 
     @Override
