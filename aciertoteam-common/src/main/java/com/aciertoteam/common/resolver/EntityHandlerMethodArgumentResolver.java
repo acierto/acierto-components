@@ -82,7 +82,7 @@ public class EntityHandlerMethodArgumentResolver implements HandlerMethodArgumen
         }
     }
 
-    // TODO incapsulate logic into the object to avoid so many params 
+    // TODO encapsulate logic into the object to avoid so many params
     private void bindAssociationProperty(NativeWebRequest webRequest, AbstractEntity parentEntity,
             BindEntity bindEntity, String field, Map<String, AbstractEntity> associations)
             throws IllegalAccessException {

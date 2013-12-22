@@ -22,7 +22,7 @@ public @interface BindEntity {
     /**
      * The name of the entity fields to bind parameters to.
      */
-    String[] fields();
+    String[] fields() default ALL;
 
     /**
      * Specify required fields. Set {ALL} to make all fields required
