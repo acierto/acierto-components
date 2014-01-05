@@ -15,23 +15,27 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.math.BigDecimal;
+import java.util.Currency;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * TODO create test
+ *
  * @author ishestiporov
  */
 @SuppressWarnings("unchecked")
 public class EntityHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EntityHandlerMethodArgumentResolver.class);
-
     private static final String ID_PARAM = "id";
-
     @Autowired
     private EntityService entityService;
-
     private EntityArgumentResolverPostProcessor postProcessor = new DefaultLoggingPostProcessor();
 
     @Override
@@ -42,7 +46,7 @@ public class EntityHandlerMethodArgumentResolver implements HandlerMethodArgumen
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
-            NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+                                  NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 
         BindEntity bindEntity = getParameterBindEntityAnnotation(parameter);
         if (bindEntity != null) {
@@ -57,34 +61,76 @@ public class EntityHandlerMethodArgumentResolver implements HandlerMethodArgumen
         AbstractEntity entity = getOrCreateParentEntity(parameter, webRequest, bindEntity);
 
         Map<String, AbstractEntity> associations = new HashMap<String, AbstractEntity>();
-        for (String field : bindEntity.fields()) {
-            bindSingleProperty(webRequest, entity, bindEntity, field, associations);
-        }
+        bindProperties(associations, entity, webRequest, bindEntity, bindEntity.fields());
         return entity;
     }
 
+    private void bindProperties(Map<String, AbstractEntity> associations, AbstractEntity entity, NativeWebRequest
+            webRequest, BindEntity bindEntity, String... fields) throws IllegalAccessException {
+
+        for (String field : fields) {
+            bindSingleProperty(webRequest, entity, bindEntity, field, associations);
+        }
+    }
+
     private AbstractEntity getOrCreateParentEntity(MethodParameter parameter, NativeWebRequest webRequest,
-            BindEntity bindEntity) {
+                                                   BindEntity bindEntity) {
         Class<? extends AbstractEntity> parameterType = (Class<? extends AbstractEntity>) parameter.getParameterType();
         String idParam = webRequest.getParameter(ID_PARAM);
         return getAndValidateEntity(idParam, parameterType, bindEntity);
     }
 
     private void bindSingleProperty(NativeWebRequest webRequest, AbstractEntity entity, BindEntity bindEntity,
-            String field, Map<String, AbstractEntity> associations) throws IllegalAccessException {
+                                    String field, Map<String, AbstractEntity> associations) throws IllegalAccessException {
 
         String paramValue = webRequest.getParameter(field);
         assertCanBind(field, paramValue, bindEntity.required());
         if (field.contains(".")) {
             bindAssociationProperty(webRequest, entity, bindEntity, field, associations);
         } else {
-            FieldUtils.writeField(entity, field, StringUtils.trim(paramValue), true);
+            if ("*".equals(field)) {
+                bindProperties(associations, entity, webRequest, bindEntity, getFieldNames(entity));
+            } else {
+                Object value = getValue(entity, field, paramValue);
+                FieldUtils.writeField(entity, field, value, true);
+            }
         }
+    }
+
+    private Object getValue(AbstractEntity entity, String fieldName, String paramValue) {
+        String value = StringUtils.trim(paramValue);
+        Class fieldType = getFieldType(entity, fieldName);
+        if (BigDecimal.class.isAssignableFrom(fieldType)) {
+            return new BigDecimal(value);
+        } else if (fieldType == Integer.TYPE) {
+            return Integer.valueOf(value);
+        } else if (fieldType == Double.TYPE) {
+            return Double.valueOf(value);
+        } else if (fieldType == Boolean.TYPE) {
+            return Boolean.valueOf(value);
+        } else if (Currency.class.isAssignableFrom(fieldType)) {
+            return Currency.getInstance(value);
+        }
+        return value;
+    }
+
+    private Class getFieldType(AbstractEntity entity, String fieldName) {
+        return FieldUtils.getField(entity.getClass(), fieldName, true).getType();
+    }
+
+    private String[] getFieldNames(AbstractEntity entity) {
+        Set<String> fieldNames = new HashSet<String>();
+        for (Field field : entity.getClass().getDeclaredFields()) {
+            if (!field.isSynthetic() && !Modifier.isStatic(field.getModifiers())) {
+                fieldNames.add(field.getName());
+            }
+        }
+        return fieldNames.toArray(new String[fieldNames.size()]);
     }
 
     // TODO encapsulate logic into the object to avoid so many params
     private void bindAssociationProperty(NativeWebRequest webRequest, AbstractEntity parentEntity,
-            BindEntity bindEntity, String field, Map<String, AbstractEntity> associations)
+                                         BindEntity bindEntity, String field, Map<String, AbstractEntity> associations)
             throws IllegalAccessException {
 
         String paramValue = webRequest.getParameter(field);
@@ -148,7 +194,7 @@ public class EntityHandlerMethodArgumentResolver implements HandlerMethodArgumen
      * {@link MethodParameter} for {@link BindEntity} present which will tell
      * for which parameters to search, which fields are required and whether
      * entity creation is allowed.
-     * 
+     *
      * @param parameter the {@link MethodParameter} potentially qualified.
      * @return
      */
