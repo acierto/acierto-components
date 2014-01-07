@@ -2,6 +2,7 @@ package com.aciertoteam.common.resolver;
 
 import com.aciertoteam.common.entity.AbstractEntity;
 import com.aciertoteam.common.service.EntityService;
+import com.aciertoteam.common.utils.StringToObjectConverter;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -17,8 +18,6 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.math.BigDecimal;
-import java.util.Currency;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -88,34 +87,15 @@ public class EntityHandlerMethodArgumentResolver implements HandlerMethodArgumen
         if (field.contains(".")) {
             bindAssociationProperty(webRequest, entity, bindEntity, field, associations);
         } else {
-            if ("*".equals(field)) {
+            if (BindEntity.ALL.equals(field)) {
                 bindProperties(associations, entity, webRequest, bindEntity, getFieldNames(entity));
+            } else if (BindEntity.COPY.equals(field)) {
+                bindProperties(associations, entity, webRequest, bindEntity, bindEntity.required());
             } else {
-                Object value = getValue(entity, field, paramValue);
+                Object value = StringToObjectConverter.getValue(entity, field, paramValue);
                 FieldUtils.writeField(entity, field, value, true);
             }
         }
-    }
-
-    private Object getValue(AbstractEntity entity, String fieldName, String paramValue) {
-        String value = StringUtils.trim(paramValue);
-        Class fieldType = getFieldType(entity, fieldName);
-        if (BigDecimal.class.isAssignableFrom(fieldType)) {
-            return new BigDecimal(value);
-        } else if (fieldType == Integer.TYPE) {
-            return Integer.valueOf(value);
-        } else if (fieldType == Double.TYPE) {
-            return Double.valueOf(value);
-        } else if (fieldType == Boolean.TYPE) {
-            return Boolean.valueOf(value);
-        } else if (Currency.class.isAssignableFrom(fieldType)) {
-            return Currency.getInstance(value);
-        }
-        return value;
-    }
-
-    private Class getFieldType(AbstractEntity entity, String fieldName) {
-        return FieldUtils.getField(entity.getClass(), fieldName, true).getType();
     }
 
     private String[] getFieldNames(AbstractEntity entity) {

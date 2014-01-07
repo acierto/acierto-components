@@ -20,6 +20,11 @@ public @interface BindEntity {
     public static final String ALL = "*";
 
     /**
+     * Uses only fields provided in required fields
+     */
+    public static final String COPY = "!";
+
+    /**
      * The name of the entity fields to bind parameters to.
      */
     String[] fields() default ALL;
