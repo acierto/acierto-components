@@ -1,12 +1,14 @@
 package com.aciertoteam.common.utils;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import org.apache.log4j.Logger;
 
 /**
  * @author Bogdan Nechyporenko
@@ -20,24 +22,21 @@ public final class SerializeUtil {
     }
 
     public static byte[] write(Serializable serializable) {
+        byte[] result = new byte[0];
         ByteArrayOutputStream baos = null;
         ObjectOutputStream oout = null;
         try {
             baos = new ByteArrayOutputStream();
             oout = new ObjectOutputStream(baos);
             oout.writeObject(serializable);
+            result = baos.toByteArray();
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);
         } finally {
-            try {
-                if (oout != null) {
-                    oout.close();
-                }
-            } catch (IOException e) {
-                LOG.error(e.getMessage(), e);
-            }
+            IOUtils.closeQuietly(oout);
+            IOUtils.closeQuietly(baos);
         }
-        return baos.toByteArray();
+        return result;
     }
 
     public static Serializable read(byte[] bytes) {
@@ -54,13 +53,7 @@ public final class SerializeUtil {
         } catch (ClassNotFoundException e) {
             LOG.error(e.getMessage(), e);
         } finally {
-            try {
-                if (ois != null) {
-                    ois.close();
-                }
-            } catch (IOException e) {
-                LOG.error(e.getMessage(), e);
-            }
+            IOUtils.closeQuietly(ois);
         }
         return null;
     }
