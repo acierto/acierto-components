@@ -803,6 +803,7 @@
     </modules>
 
     <properties>
+        <aciertoteam-version>1.0.1</aciertoteam-version>
         <camel-version>2.10.3</camel-version>
         <spring-version>3.2.3.RELEASE</spring-version>
         <spring-security-version>3.1.1.RELEASE</spring-security-version>
