@@ -1,8 +1,11 @@
 package com.aciertoteam.common.utils;
 
 import com.aciertoteam.common.entity.AbstractEntity;
+import com.aciertoteam.common.service.EntityService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Currency;
@@ -10,9 +13,13 @@ import java.util.Currency;
 /**
  * @author Bogdan Nechyporenko
  */
+@Component
 public class StringToObjectConverter {
 
-    public static Object getValue(AbstractEntity entity, String fieldName, String paramValue) {
+    @Autowired
+    private EntityService entityService;
+
+    public Object getValue(AbstractEntity entity, String fieldName, String paramValue) {
         String value = StringUtils.trim(paramValue);
         Class fieldType = getFieldType(entity, fieldName);
         if (BigDecimal.class.isAssignableFrom(fieldType)) {
@@ -27,6 +34,8 @@ public class StringToObjectConverter {
             return Currency.getInstance(value);
         } else if (Enum.class.isAssignableFrom(fieldType)) {
             return EnumCreator.getEnum(fieldType.getName(), paramValue.toUpperCase());
+        } else if (AbstractEntity.class.isAssignableFrom(fieldType)) {
+            return entityService.findById(fieldType, Long.valueOf(paramValue));
         }
         return value;
     }

@@ -35,6 +35,8 @@ public class EntityHandlerMethodArgumentResolver implements HandlerMethodArgumen
     private static final String ID_PARAM = "id";
     @Autowired
     private EntityService entityService;
+    @Autowired
+    private StringToObjectConverter stringToObjectConverter;
     private EntityArgumentResolverPostProcessor postProcessor = new DefaultLoggingPostProcessor();
 
     @Override
@@ -92,7 +94,7 @@ public class EntityHandlerMethodArgumentResolver implements HandlerMethodArgumen
             } else if (BindEntity.COPY.equals(field)) {
                 bindProperties(associations, entity, webRequest, bindEntity, bindEntity.required());
             } else {
-                Object value = StringToObjectConverter.getValue(entity, field, paramValue);
+                Object value = stringToObjectConverter.getValue(entity, field, paramValue);
                 FieldUtils.writeField(entity, field, value, true);
             }
         }
