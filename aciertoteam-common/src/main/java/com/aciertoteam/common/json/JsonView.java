@@ -195,7 +195,7 @@ public class JsonView extends AbstractView {
     @SuppressWarnings("unchecked")
     protected void renderMergedOutputModel(Map model, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        if (!coerceModelToArray) {
+        if (!coerceModelToArray && !model.containsKey("success")) {
             model.put("success", success);
         }
         response.setContentType(getContentType());
