@@ -84,8 +84,8 @@ public class EntityHandlerMethodArgumentResolver implements HandlerMethodArgumen
     private void bindSingleProperty(NativeWebRequest webRequest, AbstractEntity entity, BindEntity bindEntity,
                                     String field, Map<String, AbstractEntity> associations) throws IllegalAccessException {
 
-        String paramValue = webRequest.getParameter(field);
-        assertCanBind(field, paramValue, bindEntity.required());
+        String[] paramValues = webRequest.getParameterValues(field);
+        assertCanBind(field, paramValues, bindEntity.required());
         if (field.contains(".")) {
             bindAssociationProperty(webRequest, entity, bindEntity, field, associations);
         } else {
@@ -94,7 +94,7 @@ public class EntityHandlerMethodArgumentResolver implements HandlerMethodArgumen
             } else if (BindEntity.COPY.equals(field)) {
                 bindProperties(associations, entity, webRequest, bindEntity, bindEntity.required());
             } else {
-                Object value = stringToObjectConverter.getValue(entity, field, paramValue);
+                Object value = stringToObjectConverter.getValue(entity, field, paramValues);
                 FieldUtils.writeField(entity, field, value, true);
             }
         }
@@ -132,8 +132,11 @@ public class EntityHandlerMethodArgumentResolver implements HandlerMethodArgumen
         FieldUtils.writeField(child, childField, StringUtils.trim(paramValue), true);
     }
 
-    private void assertCanBind(String field, String paramValue, String[] requiredParams) {
-        if (isRequired(field, requiredParams) && StringUtils.isBlank(paramValue)) {
+    private void assertCanBind(String field, String[] paramValues, String[] requiredParams) {
+        int length = paramValues.length;
+        if (length == 0) {
+            throw new MissingRequestParameterException(field, "java.lang.String");
+        } else if (length == 1 && isRequired(field, requiredParams) && StringUtils.isBlank(paramValues[0])) {
             throw new MissingRequestParameterException(field, "java.lang.String");
         }
     }
