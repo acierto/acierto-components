@@ -11,6 +11,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.List;
@@ -26,17 +27,17 @@ public class StringToObjectConverter {
     private EntityService entityService;
 
     public Object getValue(AbstractEntity entity, String fieldName, String[] paramValues) {
-        if (paramValues.length == 1) {
+        Class fieldType = getFieldType(entity, fieldName);
+        if (!Collection.class.isAssignableFrom(fieldType)) {
             return getSingleValue(entity, fieldName, paramValues[0], false);
         } else {
-            Class collectionFieldType = getFieldType(entity, fieldName);
-            if (List.class.isAssignableFrom(collectionFieldType)) {
+            if (List.class.isAssignableFrom(fieldType)) {
                 List<Object> list = new ArrayList<Object>();
                 for (String paramValue: paramValues) {
                     list.add(getSingleValue(entity, fieldName, paramValue, true));
                 }
                 return list;
-            } else if (Set.class.isAssignableFrom(collectionFieldType)) {
+            } else if (Set.class.isAssignableFrom(fieldType)) {
                 Set<Object> set = new HashSet<Object>();
                 for (String paramValue: paramValues) {
                     set.add(getSingleValue(entity, fieldName, paramValue, true));
