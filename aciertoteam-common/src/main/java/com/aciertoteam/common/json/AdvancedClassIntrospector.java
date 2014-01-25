@@ -1,10 +1,5 @@
 package com.aciertoteam.common.json;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.introspect.AnnotatedClass;
@@ -12,6 +7,11 @@ import org.codehaus.jackson.map.introspect.BasicBeanDescription;
 import org.codehaus.jackson.map.introspect.BasicClassIntrospector;
 import org.codehaus.jackson.map.type.TypeFactory;
 import org.springframework.beans.BeanUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Bogdan Nechyporenko
@@ -21,11 +21,13 @@ public class AdvancedClassIntrospector extends BasicClassIntrospector {
     private Map<Class, List<String>> classAttributesMap = new HashMap<Class, List<String>>();
 
     public AdvancedClassIntrospector(Class clazz, String[] attributes) {
-        for (String attribute : attributes) {
-            if (attribute.contains(".")) {
-                populateChildClassAttribute(clazz, classAttributesMap, attribute);
-            } else {
-                addAttribute(classAttributesMap, clazz, attribute);
+        if (clazz != null) {
+            for (String attribute : attributes) {
+                if (attribute.contains(".")) {
+                    populateChildClassAttribute(clazz, classAttributesMap, attribute);
+                } else {
+                    addAttribute(classAttributesMap, clazz, attribute);
+                }
             }
         }
     }
@@ -39,13 +41,13 @@ public class AdvancedClassIntrospector extends BasicClassIntrospector {
         ac.resolveFields(false);
 
         List<String> attributes = classAttributesMap.get(clazz);
-        String[] attrs = attributes == null ? new String[]{"*"} : attributes.toArray(new String[attributes.size()]);
+        String[] attrs = attributes == null ? new String[] { "*" } : attributes.toArray(new String[attributes.size()]);
 
         return new AdvancedBeanDescription(TypeFactory.type(clazz), ac, ai, attrs);
     }
 
     private void populateChildClassAttribute(Class<?> parentClass, Map<Class, List<String>> classAttributesMap,
-                                             String attribute) {
+            String attribute) {
         String[] attrs = attribute.split("\\.");
         Class<?> childClassType = BeanUtils.getPropertyDescriptor(parentClass, attrs[0]).getPropertyType();
         addAttribute(classAttributesMap, childClassType, attrs[1]);
