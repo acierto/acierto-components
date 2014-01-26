@@ -1,5 +1,6 @@
 package com.aciertoteam.common.json;
 
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.JsonEncoding;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +24,7 @@ public class CustomJsonView extends AbstractView {
     private String[] attributes;
     private Object targetObject;
     private Class targetObjectClass;
+    private String encloseName;
     private boolean raw;
     private boolean noDefaultIncludes;
 
@@ -42,6 +45,15 @@ public class CustomJsonView extends AbstractView {
         this.raw = raw;
         this.noDefaultIncludes = noDefaultIncludes;
         setTargetObjectClass(result);
+    }
+
+    private CustomJsonView(Object result, String encloseName, String... attributes) {
+        this(result, true, true, attributes);
+        this.encloseName = encloseName;
+    }
+
+    public static CustomJsonView createEnclosedCollectionView(Object result, String encloseName, String... attributes) {
+        return new CustomJsonView(result, encloseName, attributes);
     }
 
     private static void prepareResponse(HttpServletRequest request, HttpServletResponse response,
@@ -73,7 +85,15 @@ public class CustomJsonView extends AbstractView {
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream(FileCopyUtils.BUFFER_SIZE);
         JsonGenerator generator = mapper.getJsonFactory().createJsonGenerator(bos, JsonEncoding.UTF8);
-        mapper.writeValue(generator, raw ? targetObject : getResultMap(targetObject));
+
+        if (!raw) {
+            mapper.writeValue(generator, getResultMap(targetObject));
+        } else if (StringUtils.isNotBlank(encloseName)) {
+            mapper.writeValue(generator, Collections.singletonMap(encloseName, targetObject));
+        } else {
+            mapper.writeValue(generator, targetObject);
+        }
+
         prepareResponse(request, response, bos);
         FileCopyUtils.copy(bos.toByteArray(), response.getOutputStream());
     }
