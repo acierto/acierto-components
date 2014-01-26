@@ -20,14 +20,15 @@ public class AdvancedClassIntrospector extends BasicClassIntrospector {
 
     private Map<Class, List<String>> classAttributesMap = new HashMap<Class, List<String>>();
 
-    public AdvancedClassIntrospector(Class clazz, String[] attributes) {
-        if (clazz != null) {
-            for (String attribute : attributes) {
-                if (attribute.contains(".")) {
-                    populateChildClassAttribute(clazz, classAttributesMap, attribute);
-                } else {
-                    addAttribute(classAttributesMap, clazz, attribute);
-                }
+    private boolean noDefaultIncludes;
+
+    public AdvancedClassIntrospector(Class clazz, boolean noDefaultIncludes, String[] attributes) {
+        this.noDefaultIncludes = noDefaultIncludes;
+        for (String attribute : attributes) {
+            if (attribute.contains(".")) {
+                populateChildClassAttribute(clazz, classAttributesMap, attribute);
+            } else {
+                addAttribute(classAttributesMap, clazz, attribute);
             }
         }
     }
@@ -41,13 +42,13 @@ public class AdvancedClassIntrospector extends BasicClassIntrospector {
         ac.resolveFields(false);
 
         List<String> attributes = classAttributesMap.get(clazz);
-        String[] attrs = attributes == null ? new String[] { "*" } : attributes.toArray(new String[attributes.size()]);
+        String[] attrs = attributes == null ? new String[]{"*"} : attributes.toArray(new String[attributes.size()]);
 
-        return new AdvancedBeanDescription(TypeFactory.type(clazz), ac, ai, attrs);
+        return new AdvancedBeanDescription(TypeFactory.type(clazz), noDefaultIncludes, ac, ai, attrs);
     }
 
     private void populateChildClassAttribute(Class<?> parentClass, Map<Class, List<String>> classAttributesMap,
-            String attribute) {
+                                             String attribute) {
         String[] attrs = attribute.split("\\.");
         Class<?> childClassType = BeanUtils.getPropertyDescriptor(parentClass, attrs[0]).getPropertyType();
         addAttribute(classAttributesMap, childClassType, attrs[1]);

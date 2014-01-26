@@ -17,21 +17,26 @@ import java.util.Map;
 public class AdvancedBeanDescription extends BasicBeanDescription {
 
     private String[] attributes;
+    private boolean noDefaultIncludes;
 
-    public AdvancedBeanDescription(JavaType type, AnnotatedClass ac, AnnotationIntrospector ai, String[] attributes) {
+    public AdvancedBeanDescription(JavaType type, boolean noDefaultIncludes, AnnotatedClass ac, AnnotationIntrospector ai, String[] attributes) {
         super(type, ac, ai);
         this.attributes = attributes;
+        this.noDefaultIncludes = noDefaultIncludes;
     }
 
     @Override
     public LinkedHashMap<String, AnnotatedMethod> findGetters(VisibilityChecker<?> visibilityChecker,
-            Collection<String> ignoredProperties) {
+                                                              Collection<String> ignoredProperties) {
 
         LinkedHashMap<String, AnnotatedMethod> getters = super.findGetters(visibilityChecker, ignoredProperties);
         LinkedHashMap<String, AnnotatedMethod> gettersFiltered = new LinkedHashMap<String, AnnotatedMethod>();
 
-        addProperty(getters, gettersFiltered, "id");
-        addProperty(getters, gettersFiltered, "name");
+        if (!noDefaultIncludes) {
+            addProperty(getters, gettersFiltered, "id");
+            addProperty(getters, gettersFiltered, "name");
+        }
+
         if (attributes != null) {
             if (attributes.length == 1 && "*".equals(attributes[0])) {
                 return getters;
@@ -44,7 +49,7 @@ public class AdvancedBeanDescription extends BasicBeanDescription {
     }
 
     private void addProperty(Map<String, AnnotatedMethod> getters, Map<String, AnnotatedMethod> gettersFiltered,
-            String propertyName) {
+                             String propertyName) {
         if (getters.containsKey(propertyName)) {
             gettersFiltered.put(propertyName, getters.get(propertyName));
         }

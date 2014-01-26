@@ -23,6 +23,7 @@ public class CustomJsonView extends AbstractView {
     private Object targetObject;
     private Class targetObjectClass;
     private boolean raw;
+    private boolean noDefaultIncludes;
 
     public CustomJsonView(Object result, String... attributes) {
         this(result, false, attributes);
@@ -32,6 +33,14 @@ public class CustomJsonView extends AbstractView {
         this.attributes = attributes;
         this.targetObject = result;
         this.raw = raw;
+        setTargetObjectClass(result);
+    }
+
+    public CustomJsonView(Object result, boolean raw, boolean noDefaultIncludes, String... attributes) {
+        this.attributes = attributes;
+        this.targetObject = result;
+        this.raw = raw;
+        this.noDefaultIncludes = noDefaultIncludes;
         setTargetObjectClass(result);
     }
 
@@ -72,7 +81,7 @@ public class CustomJsonView extends AbstractView {
     private ObjectMapper createMapper(Class clazz) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.getSerializationConfig().setDateFormat(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss"));
-        mapper.getSerializationConfig().setIntrospector(new AdvancedClassIntrospector(clazz, attributes));
+        mapper.getSerializationConfig().setIntrospector(new AdvancedClassIntrospector(clazz, noDefaultIncludes, attributes));
         return mapper;
     }
 
