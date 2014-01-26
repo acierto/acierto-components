@@ -81,6 +81,15 @@ public class DefaultEntityService implements EntityService {
     }
 
     @Override
+    public <T extends IAbstractEntity> void markAsDeleted(List<T> entities) {
+        for (T entity : entities) {
+            entity.closeEndPeriod();
+            entityRepository.saveOrUpdate((AbstractEntity) entity);
+            propagateDelete(entity);
+        }
+    }
+
+    @Override
     public <T extends IAbstractEntity> void markAsDeletedById(Class<T> clazz, Long id) {
         IAbstractEntity entity = findById(clazz, id);
         if (entity != null) {
