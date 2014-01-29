@@ -144,4 +144,6 @@ public interface EntityService {
      * @param <T> IAbstractEntity
      */
     <T extends IAbstractEntity> T saveOrUpdate(T entity);
+
+    <T extends IAbstractEntity> void markAsDeleted(List<T> entities);
 }
