@@ -26,6 +26,9 @@ public class Language extends AbstractEntity {
     @Column//(unique = true, nullable = false)    TODO: uncomment only after fixing population of data
     private String nativeLanguageName;
 
+    @Column
+    private Boolean supported;
+
     Language() {
         //hibernate
     }
@@ -60,6 +63,10 @@ public class Language extends AbstractEntity {
         this.nativeLanguageName = nativeLanguageName;
     }
 
+    public boolean isSupported() {
+        return Boolean.TRUE.equals(supported);
+    }
+
     @Override
     public final boolean equals(Object obj) {
         return ContractEqualsBuilder.isEquals(this, obj, "code", "englishName", "nativeLanguageName");
@@ -73,5 +80,9 @@ public class Language extends AbstractEntity {
     @Override
     public String toString() {
         return "Language{code='" + code + "\', englishName='" + englishName + "\', nativeLanguageName='" + nativeLanguageName + "\'}";
+    }
+
+    public void markAsSupported() {
+        this.supported = true;
     }
 }
