@@ -1,0 +1,17 @@
+apply plugin: 'java'
+
+dependencies {
+    compile project(':aciertoteam-common')
+    compile project(':aciertoteam-i18n')
+    testCompile project(':aciertoteam-test')
+}
+
+sonarRunner {
+    sonarProperties {
+        property "sonar.projectName", ':aciertoteam-i18n'
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.language", "java"
+    }
+}
+
+apply from: file('../gradle/jacoco.gradle')
