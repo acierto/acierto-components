@@ -2,7 +2,7 @@ def String[] modules = [
     'aciertoteam-common',
     'aciertoteam-generator',
     'aciertoteam-io',
-    'aciertoteam-i8n',
+    'aciertoteam-i18n',
     'aciertoteam-mail',
     'aciertoteam-geo',
     'aciertoteam-osm',
