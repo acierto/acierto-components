@@ -2,7 +2,7 @@ apply plugin: 'java'
 
 dependencies {
     compile project(':aciertoteam-common')
-    compile project(':aciertoteam-i18n')
+    compile project(':aciertoteam-geo')
     testCompile project(':aciertoteam-test')
 }
 
