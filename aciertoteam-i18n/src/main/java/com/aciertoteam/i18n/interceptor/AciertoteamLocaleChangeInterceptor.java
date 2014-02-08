@@ -35,26 +35,38 @@ public class AciertoteamLocaleChangeInterceptor extends LocaleChangeInterceptor 
         if (newLocale != null) {
             Locale locale = StringUtils.parseLocaleString(newLocale);
             setUserLocale(locale);
-        } else {
-            Country country = geoIpService.defineCountry(ipDetector.getIpAddress(request));
-            Locale defaultLocale = messageSource.getLocale(country);
-            setUserLocale(defaultLocale);
-
-            LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
-            if (localeResolver == null) {
-                throw new IllegalStateException("No LocaleResolver found: not in a DispatcherServlet request?");
-            }
-            localeResolver.setLocale(request, response, defaultLocale);
+        } else if (isDefaultLocaleToBeInstalled()) {
+            installDefaultLocale(request, response);
         }
         return super.preHandle(request, response, handler);
     }
 
+    private void installDefaultLocale(HttpServletRequest request, HttpServletResponse response) {
+        Country country = geoIpService.defineCountry(ipDetector.getIpAddress(request));
+        Locale defaultLocale = messageSource.getLocale(country);
+        setUserLocale(defaultLocale);
+
+        LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
+        if (localeResolver == null) {
+            throw new IllegalStateException("No LocaleResolver found: not in a DispatcherServlet request?");
+        }
+        localeResolver.setLocale(request, response, defaultLocale);
+    }
+
     private void setUserLocale(Locale locale) {
-        UserSessionLocale userSessionLocale = (UserSessionLocale) ContextLoader.getCurrentWebApplicationContext()
-                .getBean("userSessionLocale");
+        UserSessionLocale userSessionLocale = getUserSessionLocale();
         if (userSessionLocale != null) {
             userSessionLocale.setLocale(locale);
         }
+    }
+
+    private boolean isDefaultLocaleToBeInstalled() {
+        UserSessionLocale userSessionLocale = getUserSessionLocale();
+        return userSessionLocale != null && !userSessionLocale.isInitialized();
+    }
+
+    private UserSessionLocale getUserSessionLocale() {
+        return (UserSessionLocale) ContextLoader.getCurrentWebApplicationContext().getBean("userSessionLocale");
     }
 
     public void setGeoIpService(GeoIpService geoIpService) {

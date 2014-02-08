@@ -12,12 +12,15 @@ public class UserSessionLocale implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private boolean initialized = false;
+
     private Locale defaultLocale = Locale.getDefault();
 
     private Locale locale;
 
     public void setLocale(Locale locale) {
         this.locale = locale;
+        this.initialized = true;
     }
 
     public Locale getLocale() {
@@ -42,4 +45,7 @@ public class UserSessionLocale implements Serializable {
         this.defaultLocale = defaultLocale;
     }
 
+    public boolean isInitialized() {
+        return initialized;
+    }
 }

@@ -60,6 +60,10 @@ public class Language extends AbstractEntity {
         return countryCode;
     }
 
+    public String getLocaleCode() {
+        return code + "_" + countryCode;
+    }
+
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }
