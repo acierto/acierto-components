@@ -73,11 +73,14 @@ public class LocalizedMessageSource {
         return String.format("%s %s", currency.getSymbol(getLocale()), price.toPlainString());
     }
 
-    public Properties getAllProperties(Country country) {
+    public Locale getLocale(Country country) {
         Language defaultLanguage = entityService.findByField(Language.class, "code", "en");
         Language countryLanguage = country.getDefaultLanguage(country);
         Language language = countryLanguage == null ? defaultLanguage : countryLanguage;
-        Locale locale = new Locale(language.getCode(), language.getCountryCode());
-        return ((MergedReloadableResourceBundleMessageSource) messageSource).getAllProperties(locale);
+        return new Locale(language.getCode(), language.getCountryCode());
+    }
+
+    public Properties getAllProperties(Country country) {
+        return ((MergedReloadableResourceBundleMessageSource) messageSource).getAllProperties(getLocale(country));
     }
 }
