@@ -12,7 +12,9 @@ import com.aciertoteam.i18n.UserSessionLocale;
 import com.aciertoteam.i18n.message.LocalizedMessageSource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.ContextLoader;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 /**
  * @author Bogdan Nechyporenko
@@ -35,8 +37,14 @@ public class AciertoteamLocaleChangeInterceptor extends LocaleChangeInterceptor 
             setUserLocale(locale);
         } else {
             Country country = geoIpService.defineCountry(ipDetector.getIpAddress(request));
-            Locale locale = messageSource.getLocale(country);
-            setUserLocale(locale);
+            Locale defaultLocale = messageSource.getLocale(country);
+            setUserLocale(defaultLocale);
+
+            LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
+            if (localeResolver == null) {
+                throw new IllegalStateException("No LocaleResolver found: not in a DispatcherServlet request?");
+            }
+            localeResolver.setLocale(request, response, defaultLocale);
         }
         return super.preHandle(request, response, handler);
     }
