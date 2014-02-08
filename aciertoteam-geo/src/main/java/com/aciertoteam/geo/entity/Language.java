@@ -20,6 +20,9 @@ public class Language extends AbstractEntity {
     @Column(unique = true, nullable = false)
     private String code;
 
+    @Column
+    private String countryCode;
+
     @Column(unique = true, nullable = false)
     private String englishName;
 
@@ -33,8 +36,14 @@ public class Language extends AbstractEntity {
         //hibernate
     }
 
+    // to be removed when files with full data (+ country code) be provided.
     public Language(String code, String englishName, String nativeLanguageName) {
+        this(code, "", englishName, nativeLanguageName);
+    }
+
+    public Language(String code, String countryCode, String englishName, String nativeLanguageName) {
         this.code = code;
+        this.countryCode = countryCode;
         this.englishName = englishName;
         this.nativeLanguageName = nativeLanguageName;
     }
@@ -45,6 +54,14 @@ public class Language extends AbstractEntity {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
     public String getEnglishName() {
@@ -79,7 +96,8 @@ public class Language extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "Language{code='" + code + "\', englishName='" + englishName + "\', nativeLanguageName='" + nativeLanguageName + "\'}";
+        return "Language{code='" + code + "\', countryCode='" + countryCode +
+                "\', englishName='" + englishName + "\', nativeLanguageName='" + nativeLanguageName + "\'}";
     }
 
     public void markAsSupported() {

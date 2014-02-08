@@ -87,6 +87,15 @@ public class Country extends AbstractEntity {
         return supported;
     }
 
+    public Language getDefaultLanguage(Country country) {
+        for (Language language: country.getLanguages()) {
+            if (language.isSupported()) {
+                return language;
+            }
+        }
+        return null;
+    }
+
     @Override
     public final boolean equals(Object obj) {
         return ContractEqualsBuilder.isEquals(this, obj, "name");

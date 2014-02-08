@@ -3,6 +3,9 @@
  */
 package com.aciertoteam.i18n.message;
 
+import com.aciertoteam.common.service.EntityService;
+import com.aciertoteam.geo.entity.Country;
+import com.aciertoteam.geo.entity.Language;
 import com.aciertoteam.i18n.UserSessionLocale;
 import org.apache.log4j.Logger;
 import org.springframework.context.MessageSource;
@@ -26,6 +29,7 @@ public class LocalizedMessageSource {
     private static final Logger LOGGER = Logger.getLogger(LocalizedMessageSource.class);
     private MessageSource messageSource;
     private UserSessionLocale userSessionLocale;
+    private EntityService entityService;
 
     public String getMessage(String code) {
         return getMessage(getLocale(), code);
@@ -61,11 +65,19 @@ public class LocalizedMessageSource {
         this.userSessionLocale = userSessionLocale;
     }
 
+    public void setEntityService(EntityService entityService) {
+        this.entityService = entityService;
+    }
+
     public String getPriceAsString(Currency currency, BigDecimal price) {
         return String.format("%s %s", currency.getSymbol(getLocale()), price.toPlainString());
     }
 
-    public Properties getAllProperties() {
-        return ((MergedReloadableResourceBundleMessageSource) messageSource).getAllProperties(getLocale());
+    public Properties getAllProperties(Country country) {
+        Language defaultLanguage = entityService.findByField(Language.class, "code", "en");
+        Language countryLanguage = country.getDefaultLanguage(country);
+        Language language = countryLanguage == null ? defaultLanguage : countryLanguage;
+        Locale locale = new Locale(language.getCode(), language.getCountryCode());
+        return ((MergedReloadableResourceBundleMessageSource) messageSource).getAllProperties(locale);
     }
 }
