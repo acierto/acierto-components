@@ -30,8 +30,6 @@ public class UserSessionLocale implements Serializable {
     /**
      * Returns user set locale or the default one if user session locale is not
      * set.
-     * 
-     * @return
      */
     public Locale getResolvedLocale() {
         return locale != null ? locale : defaultLocale;

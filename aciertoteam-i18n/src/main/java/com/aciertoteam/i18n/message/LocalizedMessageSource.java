@@ -80,7 +80,7 @@ public class LocalizedMessageSource {
         return new Locale(language.getCode(), language.getCountryCode());
     }
 
-    public Properties getAllProperties(Country country) {
-        return ((MergedReloadableResourceBundleMessageSource) messageSource).getAllProperties(getLocale(country));
+    public Properties getAllProperties() {
+        return ((MergedReloadableResourceBundleMessageSource) messageSource).getAllProperties(getLocale());
     }
 }
