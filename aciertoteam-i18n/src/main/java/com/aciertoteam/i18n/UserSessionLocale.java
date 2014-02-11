@@ -75,10 +75,11 @@ public class UserSessionLocale implements Serializable, InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
-        if (requestAttributes instanceof ServletRequestAttributes) {
-            HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
-            defineDefaultLocale(request);
-        }
-    }
+        if (RequestContextHolder.getRequestAttributes() != null) {
+            RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
+            if (requestAttributes instanceof ServletRequestAttributes) {
+                HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
+                defineDefaultLocale(request);
+            }
+        }    }
 }
