@@ -181,7 +181,7 @@ subprojects {
                 "cglib:cglib:$cglibVersion",
                 "jfree:jfreechart:1.0.9",
                 "asm:asm-all:$asmVersion",
-                "commons-fileupload:commons-fileupload:1.2",
+                "commons-fileupload:commons-fileupload:1.3.1",
                 "commons-beanutils:commons-beanutils:1.8.3",
                 "net.sf.dozer:dozer:5.3.1",
                 "org.apache.xmlbeans:xmlbeans:2.4.0",
