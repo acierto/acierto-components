@@ -1,20 +1,19 @@
 package com.aciertoteam.common.json;
 
-import org.apache.commons.lang3.StringUtils;
-import org.codehaus.jackson.JsonEncoding;
-import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.servlet.view.AbstractView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.StringUtils;
+import org.codehaus.jackson.JsonEncoding;
+import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.servlet.view.AbstractView;
 
 /**
  * @author Bogdan Nechyporenko
@@ -27,9 +26,15 @@ public class CustomJsonView extends AbstractView {
     private String encloseName;
     private boolean raw;
     private boolean noDefaultIncludes;
+    private Integer total;
 
     public CustomJsonView(Object result, String... attributes) {
         this(result, false, attributes);
+    }
+
+    public CustomJsonView(Object result, int total, String... attributes) {
+        this(result, false, attributes);
+        this.total = total;
     }
 
     public CustomJsonView(Object result, boolean raw, String... attributes) {
@@ -57,7 +62,7 @@ public class CustomJsonView extends AbstractView {
     }
 
     private static void prepareResponse(HttpServletRequest request, HttpServletResponse response,
-                                        ByteArrayOutputStream bos) {
+            ByteArrayOutputStream bos) {
         String contentType = request.getContentType();
         if (contentType != null && contentType.startsWith("multipart/form-data")) {
             response.setContentType("text/html; charset=UTF-8");
@@ -101,7 +106,8 @@ public class CustomJsonView extends AbstractView {
     private ObjectMapper createMapper(Class clazz) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.getSerializationConfig().setDateFormat(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss"));
-        mapper.getSerializationConfig().setIntrospector(new AdvancedClassIntrospector(clazz, noDefaultIncludes, attributes));
+        mapper.getSerializationConfig().setIntrospector(
+                new AdvancedClassIntrospector(clazz, noDefaultIncludes, attributes));
         return mapper;
     }
 
@@ -109,6 +115,9 @@ public class CustomJsonView extends AbstractView {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("data", callResult);
         result.put("success", Boolean.TRUE);
+        if (total != null) {
+            result.put("total", total);
+        }
         return result;
     }
 }
