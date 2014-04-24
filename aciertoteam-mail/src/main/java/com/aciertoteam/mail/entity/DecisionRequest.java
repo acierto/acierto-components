@@ -57,4 +57,13 @@ public interface DecisionRequest extends Identifiable {
      */
     Locale getLocale();
 
+    /**
+     * Appealing to the customer,
+     * i.e for company - company name
+     *     for user    - first name and last name
+     *     etc.
+     *
+     * @return
+     */
+    String getUser();
 }

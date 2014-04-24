@@ -108,7 +108,7 @@ public class DefaultNotificationService implements NotificationService {
         HashMap<String, Object> properties = new HashMap<String, Object>();
         properties.put("requestSid", decisionRequest.getSid());
         properties.put("cause", decisionRequest.getRejectCause());
-        properties.put("user", "user");
+        properties.put("user", decisionRequest.getUser());
         notification.setProperties(properties);
     }
 
