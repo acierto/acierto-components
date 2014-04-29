@@ -535,7 +535,7 @@
 
                             <h3 style="text-align: left;display: block;font-family: Helvetica;font-size: 18px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: -.5px;margin: 0;color: #606060 !important;">
                                 ${msg("dear")} <#if person.name?has_content>${person.name}<#else> user </#if>,<br>
-                                &nbsp;&nbsp; Your password has been changed.</h3>
+                                &nbsp;&nbsp; ${msg("label.password.changed")}.</h3>
 
                         </td>
                     </tr>
