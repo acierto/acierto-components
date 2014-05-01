@@ -313,16 +313,14 @@
                                                                     <h4 class="h4"
                                                                         style="color: rgb(32, 32, 32);display: block;font-family: Arial;font-size: 22px;font-weight: bold;line-height: 100%;margin: 0px 0px 10px;text-align: left;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;">
                                                                     ${msg("dear")} <#if person.name?has_content>${person.name}<#else>user</#if></h4>
-                                                                    ${msg("account.activated.body.text")}:<br>
+                                                                    ${msg("account.activated.body.text")}<br>
                                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                     <div style="color: #505050;font-family: Arial;font-size: 14px;line-height: 150%;">
                                                                         <img align="none" height="39"
                                                                              src="cid:user"
                                                                              style="border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;display: inline;"
-                                                                             width="39">&nbsp;&nbsp;&nbsp;&nbsp; <span style="vertical-align: super">${login}</span><br>
-                                                                    <img align="none" height="40" src="cid:key" style="border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;display: inline;" width="40"> &nbsp; &nbsp;&nbsp; <span style="vertical-align: super">${password}</span>
-
-                                                                        &nbsp;</div>
+                                                                             width="39">&nbsp;&nbsp;&nbsp;&nbsp; <span style="vertical-align: super">${login}</span>
+                                                                    </div>
                                                                 </div>
                                                             </td>
                                                         </tr>
