@@ -5,7 +5,7 @@ ext {
     seleniumVersion = "2.30.0"
     springVersion = '3.1.1.RELEASE'
     camelVersion = '2.10.3'
-    aciertoTeamComponentsVersion = '1.0.0'
+    aciertoTeamComponentsVersion = '1.0.2'
     apacheDsVersion = '1.5.5'
     jstlVersion = '1.2'
     cglibVersion = '2.2.2'
