@@ -13,7 +13,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.orm.hibernate3.SessionFactoryUtils;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.ParameterizedType;
@@ -192,7 +192,10 @@ public abstract class DefaultAbstractRepository<T extends IAbstractEntity> imple
     }
 
     protected final Session getSession(boolean applyValidThruFilter) {
-        Session session = SessionFactoryUtils.getSession(sessionFactory, true);
+        Session session = sessionFactory.getCurrentSession();
+        if (session == null) {
+            session = sessionFactory.openSession();
+        }
         if (applyValidThruFilter) {
             session.enableFilter(AbstractEntity.VALID_THRU_FILTER).setParameter(AbstractEntity.NOW_PARAM,
                     getCurrentDate());

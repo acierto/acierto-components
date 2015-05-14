@@ -4,4 +4,9 @@ dependencies {
     compile dbunit
     compile mockito
     compile junit
+
+    compile(jencks) {
+        exclude(group: 'org.springframework', module: 'spring-jms')
+        exclude(group: 'org.springframework', module: 'spring-aop')
+    }
 }
