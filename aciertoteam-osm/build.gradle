@@ -1,0 +1,10 @@
+dependencies {
+    compile project(':aciertoteam-common')
+
+    compile commons_lang3
+    compile commons_io
+    compile jodd
+    compile spring_beans
+
+    testCompile project(':aciertoteam-test')
+}

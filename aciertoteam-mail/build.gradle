@@ -1,0 +1,8 @@
+dependencies {
+    compile project(':aciertoteam-common')
+    testCompile project(':aciertoteam-test')
+
+    compile camel_core
+    compile camel_mail
+    compile javax_mail
+}

@@ -11,11 +11,11 @@ dependencies {
     jruby 'org.jruby:jruby-complete:1.7.3'
 
     // If using Spock, need to depend on geb-spock
-    testCompile "org.gebish:geb-spock:$gebVersion"
+    testCompile "org.gebish:geb-spock:$geb_version"
     testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
 
     // If using JUnit, need to depend on geb-junit (3 or 4)
-    testCompile "org.gebish:geb-junit4:$gebVersion"
+    testCompile "org.gebish:geb-junit4:$geb_version"
 }
 
 buildscript {
@@ -39,6 +39,24 @@ allprojects {
         mavenCentral()
         mavenLocal()
     }
+}
+
+configure (allprojects) { p ->
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'maven'
+}
+
+configure (subprojects) {
+    sonarRunner {
+        sonarProperties {
+            property "sonar.projectName", ':aciertoteam-common'
+            property "sonar.sourceEncoding", "UTF-8"
+            property "sonar.language", "java"
+        }
+    }
+
+    apply from: file('../gradle/jacoco.gradle')
 }
 
 task watchSass {
@@ -100,135 +118,8 @@ test {
 }
 
 subprojects {
-
     group = "com.aciertoteam"
-    apply plugin: 'java'
-    apply plugin: 'maven'
-    apply plugin: 'idea'
     sourceCompatibility = 1.6
-
-    dependencies {
-        compile 'com.github.leleuj.springframework.security:spring-security-oauth-client:1.1.0',
-                'commons-codec:commons-codec:1.4',
-                'org.scribe:scribe:1.3.2',
-                'javax.servlet:servlet-api:2.5',
-                "org.apache.httpcomponents:httpclient:$httpcomponentsVersion",
-                "org.apache.httpcomponents:httpcore:$httpcomponentsVersion",
-                "org.kohsuke:geoip:1.2.8",
-                "org.apache.camel:camel-core:$camelVersion",
-                "org.apache.camel:camel-mail:$camelVersion",
-                "com.lowagie:itext:2.1.7",
-                "net.sf.json-lib:json-lib:2.2.1:jdk15",
-                "org.springframework.springfaces:springfaces-mvc:$springFacesVersion",
-                "org.springframework.data:spring-data-commons:1.6.0.M1",
-                "com.sun.el:el-ri:1.0",
-                "org.primefaces:primefaces:$primefacesVersion",
-                "org.primefaces.extensions:primefaces-extensions:$primefacesExtensionsVersion",
-                "org.primefaces.themes:sunny:1.0.8",
-                "javax.inject:javax.inject:1",
-                "com.sun.faces:jsf-api:$jsfVersion",
-                "com.sun.faces:jsf-impl:$jsfVersion",
-                "joda-time:joda-time:1.6.2",
-                "org.glassfish.web:el-impl:2.2",
-                "javax.el:el-api:2.2",
-                "org.apache.commons:commons-lang3:3.1",
-                "log4j:log4j:1.2.14",
-                "org.apache.poi:poi-scratchpad:$poiVersion",
-                "org.apache.poi:poi:$poiVersion",
-                "org.quartz-scheduler:quartz:1.8.2",
-                "org.springframework.security:spring-security-taglibs:$springVersion",
-                "org.springframework.security:spring-security-config:$springVersion",
-                "org.springframework.security:spring-security-acl:$springVersion",
-                "org.springframework.security:spring-security-core:$springVersion",
-                "org.springframework.security:spring-security-web:$springVersion",
-                "org.springframework:spring-web:$springVersion",
-                "org.springframework:spring-webmvc:$springVersion",
-                "org.codehaus.jackson:jackson-mapper-asl:1.5.3",
-                "org.springframework:spring-tx:$springVersion",
-                "org.springframework:spring-jdbc:$springVersion",
-                "org.springframework:spring-context:$springVersion",
-                "org.springframework:spring-context-support:$springVersion",
-                "org.springframework:spring-core:$springVersion",
-                "mysql:mysql-connector-java:$mysqlVersion",
-                "net.sf.jsr107cache:jsr107cache:1.1",
-                "net.sf.ehcache:ehcache-core:2.3.1",
-                "activesoap:jaxp-api:1.3",
-                "commons-io:commons-io:1.4",
-                "javax.transaction:jta:1.1",
-                "org.hibernate:hibernate-core:3.6.6.Final",
-                "org.hibernate:hibernate-entitymanager:3.6.6.Final",
-                "org.hibernate:hibernate-validator:4.1.0.Final",
-                "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final",
-                "commons-collections:commons-collections:3.1",
-                "org.hibernate:hibernate-commons-annotations:3.2.0.Final",
-                "javax.xml.bind:jaxb-api:2.2",
-                "cglib:cglib:$cglibVersion",
-                "jfree:jfreechart:1.0.9",
-                "asm:asm-all:$asmVersion",
-                "commons-fileupload:commons-fileupload:1.3.1",
-                "commons-beanutils:commons-beanutils:1.8.3",
-                "net.sf.dozer:dozer:5.3.1",
-                "org.apache.xmlbeans:xmlbeans:2.4.0",
-                "com.servlets:cos:09May2002",
-                "javax.mail:mail:1.4",
-                "javax.servlet.jsp:jsp-api:2.1",
-                "org.slf4j:slf4j-api:$slf4jVersion",
-                "org.slf4j:slf4j-jdk14:$slf4jVersion",
-                "org.freemarker:freemarker:2.3.14",
-                "net.sf.opencsv:opencsv:2.3",
-                "javax.servlet:jstl:$jstlVersion",
-                "taglibs:standard:1.1.2",
-                "commons-dbcp:commons-dbcp:1.1.2",
-                "net.sf.flexjson:flexjson:2.0",
-                "commons-digester:commons-digester:2.1",
-                "org.codehaus.groovy:groovy-all:1.7.0"
-
-        compile("org.springframework:spring-expression:$springVersion") {
-            exclude(group: 'org.springframework', module: 'spring')
-        }
-
-        compile("org.springframework:spring-beans:$springVersion") {
-            exclude(group: 'org.springframework', module: 'spring')
-        }
-
-        compile("org.springframework:spring-orm:$springVersion") {
-            exclude(group: 'org.springframework', module: 'spring')
-        }
-
-        compile("com.octo.captcha:jcaptcha-all:1.0-RC4") {
-            exclude(group: 'org.springframework', module: 'spring')
-        }
-
-        compile("org.apache.camel:camel-spring:$camelVersion") {
-            exclude(group: 'org.springframework', module: 'spring-tx')
-            exclude(group: 'org.springframework', module: 'spring-aop')
-            exclude(group: 'org.apache.geronimo.specs', module: 'geronimo-jta_1.0.1B_spec')
-            exclude(group: 'org.apache.geronimo.specs', module: 'geronimo-jta_1.1_spec')
-        }
-
-        testCompile "org.seleniumhq.selenium:selenium-java:$seleniumVersion",
-                "org.dbunit:dbunit:2.4.8",
-                "junit:junit:4.11",
-                "org.mockito:mockito-all:1.8.4",
-                "org.jmock:jmock-junit4:2.5.1",
-                "org.jmock:jmock-junit4:2.5.1",
-                "org.codehaus.mojo:dbunit-maven-plugin:1.0-beta-3",
-                "com.h2database:h2:1.3.168",
-                "org.apache.camel:camel-http:$camelVersion",
-                "org.jodd:jodd:3.1.1",
-                "org.jvnet.mock-javamail:mock-javamail:1.9",
-                "org.kubek2k:springockito-annotations:1.0.8",
-                "org.kubek2k:springockito:1.0.5"
-
-        testCompile("org.jencks:jencks:2.1") {
-            exclude(group: 'org.springframework', module: 'spring-jms')
-            exclude(group: 'org.springframework', module: 'spring-aop')
-        }
-
-        testCompile("org.springframework:spring-test:$springVersion") {
-            exclude(group: 'org.springframework', module: 'spring-aop')
-        }
-    }
 }
 
 project(":aciertoteam-test") {

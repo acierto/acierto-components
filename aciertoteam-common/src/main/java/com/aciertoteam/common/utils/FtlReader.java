@@ -30,7 +30,7 @@ public class FtlReader {
     }
 
     public String read(String ftlFileName, Map<String, Object> root) {
-        String localizedFtlFileName = String.format(ftlFileName + ".ftl");
+        String localizedFtlFileName = ftlFileName + ".ftl";
 
         Writer out = null;
         try {

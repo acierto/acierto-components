@@ -1,0 +1,7 @@
+dependencies {
+    compile project(':aciertoteam-common')
+
+    compile dbunit
+    compile mockito
+    compile junit
+}

@@ -1,0 +1,9 @@
+dependencies {
+	compile project(':aciertoteam-common')
+	compile project(':aciertoteam-io')
+
+	compile geoip_api
+
+	testCompile jodd
+	testCompile project(':aciertoteam-test')
+}

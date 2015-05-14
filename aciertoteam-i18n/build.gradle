@@ -1,0 +1,5 @@
+dependencies {
+    compile project(':aciertoteam-common')
+    compile project(':aciertoteam-geo')
+    testCompile project(':aciertoteam-test')
+}

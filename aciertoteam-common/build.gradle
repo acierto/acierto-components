@@ -1,0 +1,23 @@
+dependencies {
+    compile commons_lang3
+    compile commons_io
+    compile freemarker
+    compile hibernate_core
+    compile hibernate_jpa_api
+    compile httpclient
+    compile httpcore
+    compile jackson_mapper_asl
+    compile jackson_annotations
+    compile javax_inject
+    compile javax_servlet_api
+    compile joda_time
+    compile json_lib
+    compile log4j
+    compile spring_context
+    compile spring_context_support
+    compile spring_data_commons
+    compile spring_orm
+    compile spring_web_mvc
+
+    testCompile junit
+}

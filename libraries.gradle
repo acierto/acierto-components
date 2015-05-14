@@ -1,44 +1,114 @@
-ext {
+ext.acierto_team_components_version = '1.0.2'
+ext.apache_ds_version = '1.5.5'
+ext.asm_version = '3.2'
+ext.camel_version = '2.15.2'
+ext.cargo_version = "1.4.14"
+ext.cglib_version = '2.2.2'
+ext.easy_mock_version = '3.0'
+ext.hamcrest_version = '1.3'
+ext.http_components_version = '4.4.1'
+ext.geb_version = "0.10.0"
+ext.gems_dir = file('.jruby/gems')
+ext.jsf_version = '2.1.13'
+ext.jstl_version = '1.2'
+ext.mysql_version = '5.1.23'
+ext.poi_version = '3.7'
+ext.power_mock_version = '1.6.2'
+ext.power_mockito_version = "1.6.2"
+ext.query_dsl_version = '3.6.3'
+ext.selenium_version = "2.25.0"
+ext.spring_version = '4.1.6.RELEASE'
+ext.spring_security_version = '4.0.1.RELEASE'
+ext.slf4j_version = '1.7.12'
+ext.tomcat_version  = "8.0.22"
 
-    slf4jVersion = '1.6.1'
-    gebVersion = "0.9.0-RC-3"
-    seleniumVersion = "2.30.0"
-    springVersion = '3.1.1.RELEASE'
-    camelVersion = '2.10.3'
-    aciertoTeamComponentsVersion = '1.0.2'
-    apacheDsVersion = '1.5.5'
-    jstlVersion = '1.2'
-    cglibVersion = '2.2.2'
-    powerMockVersion = '1.4.12'
-    mysqlVersion = '5.1.23'
-    asmVersion = '3.2'
-    jsfVersion = '2.1.13'
-    primefacesVersion = '3.5'
-    primefacesExtensionsVersion = '0.6.3'
-    poiVersion = '3.7'
-    easyMockVersion = '3.0'
-    springFacesVersion = '0.0.3'
-    httpcomponentsVersion = '4.2.2'
-    gemsDir = file('.jruby/gems')
+ext.camel_core = "org.apache.camel:camel-core:$camel_version"
+ext.camel_mail = "org.apache.camel:camel-mail:$camel_version"
+ext.cargo_core = "org.codehaus.cargo:cargo-core-uberjar:$cargo_version"
+ext.cargo_ant = "org.codehaus.cargo:cargo-ant:$cargo_version"
+ext.commons_io = "commons-io:commons-io:2.4"
+ext.commons_lang3 = "org.apache.commons:commons-lang3:3.4"
+ext.commons_fileupload = "commons-fileupload:commons-fileupload:1.3.1"
+ext.dbunit = "org.dbunit:dbunit:2.4.9"
+ext.ehcache_core = "net.sf.ehcache:ehcache-core:2.6.11"
+ext.el_api = "javax.el:el-api:3.0.0"
+ext.equalsverifier = "nl.jqno.equalsverifier:equalsverifier:1.7.2"
+ext.freemarker = "org.freemarker:freemarker:2.3.22"
+ext.geb_spock = "org.gebish:geb-spock:$geb_version"
+ext.geb_junit4 = "org.gebish:geb-junit4:$geb_version"
+ext.geoip_api = "com.maxmind.geoip:geoip-api:1.2.14"
+ext.hamcrest = "org.hamcrest:hamcrest-all:$hamcrest_version"
+ext.hamcrest_core = "org.hamcrest:hamcrest-core:$hamcrest_version"
+ext.hibernate_core = "org.hibernate:hibernate-core:4.3.9.Final"
+ext.hibernate_jpa_api = "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final"
+ext.hibernate_validator = "org.hibernate:hibernate-validator:5.1.3.Final"
+ext.httpclient = "org.apache.httpcomponents:httpclient:$http_components_version"
+ext.httpcore = "org.apache.httpcomponents:httpcore:$http_components_version"
+ext.h2_database = "com.h2database:h2:1.4.187"
+ext.jackson_annotations = "com.fasterxml.jackson.core:jackson-annotations:2.5.3"
+ext.jackson_mapper_asl = "org.codehaus.jackson:jackson-mapper-asl:1.5.3" // TODO: must be 1.9.13
+ext.javax_inject = "javax.inject:javax.inject:1"
+ext.javax_mail = "javax.mail:mail:1.4.7"
+ext.javassist = "javassist:javassist:3.12.1.GA"
+ext.javax_servlet_api = "javax.servlet:javax.servlet-api:3.1.0"
+ext.joda_time = "joda-time:joda-time:2.7"
+ext.jodd = "org.jodd:jodd:3.1.1" // TODO must be 3.4.1
+ext.junit = "junit:junit:4.12"
+ext.json = "org.json:json:20141113"
+ext.json_lib = "net.sf.json-lib:json-lib:2.4:jdk15"
+ext.jsp_api = "javax.servlet.jsp:jsp-api:2.2"
+ext.jsr_250 = "javax.annotation:jsr250-api:1.0"
+ext.lambdaj = "com.googlecode.lambdaj:lambdaj:2.3.3"
+ext.log4j = "log4j:log4j:1.2.17"
+ext.mockito = "org.mockito:mockito-all:1.10.19"
+ext.mysql_connector = "mysql:mysql-connector-java:5.1.35"
+ext.open_symphony = "opensymphony:sitemesh:2.4.2"
+ext.powermock_junit = "org.powermock:powermock-release-with-junit-mockito-dependencies:$power_mockito_version"
+ext.powermock_testng = "org.powermock:powermock-release-with-testng-mockito-dependencies:$power_mockito_version"
+ext.query_dsl_apt = "com.mysema.querydsl:querydsl-apt:$query_dsl_version"
+ext.query_dsl_jdo = "com.mysema.querydsl:querydsl-jdo:$query_dsl_version"
+ext.slf4j_api = "org.slf4j:slf4j-api:$slf4j_version"
+ext.slf4j_jdk = "org.slf4j:slf4j-jdk14:$slf4j_version"
+ext.scribe = "org.scribe:scribe:1.3.7"
+ext.scribe_up = "org.scribe:scribe-up:1.3.1"
+ext.servlet_api = "javax.servlet:javax.servlet-api:3.0.1"
+ext.spock_core = "org.spockframework:spock-core:1.0-groovy-2.4"
+ext.spring_aop = "org.springframework:spring-aop:$spring_version"
+ext.spring_beans = "org.springframework:spring-beans:$spring_version"
+ext.spring_core = "org.springframework:spring-core:$spring_version"
+ext.spring_data_commons = "org.springframework.data:spring-data-commons:1.10.0.RELEASE"
+ext.spring_data_mongodb = "org.springframework.data:spring-data-mongodb:1.7.0.RELEASE"
+ext.spring_context = "org.springframework:spring-context:$spring_version"
+ext.spring_context_support = "org.springframework:spring-context-support:$spring_version"
+ext.spring_orm = "org.springframework:spring-orm:$spring_version"
+ext.spring_security_config = "org.springframework.security:spring-security-config:$spring_security_version"
+ext.spring_security_core = "org.springframework.security:spring-security-core:$spring_security_version"
+ext.spring_security_taglibs = "org.springframework.security:spring-security-taglibs:$spring_security_version"
+ext.spring_security_oauth_client = "com.github.leleuj.springframework.security:spring-security-oauth-client:1.1.0"
+ext.spring_security_web = "org.springframework.security:spring-security-web:$spring_security_version"
+ext.spring_test = "org.springframework:spring-test:$spring_version"
+ext.spring_web = "org.springframework:spring-web:$spring_version"
+ext.spring_web_mvc = "org.springframework:spring-webmvc:$spring_version"
+ext.springockito = "org.kubek2k:springockito:1.0.9"
+ext.springockito_annotations = "org.kubek2k:springockito-annotations:1.0.9"
+ext.tomcat_embed_core = "org.apache.tomcat.embed:tomcat-embed-core:${tomcat_version}"
+ext.tomcat_embed_logging_juli = "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcat_version}"
+ext.tomcat_embed_jasper = "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcat_version}"
+ext.reflections = "org.reflections:reflections:0.9.9"
+ext.xerces_impl = "xerces:xercesImpl:2.11.0"
+ext.xml_apis = "xml-apis:xml-apis:1.4.01"
 
-    drivers = ["firefox", "chrome"]
+ext.cssDir = file('fastappoint-frontend/src/main/webapp/resources/css')
+ext.gemsDir = file('.jruby/gems')
+ext.sassDir = file('fastappoint-frontend/src/main/webapp/resources/sass')
+ext.imagesDir = file('fastappoint-frontend/src/main/webapp/resources/images')
+ext.javascriptsDir = file('fastappoint-frontend/src/main/webapp/resources/js')
 
-    cssDir = file('fastappoint-frontend/src/main/webapp/resources/css')
-    sassDir = file('fastappoint-frontend/src/main/webapp/resources/sass')
-    imagesDir = file('fastappoint-frontend/src/main/webapp/resources/images')
-    javascriptsDir = file('fastappoint-frontend/src/main/webapp/resources/js')
-
-    powerMockDependencies = [
-            "org.powermock:powermock-core:$powerMockVersion",
-            "org.powermock:powermock-api-support:$powerMockVersion",
-            "org.powermock:powermock-module-junit4-common:$powerMockVersion",
-            "org.powermock:powermock-module-junit4:$powerMockVersion",
-            "org.powermock:powermock-api-mockito:$powerMockVersion",
-            "org.powermock:powermock-reflect:$powerMockVersion"
-    ]
-
-
-    libraries = [
-            java16_signature: 'org.codehaus.mojo.signature:java16:1.0@signature'
-    ]
-}
+ext.powerMockDependencies = [
+        "org.powermock:powermock-core:$power_mock_version",
+        "org.powermock:powermock-api-support:$power_mock_version",
+        "org.powermock:powermock-module-junit4-common:$power_mock_version",
+        "org.powermock:powermock-module-junit4:$power_mock_version",
+        "org.powermock:powermock-api-mockito:$power_mock_version",
+        "org.powermock:powermock-reflect:$power_mock_version"
+]
