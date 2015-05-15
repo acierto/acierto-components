@@ -70,9 +70,10 @@ configure (subprojects) {
         archives javadocJar, sourcesJar
     }
 
-    signing {
-        sign configurations.archives
-    }
+// TODO: uncomment after creating a configuration file for signing
+//    signing {
+//        sign configurations.archives
+//    }
 
     apply from: file('../gradle/jacoco.gradle')
 }
