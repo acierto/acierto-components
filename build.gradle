@@ -34,7 +34,6 @@ buildscript {
 }
 
 allprojects {
-
     repositories {
         mavenCentral()
         mavenLocal()
@@ -45,6 +44,7 @@ configure (allprojects) { p ->
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'maven'
+    apply plugin: 'signing'
 }
 
 configure (subprojects) {
@@ -54,6 +54,24 @@ configure (subprojects) {
             property "sonar.sourceEncoding", "UTF-8"
             property "sonar.language", "java"
         }
+    }
+
+    task javadocJar(type: Jar) {
+        classifier = 'javadoc'
+        from javadoc
+    }
+
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    artifacts {
+        archives javadocJar, sourcesJar
+    }
+
+    signing {
+        sign configurations.archives
     }
 
     apply from: file('../gradle/jacoco.gradle')
