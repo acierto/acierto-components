@@ -1,3 +1,6 @@
+archivesBaseName = "aciertoteam-osm"
+description = "Wrapper around open osm api"
+
 dependencies {
     compile project(':aciertoteam-common')
 

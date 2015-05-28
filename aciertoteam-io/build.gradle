@@ -1,3 +1,6 @@
+archivesBaseName = "aciertoteam-io"
+description = "Services for I/O"
+
 dependencies {
     compile log4j
     compile commons_io

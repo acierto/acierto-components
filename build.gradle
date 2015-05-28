@@ -71,9 +71,9 @@ configure (subprojects) {
     }
 
 // TODO: uncomment after creating a configuration file for signing
-//    signing {
-//        sign configurations.archives
-//    }
+    signing {
+        sign configurations.archives
+    }
 
     apply from: file('../gradle/jacoco.gradle')
 }
@@ -137,8 +137,56 @@ test {
 }
 
 subprojects {
-    group = "com.aciertoteam"
     sourceCompatibility = 1.7
+}
+
+configure(subprojects.findAll()) { p ->
+
+    afterEvaluate {
+        uploadArchives {
+            repositories {
+                mavenDeployer {
+                    beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+                    repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                        authentication(userName: ossrhUsername, password: ossrhPassword)
+                    }
+
+                    snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                        authentication(userName: ossrhUsername, password: ossrhPassword)
+                    }
+
+                    pom.project {
+                        name p.name
+                        packaging 'jar'
+                        description p.description
+                        url 'https://github.com/acierto/acierto-components'
+
+                        scm {
+                            connection 'https://github.com/acierto/acierto-components'
+                            developerConnection 'scm:https://github.com/acierto/acierto-components'
+                            url 'scm:git://github.com/acierto/acierto-components'
+                        }
+
+                        licenses {
+                            license {
+                                name 'The Apache License, Version 2.0'
+                                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            }
+                        }
+
+                        developers {
+                            developer {
+                                id 'AciertoTeam'
+                                name 'Acierto Team'
+                                email 'fastappoint@gmail.com'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 project(":aciertoteam-test") {

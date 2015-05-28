@@ -1,3 +1,6 @@
+archivesBaseName = "aciertoteam-generator"
+description = "Generates output by specific rules based on provided input data"
+
 dependencies {
     compile project(':aciertoteam-io')
 

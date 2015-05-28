@@ -1,3 +1,6 @@
+archivesBaseName = "aciertoteam-geo"
+description = "Alleviate Geo challenges"
+
 dependencies {
 	compile project(':aciertoteam-common')
 	compile project(':aciertoteam-io')

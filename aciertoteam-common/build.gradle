@@ -1,3 +1,6 @@
+archivesBaseName = "aciertoteam-common"
+description = "Contains common functionality which used by other acierto modules"
+
 dependencies {
     compile commons_lang3
     compile commons_io

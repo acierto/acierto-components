@@ -1,3 +1,6 @@
+archivesBaseName = "aciertoteam-mail"
+description = "Simplifies mail worfklow"
+
 dependencies {
     compile project(':aciertoteam-common')
     testCompile project(':aciertoteam-test')

@@ -1,3 +1,6 @@
+archivesBaseName = "aciertoteam-test"
+description = "Provides template functionality for testing"
+
 dependencies {
     compile project(':aciertoteam-common')
 

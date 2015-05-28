@@ -1,3 +1,6 @@
+archivesBaseName = "aciertoteam-i18n"
+description = "Internationalization"
+
 dependencies {
     compile project(':aciertoteam-common')
     compile project(':aciertoteam-geo')
