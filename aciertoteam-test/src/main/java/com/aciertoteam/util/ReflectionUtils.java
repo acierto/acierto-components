@@ -33,6 +33,7 @@ public final class ReflectionUtils {
             Currency.getInstance("EUR"), BigDecimal.ZERO };
 
     private static final Map<Class, Object> COLLECTION_MAP = new HashMap<Class, Object>();
+
     static {
         COLLECTION_MAP.put(Set.class, Collections.emptySet());
         COLLECTION_MAP.put(List.class, Collections.emptyList());
