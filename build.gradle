@@ -40,14 +40,14 @@ allprojects {
     }
 }
 
-configure (allprojects) { p ->
+configure(allprojects) { p ->
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'maven'
     apply plugin: 'signing'
 }
 
-configure (subprojects) {
+configure(subprojects) {
     sonarRunner {
         sonarProperties {
             property "sonar.projectName", ':aciertoteam-common'
@@ -70,9 +70,10 @@ configure (subprojects) {
         archives javadocJar, sourcesJar
     }
 
-// TODO: uncomment after creating a configuration file for signing
-    signing {
-        sign configurations.archives
+    if (hasProperty("signing.keyId")) {
+        signing {
+            sign configurations.archives
+        }
     }
 
     apply from: file('../gradle/jacoco.gradle')
@@ -143,43 +144,45 @@ subprojects {
 configure(subprojects.findAll()) { p ->
 
     afterEvaluate {
-        uploadArchives {
-            repositories {
-                mavenDeployer {
-                    beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+        if (hasProperty("ossrhUsername") && hasProperty("ossrhPassword")) {
+            uploadArchives {
+                repositories {
+                    mavenDeployer {
+                        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-                    repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                        authentication(userName: ossrhUsername, password: ossrhPassword)
-                    }
-
-                    snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                        authentication(userName: ossrhUsername, password: ossrhPassword)
-                    }
-
-                    pom.project {
-                        name p.name
-                        packaging 'jar'
-                        description p.description
-                        url 'https://github.com/acierto/acierto-components'
-
-                        scm {
-                            connection 'https://github.com/acierto/acierto-components'
-                            developerConnection 'scm:https://github.com/acierto/acierto-components'
-                            url 'scm:git://github.com/acierto/acierto-components'
+                        repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                            authentication(userName: ossrhUsername, password: ossrhPassword)
                         }
 
-                        licenses {
-                            license {
-                                name 'The Apache License, Version 2.0'
-                                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                            authentication(userName: ossrhUsername, password: ossrhPassword)
+                        }
+
+                        pom.project {
+                            name p.name
+                            packaging 'jar'
+                            description p.description
+                            url 'https://github.com/acierto/acierto-components'
+
+                            scm {
+                                connection 'https://github.com/acierto/acierto-components'
+                                developerConnection 'scm:https://github.com/acierto/acierto-components'
+                                url 'scm:git://github.com/acierto/acierto-components'
                             }
-                        }
 
-                        developers {
-                            developer {
-                                id 'AciertoTeam'
-                                name 'Acierto Team'
-                                email 'fastappoint@gmail.com'
+                            licenses {
+                                license {
+                                    name 'The Apache License, Version 2.0'
+                                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                                }
+                            }
+
+                            developers {
+                                developer {
+                                    id 'AciertoTeam'
+                                    name 'Acierto Team'
+                                    email 'fastappoint@gmail.com'
+                                }
                             }
                         }
                     }
